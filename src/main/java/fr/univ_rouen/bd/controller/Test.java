@@ -1,34 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.univ_rouen.bd.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import fr.univ_rouen.bd.model.BDModel;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.sax.SAXResult;
-import javax.xml.transform.stream.StreamSource;
 import org.apache.fop.apps.FOPException;
-import org.apache.fop.apps.Fop;
-import org.apache.fop.apps.FopFactory;
 
 /**
  *
@@ -66,12 +47,22 @@ public class Test extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        FopFactory fopFactory = FopFactory.newInstance();
+        try {
+            BDModel model = new BDModel();
+            PrintWriter out = response.getWriter();
+           
+    out.println("Hello World");
+     out.println(model.executeXQuery());
+        } catch (Exception ex) {
+            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        /*FopFactory fopFactory = FopFactory.newInstance();
         OutputStream out = null;
 
-
         TransformerFactory factory = TransformerFactory.newInstance();
-        Source src = new StreamSource(new File("bd-fo.xsl"));
+
+        String realContextPath = getServletContext().getRealPath("/WEB-INF/bd-fo.xsl");
+        Source src = new StreamSource(new File(realContextPath));
         Transformer transformer = null;
         try {
             transformer = factory.newTransformer(src); // identity transformer
@@ -80,32 +71,29 @@ public class Test extends HttpServlet {
         }
 
         Map<String, File> fichier = new HashMap<String, File>();
-        fichier.put("Hellblazer Death and cigarettes", new File("./bd.xml"));
-        fichier.put("Batman-Sombre reflet", new File("./bd1.xml"));
+        fichier.put("Hellblazer Death and cigarettes", new File("/WEB-INF/bd.xml"));
+        fichier.put("Batman-Sombre reflet", new File("/WEB-INF/bd1.xml"));
         for (String name : fichier.keySet()) {
-            out = new BufferedOutputStream(new FileOutputStream(new File("./"+ name + ".pdf")));
-            Fop fop = null;
+            File f = new File("WEB-INF/" + name + ".pdf");
+            System.out.println(f.getAbsolutePath());
+            f.createNewFile();
+            out = new BufferedOutputStream(new FileOutputStream(f));
             try {
-                fop = fopFactory.newFop("application/pdf", out);
+                Fop fop = fopFactory.newFop("application/pdf", out);
+
+                StreamSource source2 = new StreamSource(fichier.get(name));
+                // Resulting SAX events (the generated FO) must be piped through to FOP
+                Result res = new SAXResult(fop.getDefaultHandler());
+
+                transformer.transform(source2, res);
+            } catch (TransformerException ex) {
+                Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
             } catch (FOPException ex) {
                 Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            StreamSource source2 = new StreamSource(fichier.get(name));
-            // Resulting SAX events (the generated FO) must be piped through to FOP
-            Result res = null;
-            try {
-                res = new SAXResult(fop.getDefaultHandler());
-            } catch (FOPException ex) {
-                Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                transformer.transform(source2, res);
-            } catch (TransformerException ex) {
-                Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
-            }
             out.close();
-        }
+        }*/
         getServletContext().getRequestDispatcher("/jsp/test2.jsp").forward(request, response);
     }
 
