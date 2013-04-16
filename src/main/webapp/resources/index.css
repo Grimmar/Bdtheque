@@ -6,29 +6,41 @@
         Purpose of the stylesheet follows.
 */
 body, html{
-    background-image: url("image/background.jpg");
     width:100%;
-    height: 99%;
+    height: 96%;
     margin : 0;
-    margin-top :5px;
-    margin-bottom :5px;
     padding:0;
+}
+
+body{
+    background-image: url("image/bg2.jpeg");
 }
 
 .page{
     width : 70%;
     height: 100%;
     margin: auto;
-    background-image: linear-gradient(to bottom,#606060,#404040);
     display:block;
     border-radius: 5px;
     min-width: 800px;
+    background-color : white;
+    position: relative;
+    margin-top:75px;
 }
 
 .header{
     width:100%;
     height: 100px;
     background-color :darkred;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.footer{
+    width:100%;
+    height: 100px;
+    position: absolute;
+    bottom: 0;
+    background-color:black;
 }
 
 h1{

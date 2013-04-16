@@ -14,7 +14,12 @@
             <div class="header">
                 <h1>BDtheque</h1>
             </div>
-            
+            <div class="container">
+                
+            </div>
+             <div class="footer">
+                
+            </div>
         </div>
     </body>
 </html>
