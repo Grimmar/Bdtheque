@@ -5,9 +5,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="resources/index.css" type="text/css" media="screen"/>
+        <link href='http://fonts.googleapis.com/css?family=Black+Ops+One' rel='stylesheet' type='text/css'>
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div class="page">
+            <div class="header">
+                <h1>BDtheque</h1>
+            </div>
+            
+        </div>
     </body>
 </html>
