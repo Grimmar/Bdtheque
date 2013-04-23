@@ -87,7 +87,7 @@ public class Test extends HttpServlet {
 
             BdSearchBean searchBean = new BdSearchBean();
             searchBean.setTitre("ress");
-            System.out.println(model.searchFor(searchBean, null).get(0).getId());
+            System.out.println(model.searchFor(searchBean, null).size());
             
            
             searchBean.setTitre("resss");

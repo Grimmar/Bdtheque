@@ -192,29 +192,34 @@ public class DBManager {
         /**
          * A voir
          */
-        /*if (CollectionUtils.isNotEmpty(searchType.getScenaristes().getScenariste())) {
-            setParameterList(query, bindParams, params, searchType.getScenaristes().getScenariste(), "scenariste");
+        if (CollectionUtils.isNotEmpty(searchType.getScenaristes().getScenariste())) {
+            query.append(separator);
+            setParameterList(query, params, searchType.getScenaristes().getScenariste(), "scenariste");
             separator = " and ";
         }
 
         if (CollectionUtils.isNotEmpty(searchType.getColoristes().getColoriste())) {
-            setParameterList(query, bindParams, params, searchType.getColoristes().getColoriste(), "coloriste");
+            query.append(separator);
+            setParameterList(query, params, searchType.getColoristes().getColoriste(), "coloriste");
             separator = " and ";
         }
 
         if (CollectionUtils.isNotEmpty(searchType.getDessinateurs().getDessinateur())) {
-            setParameterList(query, bindParams, params, searchType.getDessinateurs().getDessinateur(), "dessinateur");
+            query.append(separator);
+            setParameterList(query, params, searchType.getDessinateurs().getDessinateur(), "dessinateur");
             separator = " and ";
         }
 
         if (CollectionUtils.isNotEmpty(searchType.getEncrages().getEncrage())) {
-            setParameterList(query, bindParams, params, searchType.getEncrages().getEncrage(), "encrage");
+            query.append(separator);
+            setParameterList(query, params, searchType.getEncrages().getEncrage(), "encrage");
             separator = " and ";
         }
 
         if (CollectionUtils.isNotEmpty(searchType.getLettrages().getLettrage())) {
-            setParameterList(query, bindParams, params, searchType.getLettrages().getLettrage(), "lettrage");
-        }*/
+            query.append(separator);
+            setParameterList(query, params, searchType.getLettrages().getLettrage(), "lettrage");
+        }
 
         
         if (MapUtils.isNotEmpty(orderBy)) {
@@ -301,14 +306,19 @@ public class DBManager {
 
     }
 
-    private void setParameterList(StringBuilder query, StringBuilder bind, Map<String, String> params, List<IndividuType> l, String prefix) {
+    private void setParameterList(StringBuilder query, Map<String, String> params, List<IndividuType> l, String prefix) {
         int i = 0;
+        query.append("(");
+        String separator = "";
         for (IndividuType ind : l) {
-            bind.append("declare variable $").append(prefix).append(i).append(" as xs:string external; ");
             params.put(prefix + i, ind.getNom() + " " + ind.getPrenom());
             i++;
-            //query
+            query.append(separator).append(/*set query*/);
+            if (i <= 1) {
+                separator = " or ";
+            }
         }
+        query.append(")");
 
     }
 }
