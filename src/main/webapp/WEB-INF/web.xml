@@ -1,12 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <context-param>
+        <description>Nombre max de requête en parallèle à la base</description>
+        <param-name>max-database-connections</param-name>
+        <param-value>100</param-value>
+    </context-param>
+    <resource-ref>
+        <description>Exist XML Database</description>
+        <res-ref-name>exist/xmlDB</res-ref-name>
+        <res-type>org.xmldb.api.base.Database</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
     <servlet>
         <servlet-name>Test</servlet-name>
         <servlet-class>fr.univ_rouen.bd.controller.Test</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>fr.univ_rouen.bd.controller.SearchServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowServlet</servlet-name>
+        <servlet-class>fr.univ_rouen.bd.controller.ShowServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddServlet</servlet-name>
+        <servlet-class>fr.univ_rouen.bd.controller.AddServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateServlet</servlet-name>
+        <servlet-class>fr.univ_rouen.bd.controller.UpdateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteServlet</servlet-name>
+        <servlet-class>fr.univ_rouen.bd.controller.DeleteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowServlet</servlet-name>
+        <url-pattern>/show</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddServlet</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateServlet</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>DeleteServlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

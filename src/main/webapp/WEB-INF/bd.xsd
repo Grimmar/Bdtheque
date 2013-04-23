@@ -4,6 +4,8 @@
     <xsd:import schemaLocation="http://www.xfront.com/isbn.xsd"/>
 	
     <!-- definition of simple elements -->
+    <xsd:element name="id" type="xsd:string" />
+    <xsd:element name="insertedDate" type="xsd:date" />
     <xsd:element name="titre" type="xsd:string" />
     <xsd:element name="numero" type="xsd:float" />
     <xsd:element name="informations" type="xsd:string" />
@@ -15,7 +17,7 @@
     <xsd:element name="nom" type="xsd:string" />
     <xsd:element name="prenom" type="xsd:string" />
     <xsd:element name="format" type="xsd:string" />
-    <xsd:element name="creation" type="xsd:date" />
+    <xsd:element name="creationDate" type="xsd:date" />
     <xsd:element name="image" type="xsd:anyURI" />
     <xsd:element name="scenariste" type="bd:individuType" />
     <xsd:element name="dessinateur" type="bd:individuType" />
@@ -30,7 +32,6 @@
     <xsd:attribute name="isbn" type="xsd:string"/>
 	
     <!-- definition of complex elements -->
-    <xsd:element name="bd" type="bd:bdType" />
     <xsd:element name="scenaristes" type="bd:scenaristesType" />
     <xsd:element name="dessinateurs" type="bd:dessinateursType" />
     <xsd:element name="coloristes" type="bd:coloristesType" />
@@ -62,30 +63,33 @@
         </xsd:sequence>
     </xsd:complexType>
 	
-    <xsd:complexType name="bdType">
-        <xsd:sequence>
-            <xsd:element name="titre" type="xsd:string" />
-            <xsd:element name="depotLegal" type="bd:partialDateType" />
-            <xsd:element name="finImpression" type="bd:partialDateType" />
-            <xsd:element name="parution" type="xsd:date" />
-            <xsd:element name="editeur" type="xsd:string" />
-            <xsd:element name="resume" type="xsd:string" />
-            <xsd:element name="format" type="xsd:string" />
-            <xsd:element name="creation" type="xsd:date" />
-            <xsd:element name="image" type="xsd:anyURI" />
-            <xsd:element ref="bd:scenaristes" minOccurs="1" maxOccurs="1" />
-            <xsd:element ref="bd:dessinateurs" minOccurs="1" maxOccurs="1" />
-            <xsd:element ref="bd:coloristes" minOccurs="1" maxOccurs="1" />
-            <xsd:element ref="bd:lettrages" minOccurs="0" maxOccurs="1" />
-            <xsd:element ref="bd:encrages" minOccurs="0" maxOccurs="1" />
-            <xsd:element ref="bd:tome" minOccurs="0" maxOccurs="1" />
-        </xsd:sequence>
-        <xsd:attribute ref="bd:isbn" use="required" />
-        <xsd:attribute ref="bd:serie" use="required" />
-        <xsd:attribute ref="bd:planches" use="required" />
-        <xsd:attribute ref="bd:langue" use="required" />
-    </xsd:complexType>
-	
+    <xsd:element name="bd">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="bd:id" minOccurs="0" maxOccurs="1"/>
+                <xsd:element ref="bd:insertedDate" minOccurs="0" maxOccurs="1" />
+                <xsd:element ref="bd:titre" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="bd:depotLegal" minOccurs="0" maxOccurs="1" />
+                <xsd:element ref="bd:finImpression" minOccurs="0" maxOccurs="1" />
+                <xsd:element ref="bd:parution" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="bd:editeur" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="bd:resume" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="bd:format" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="bd:creationDate"  minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="bd:image" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="bd:scenaristes" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="bd:dessinateurs" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="bd:coloristes" minOccurs="0" maxOccurs="1" />
+                <xsd:element ref="bd:lettrages" minOccurs="0" maxOccurs="1" />
+                <xsd:element ref="bd:encrages" minOccurs="0" maxOccurs="1" />
+                <xsd:element ref="bd:tome" minOccurs="0" maxOccurs="1" />
+            </xsd:sequence>
+            <xsd:attribute ref="bd:isbn" use="required" />
+            <xsd:attribute ref="bd:serie" />
+            <xsd:attribute ref="bd:planches" use="required" />
+            <xsd:attribute ref="bd:langue" use="required" />
+        </xsd:complexType>
+    </xsd:element>
     <xsd:complexType name="scenaristesType">
         <xsd:sequence>
             <xsd:element ref="bd:scenariste" minOccurs="1" maxOccurs="unbounded" />
