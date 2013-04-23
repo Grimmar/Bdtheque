@@ -1,6 +1,7 @@
 package fr.univ_rouen.bd.controller;
 
 import fr.univ_rouen.bd.model.Bd;
+import fr.univ_rouen.bd.model.BdSearchBean;
 import fr.univ_rouen.bd.model.DBManager;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -63,11 +64,11 @@ public class Test extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            DBManager model = new DBManager();
+            DBManager model = DBManager.getInstance();
             PrintWriter out = response.getWriter();
 
             out.println("Hello World");
-            Bd bd = new Bd();
+/*            Bd bd = new Bd();
             bd.setIsbn("6565684985");
             bd.setTitre("Une ressource");
 
@@ -82,12 +83,16 @@ public class Test extends HttpServlet {
             bd.setSerie("One-Shot");
             bd.setPlanches(BigInteger.valueOf(40));
             bd.setLangue("FR");
-            out.println(model.add(bd));
-            
-            Bd bd2 = model.get("1d7aab18");
-            System.out.println(bd2.getSerie());
-            
+            out.println(model.add(bd));*/
 
+            BdSearchBean searchBean = new BdSearchBean();
+            searchBean.setTitre("ress");
+            System.out.println(model.searchFor(searchBean, null).get(0).getId());
+            
+           
+            searchBean.setTitre("resss");
+            System.out.println(model.searchFor(searchBean, null).size());
+            
         } catch (Exception ex) {
             Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
         }
