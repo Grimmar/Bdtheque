@@ -313,7 +313,7 @@ public class DBManager {
         for (IndividuType ind : l) {
             params.put(prefix + i, ind.getNom() + " " + ind.getPrenom());
             i++;
-            query.append(separator).append(/*set query*/);
+            //query.append(separator).append(/*set query*/);
             if (i <= 1) {
                 separator = " or ";
             }

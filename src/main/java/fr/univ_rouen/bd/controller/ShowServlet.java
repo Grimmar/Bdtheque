@@ -32,7 +32,8 @@ public class ShowServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShowServlet</title>");            
+            out.println("<title>Servlet ShowServlet</title>"); 
+            out.println(request.getParameter("resource"));
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ShowServlet at " + request.getContextPath() + "</h1>");
@@ -81,6 +82,6 @@ public class ShowServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Consultation of a resource";
     }// </editor-fold>
 }

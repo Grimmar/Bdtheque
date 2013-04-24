@@ -11,6 +11,20 @@
         <res-type>org.xmldb.api.base.Database</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>
+    
+    <filter>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+        <init-param>
+            <param-name>logLevel</param-name>
+            <param-value>WARN</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
     <servlet>
         <servlet-name>Test</servlet-name>
         <servlet-class>fr.univ_rouen.bd.controller.Test</servlet-class>
@@ -55,7 +69,7 @@
         <servlet-name>UpdateServlet</servlet-name>
         <url-pattern>/update</url-pattern>
     </servlet-mapping>
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>DeleteServlet</servlet-name>
         <url-pattern>/delete</url-pattern>
     </servlet-mapping>

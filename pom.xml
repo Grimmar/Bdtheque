@@ -152,7 +152,11 @@
             <artifactId>xmldb</artifactId>
             <version>1.0</version>
         </dependency>
-           
+        <dependency>
+            <groupId>org.tuckey</groupId>
+            <artifactId>urlrewritefilter</artifactId>
+            <version>4.0.3</version>
+        </dependency>   
         <!-- mvn install:install-file -Dfile=exist-1.2.6.jar -DartifactId=exist -DgroupId=org.exist -Dversion=1.2.6 -Dpackaging=jar -->
         <!--<dependency>
             <groupId>org.exist</groupId>
