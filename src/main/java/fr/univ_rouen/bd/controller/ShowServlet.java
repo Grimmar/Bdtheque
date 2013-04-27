@@ -38,20 +38,26 @@ public class ShowServlet extends HttpServlet {
         String resource_id = request.getParameter(ATTR_RESOURCE);
         if (StringUtils.isBlank(resource_id)) {
             //TODO throw error
-        }
-        Bd bd = null;
-        try {
-            bd = DBManager.getInstance().get(resource_id);
-        } catch (Exception ex) {
-            Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Le code " + resource_id + " est inexistant");
+        } else {
 
-        if (bd == null) {
-            //TODO throw error
-        }
-        request.setAttribute(ATTR_BD, bd);
+            Bd bd = null;
+            try {
+                bd = DBManager.getInstance().get(resource_id);
+            } catch (Exception ex) {
+                Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-        this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+            if (bd == null) {
+                //TODO throw error
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Le code " + resource_id + " est inexistant");
+            } else {
+                request.setAttribute(ATTR_BD, bd);
+
+                this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+            }
+
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

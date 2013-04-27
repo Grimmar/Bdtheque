@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author bissoqu1
  */
-public abstract class AbstractForm<E> {
+public abstract class AbstractForm<E> implements Form<E> {
 
     private Map<String, String> errors;
     private String result;
@@ -19,20 +19,21 @@ public abstract class AbstractForm<E> {
         errors = new HashMap<String, String>();
     }
 
+    @Override
     public Map<String, String> getErrors() {
         return MapUtils.unmodifiableMap(errors);
     }
-
-    public abstract E validateForm(HttpServletRequest request);
 
     protected void setError(String field, String message) {
         errors.put(field, message);
     }
 
+    @Override
     public String getResult() {
         return result;
     }
 
+    @Override
     public boolean isValid() {
         return MapUtils.isEmpty(errors);
     }
@@ -41,6 +42,7 @@ public abstract class AbstractForm<E> {
         this.result = result;
     }
 
+    @Override
     public void clearErrors() {
         errors.clear();
     }

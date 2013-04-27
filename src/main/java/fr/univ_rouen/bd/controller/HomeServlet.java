@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class HomeServlet extends HttpServlet {
 
+    private static final String VIEW = "/WEB-INF/jsp/index.jsp";
+    
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -25,7 +27,7 @@ public class HomeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
