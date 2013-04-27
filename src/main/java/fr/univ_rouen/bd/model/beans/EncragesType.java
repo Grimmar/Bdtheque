@@ -6,7 +6,7 @@
 //
 
 
-package fr.univ_rouen.bd.model;
+package fr.univ_rouen.bd.model.beans;
 
 import java.util.ArrayList;
 import java.util.List;

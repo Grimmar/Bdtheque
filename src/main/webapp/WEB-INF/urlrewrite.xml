@@ -43,6 +43,11 @@
             <from>/export/(html|pdf)/(.+)</from>
             <to>/export?format=$1&amp;resource=$2</to>
         </rule>
+        
+        <rule>
+            <from>/$</from>
+            <to>/home</to>
+        </rule>
     <!--
 
     INSTALLATION

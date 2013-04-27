@@ -13,7 +13,7 @@ body, html{
 }
 
 body{
-    background-image: url("image/bg2.jpeg");
+    background-image: url("../img/bg2.jpeg");
 }
 
 .page{

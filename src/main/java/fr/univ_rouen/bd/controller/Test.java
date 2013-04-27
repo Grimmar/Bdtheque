@@ -1,8 +1,8 @@
 package fr.univ_rouen.bd.controller;
 
-import fr.univ_rouen.bd.model.Bd;
-import fr.univ_rouen.bd.model.BdSearchBean;
-import fr.univ_rouen.bd.model.DBManager;
+import fr.univ_rouen.bd.model.beans.Bd;
+import fr.univ_rouen.bd.model.beans.search.BdSearchBean;
+import fr.univ_rouen.bd.model.dao.DBManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
@@ -134,7 +134,7 @@ public class Test extends HttpServlet {
 
          out.close();
          }*/
-        getServletContext().getRequestDispatcher("/jsp/test2.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/test2.jsp").forward(request, response);
     }
 
     /**

@@ -6,7 +6,7 @@
 //
 
 
-package fr.univ_rouen.bd.model;
+package fr.univ_rouen.bd.model.beans;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -15,17 +15,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for individuType complex type.
+ * <p>Java class for tomeType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="individuType">
+ * &lt;complexType name="tomeType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://univ-rouen.fr/bd}nom"/>
- *         &lt;element ref="{http://univ-rouen.fr/bd}prenom" minOccurs="0"/>
+ *         &lt;element ref="{http://univ-rouen.fr/bd}numero"/>
+ *         &lt;element ref="{http://univ-rouen.fr/bd}informations"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,62 +35,54 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "individuType", propOrder = {
-    "nom",
-    "prenom"
+@XmlType(name = "tomeType", propOrder = {
+    "numero",
+    "informations"
 })
-public class IndividuType {
+public class TomeType {
 
+    protected float numero;
     @XmlElement(required = true)
-    protected String nom;
-    protected String prenom;
+    protected String informations;
 
     /**
-     * Gets the value of the nom property.
+     * Gets the value of the numero property.
+     * 
+     */
+    public float getNumero() {
+        return numero;
+    }
+
+    /**
+     * Sets the value of the numero property.
+     * 
+     */
+    public void setNumero(float value) {
+        this.numero = value;
+    }
+
+    /**
+     * Gets the value of the informations property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getNom() {
-        return nom;
+    public String getInformations() {
+        return informations;
     }
 
     /**
-     * Sets the value of the nom property.
+     * Sets the value of the informations property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setNom(String value) {
-        this.nom = value;
-    }
-
-    /**
-     * Gets the value of the prenom property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getPrenom() {
-        return prenom;
-    }
-
-    /**
-     * Sets the value of the prenom property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setPrenom(String value) {
-        this.prenom = value;
+    public void setInformations(String value) {
+        this.informations = value;
     }
 
 }

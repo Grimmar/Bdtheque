@@ -6,7 +6,7 @@
 //
 
 
-package fr.univ_rouen.bd.model;
+package fr.univ_rouen.bd.model.beans;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,16 +17,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for scenaristesType complex type.
+ * <p>Java class for dessinateursType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="scenaristesType">
+ * &lt;complexType name="dessinateursType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://univ-rouen.fr/bd}scenariste" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://univ-rouen.fr/bd}dessinateur" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,27 +36,27 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "scenaristesType", propOrder = {
-    "scenariste"
+@XmlType(name = "dessinateursType", propOrder = {
+    "dessinateur"
 })
-public class ScenaristesType {
+public class DessinateursType {
 
     @XmlElement(required = true)
-    protected List<IndividuType> scenariste;
+    protected List<IndividuType> dessinateur;
 
     /**
-     * Gets the value of the scenariste property.
+     * Gets the value of the dessinateur property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the scenariste property.
+     * This is why there is not a <CODE>set</CODE> method for the dessinateur property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getScenariste().add(newItem);
+     *    getDessinateur().add(newItem);
      * </pre>
      * 
      * 
@@ -66,11 +66,11 @@ public class ScenaristesType {
      * 
      * 
      */
-    public List<IndividuType> getScenariste() {
-        if (scenariste == null) {
-            scenariste = new ArrayList<IndividuType>();
+    public List<IndividuType> getDessinateur() {
+        if (dessinateur == null) {
+            dessinateur = new ArrayList<IndividuType>();
         }
-        return this.scenariste;
+        return this.dessinateur;
     }
 
 }

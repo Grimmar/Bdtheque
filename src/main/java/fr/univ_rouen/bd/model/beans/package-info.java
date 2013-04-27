@@ -6,4 +6,4 @@
 //
 
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://univ-rouen.fr/bd", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package fr.univ_rouen.bd.model;
+package fr.univ_rouen.bd.model.beans;

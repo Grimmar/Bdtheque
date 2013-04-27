@@ -6,7 +6,7 @@
 //
 
 
-package fr.univ_rouen.bd.model;
+package fr.univ_rouen.bd.model.beans;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,16 +17,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for lettragesType complex type.
+ * <p>Java class for scenaristesType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="lettragesType">
+ * &lt;complexType name="scenaristesType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://univ-rouen.fr/bd}lettrage" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://univ-rouen.fr/bd}scenariste" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,27 +36,27 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "lettragesType", propOrder = {
-    "lettrage"
+@XmlType(name = "scenaristesType", propOrder = {
+    "scenariste"
 })
-public class LettragesType {
+public class ScenaristesType {
 
     @XmlElement(required = true)
-    protected List<IndividuType> lettrage;
+    protected List<IndividuType> scenariste;
 
     /**
-     * Gets the value of the lettrage property.
+     * Gets the value of the scenariste property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the lettrage property.
+     * This is why there is not a <CODE>set</CODE> method for the scenariste property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getLettrage().add(newItem);
+     *    getScenariste().add(newItem);
      * </pre>
      * 
      * 
@@ -66,11 +66,11 @@ public class LettragesType {
      * 
      * 
      */
-    public List<IndividuType> getLettrage() {
-        if (lettrage == null) {
-            lettrage = new ArrayList<IndividuType>();
+    public List<IndividuType> getScenariste() {
+        if (scenariste == null) {
+            scenariste = new ArrayList<IndividuType>();
         }
-        return this.lettrage;
+        return this.scenariste;
     }
 
 }

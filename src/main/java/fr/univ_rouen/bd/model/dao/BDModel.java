@@ -1,5 +1,6 @@
-package fr.univ_rouen.bd.model;
+package fr.univ_rouen.bd.model.dao;
 
+import fr.univ_rouen.bd.model.beans.Bd;
 import java.util.List;
 
 /**

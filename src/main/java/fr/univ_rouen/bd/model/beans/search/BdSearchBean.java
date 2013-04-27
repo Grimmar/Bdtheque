@@ -1,4 +1,10 @@
-package fr.univ_rouen.bd.model;
+package fr.univ_rouen.bd.model.beans.search;
+
+import fr.univ_rouen.bd.model.beans.ColoristesType;
+import fr.univ_rouen.bd.model.beans.DessinateursType;
+import fr.univ_rouen.bd.model.beans.EncragesType;
+import fr.univ_rouen.bd.model.beans.LettragesType;
+import fr.univ_rouen.bd.model.beans.ScenaristesType;
 
 /**
  *

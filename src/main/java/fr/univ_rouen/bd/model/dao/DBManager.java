@@ -1,5 +1,14 @@
-package fr.univ_rouen.bd.model;
+package fr.univ_rouen.bd.model.dao;
 
+import fr.univ_rouen.bd.model.beans.Bd;
+import fr.univ_rouen.bd.model.beans.ColoristesType;
+import fr.univ_rouen.bd.model.beans.DessinateursType;
+import fr.univ_rouen.bd.model.beans.EncragesType;
+import fr.univ_rouen.bd.model.beans.IndividuType;
+import fr.univ_rouen.bd.model.beans.LettragesType;
+import fr.univ_rouen.bd.model.beans.ScenaristesType;
+import fr.univ_rouen.bd.model.beans.TomeType;
+import fr.univ_rouen.bd.model.beans.search.BdSearchBean;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;

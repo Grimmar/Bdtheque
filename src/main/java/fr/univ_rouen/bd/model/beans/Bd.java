@@ -6,7 +6,7 @@
 //
 
 
-package fr.univ_rouen.bd.model;
+package fr.univ_rouen.bd.model.beans;
 
 import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;

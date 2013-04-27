@@ -6,7 +6,7 @@
 //
 
 
-package fr.univ_rouen.bd.model;
+package fr.univ_rouen.bd.model.beans;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,16 +17,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for coloristesType complex type.
+ * <p>Java class for lettragesType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="coloristesType">
+ * &lt;complexType name="lettragesType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://univ-rouen.fr/bd}coloriste" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://univ-rouen.fr/bd}lettrage" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,27 +36,27 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "coloristesType", propOrder = {
-    "coloriste"
+@XmlType(name = "lettragesType", propOrder = {
+    "lettrage"
 })
-public class ColoristesType {
+public class LettragesType {
 
     @XmlElement(required = true)
-    protected List<IndividuType> coloriste;
+    protected List<IndividuType> lettrage;
 
     /**
-     * Gets the value of the coloriste property.
+     * Gets the value of the lettrage property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the coloriste property.
+     * This is why there is not a <CODE>set</CODE> method for the lettrage property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getColoriste().add(newItem);
+     *    getLettrage().add(newItem);
      * </pre>
      * 
      * 
@@ -66,11 +66,11 @@ public class ColoristesType {
      * 
      * 
      */
-    public List<IndividuType> getColoriste() {
-        if (coloriste == null) {
-            coloriste = new ArrayList<IndividuType>();
+    public List<IndividuType> getLettrage() {
+        if (lettrage == null) {
+            lettrage = new ArrayList<IndividuType>();
         }
-        return this.coloriste;
+        return this.lettrage;
     }
 
 }
