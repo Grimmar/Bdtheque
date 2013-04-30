@@ -188,7 +188,7 @@ public class DBManager {
 
         if (StringUtils.isNotBlank(searchType.getResume())) {
             params.put("resume", searchType.getResume());
-            query.append(separator).append("contains(upper-case($bd/bd:bd/bd:resume/text()), upper-case($resume))");
+            query.append(separator).append("contains(upper-case($bd/bd:bd/bd:resume/text()), upper-case($resume)) == 0");
             separator = " and ";
         }
 
@@ -320,9 +320,16 @@ public class DBManager {
         query.append("(");
         String separator = "";
         for (IndividuType ind : l) {
-            params.put(prefix + i, ind.getNom() + " " + ind.getPrenom());
+            //params.put(prefix + i, ind.getNom() + " " + ind.getPrenom());
             i++;
-            //query.append(separator).append(/*set query*/);
+            query.append(separator)
+                    .append("( contains(upper-case($bd/bd:").append(prefix).append("s").append("/bd:").append(prefix).append("/bd:nom), upper-case(\"")
+                    .append(ind.getNom())
+                    .append("\" )) == 0 )")
+                    .append("and ( contains(upper-case($bd/bd:").append(prefix).append("s").append("/bd:").append(prefix).append("/bd:prenom), upper-case(\"")
+                    .append(ind.getPrenom())
+                    .append("\" ))==0 )");
+            
             if (i <= 1) {
                 separator = " or ";
             }
