@@ -1,5 +1,8 @@
 package fr.univ_rouen.bd.controller;
 
+import static fr.univ_rouen.bd.controller.Test.CONF_DAO_FACTORY;
+import fr.univ_rouen.bd.model.dao.BdDao;
+import fr.univ_rouen.bd.model.dao.DAOFactory;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +16,14 @@ import javax.servlet.http.HttpServletResponse;
 public class HomeServlet extends HttpServlet {
 
     private static final String VIEW = "/WEB-INF/jsp/index.jsp";
-    
+    public static final String CONF_DAO_FACTORY = "daofactory";
+    private BdDao bdDao;
+
+    @Override
+    public void init() throws ServletException {
+        this.bdDao = ((DAOFactory) getServletContext().getAttribute(CONF_DAO_FACTORY)).getBdDao();
+    }
+
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -30,7 +40,6 @@ public class HomeServlet extends HttpServlet {
         this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
      * <code>GET</code> method.
@@ -68,6 +77,6 @@ public class HomeServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        return "Accueil de l'application";
+    }
 }

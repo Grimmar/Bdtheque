@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2013.04.23 at 10:30:11 AM CEST 
 //
-
-
 package fr.univ_rouen.bd.model.beans;
 
 import java.math.BigInteger;
@@ -18,12 +16,12 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-
 /**
  * <p>Java class for anonymous complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -55,8 +53,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
@@ -128,11 +126,9 @@ public class Bd {
 
     /**
      * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getId() {
         return id;
@@ -140,11 +136,9 @@ public class Bd {
 
     /**
      * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setId(String value) {
         this.id = value;
@@ -152,11 +146,9 @@ public class Bd {
 
     /**
      * Gets the value of the insertedDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is {@link XMLGregorianCalendar }
+     *
      */
     public XMLGregorianCalendar getInsertedDate() {
         return insertedDate;
@@ -164,11 +156,9 @@ public class Bd {
 
     /**
      * Sets the value of the insertedDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is {@link XMLGregorianCalendar }
+     *
      */
     public void setInsertedDate(XMLGregorianCalendar value) {
         this.insertedDate = value;
@@ -176,11 +166,9 @@ public class Bd {
 
     /**
      * Gets the value of the titre property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getTitre() {
         return titre;
@@ -188,11 +176,9 @@ public class Bd {
 
     /**
      * Sets the value of the titre property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setTitre(String value) {
         this.titre = value;
@@ -200,11 +186,9 @@ public class Bd {
 
     /**
      * Gets the value of the depotLegal property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getDepotLegal() {
         return depotLegal;
@@ -212,11 +196,9 @@ public class Bd {
 
     /**
      * Sets the value of the depotLegal property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setDepotLegal(String value) {
         this.depotLegal = value;
@@ -224,11 +206,9 @@ public class Bd {
 
     /**
      * Gets the value of the finImpression property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getFinImpression() {
         return finImpression;
@@ -236,11 +216,9 @@ public class Bd {
 
     /**
      * Sets the value of the finImpression property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setFinImpression(String value) {
         this.finImpression = value;
@@ -248,11 +226,9 @@ public class Bd {
 
     /**
      * Gets the value of the parution property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is {@link XMLGregorianCalendar }
+     *
      */
     public XMLGregorianCalendar getParution() {
         return parution;
@@ -260,11 +236,9 @@ public class Bd {
 
     /**
      * Sets the value of the parution property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is {@link XMLGregorianCalendar }
+     *
      */
     public void setParution(XMLGregorianCalendar value) {
         this.parution = value;
@@ -272,11 +246,9 @@ public class Bd {
 
     /**
      * Gets the value of the editeur property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getEditeur() {
         return editeur;
@@ -284,11 +256,9 @@ public class Bd {
 
     /**
      * Sets the value of the editeur property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setEditeur(String value) {
         this.editeur = value;
@@ -296,11 +266,9 @@ public class Bd {
 
     /**
      * Gets the value of the resume property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getResume() {
         return resume;
@@ -308,11 +276,9 @@ public class Bd {
 
     /**
      * Sets the value of the resume property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setResume(String value) {
         this.resume = value;
@@ -320,11 +286,9 @@ public class Bd {
 
     /**
      * Gets the value of the format property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getFormat() {
         return format;
@@ -332,11 +296,9 @@ public class Bd {
 
     /**
      * Sets the value of the format property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setFormat(String value) {
         this.format = value;
@@ -344,11 +306,9 @@ public class Bd {
 
     /**
      * Gets the value of the creationDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is {@link XMLGregorianCalendar }
+     *
      */
     public XMLGregorianCalendar getCreationDate() {
         return creationDate;
@@ -356,11 +316,9 @@ public class Bd {
 
     /**
      * Sets the value of the creationDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is {@link XMLGregorianCalendar }
+     *
      */
     public void setCreationDate(XMLGregorianCalendar value) {
         this.creationDate = value;
@@ -368,11 +326,9 @@ public class Bd {
 
     /**
      * Gets the value of the image property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getImage() {
         return image;
@@ -380,11 +336,9 @@ public class Bd {
 
     /**
      * Sets the value of the image property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setImage(String value) {
         this.image = value;
@@ -392,11 +346,9 @@ public class Bd {
 
     /**
      * Gets the value of the scenaristes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ScenaristesType }
-     *     
+     *
+     * @return possible object is {@link ScenaristesType }
+     *
      */
     public ScenaristesType getScenaristes() {
         return scenaristes;
@@ -404,11 +356,9 @@ public class Bd {
 
     /**
      * Sets the value of the scenaristes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ScenaristesType }
-     *     
+     *
+     * @param value allowed object is {@link ScenaristesType }
+     *
      */
     public void setScenaristes(ScenaristesType value) {
         this.scenaristes = value;
@@ -416,11 +366,9 @@ public class Bd {
 
     /**
      * Gets the value of the dessinateurs property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link DessinateursType }
-     *     
+     *
+     * @return possible object is {@link DessinateursType }
+     *
      */
     public DessinateursType getDessinateurs() {
         return dessinateurs;
@@ -428,11 +376,9 @@ public class Bd {
 
     /**
      * Sets the value of the dessinateurs property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link DessinateursType }
-     *     
+     *
+     * @param value allowed object is {@link DessinateursType }
+     *
      */
     public void setDessinateurs(DessinateursType value) {
         this.dessinateurs = value;
@@ -440,11 +386,9 @@ public class Bd {
 
     /**
      * Gets the value of the coloristes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ColoristesType }
-     *     
+     *
+     * @return possible object is {@link ColoristesType }
+     *
      */
     public ColoristesType getColoristes() {
         return coloristes;
@@ -452,11 +396,9 @@ public class Bd {
 
     /**
      * Sets the value of the coloristes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ColoristesType }
-     *     
+     *
+     * @param value allowed object is {@link ColoristesType }
+     *
      */
     public void setColoristes(ColoristesType value) {
         this.coloristes = value;
@@ -464,11 +406,9 @@ public class Bd {
 
     /**
      * Gets the value of the lettrages property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link LettragesType }
-     *     
+     *
+     * @return possible object is {@link LettragesType }
+     *
      */
     public LettragesType getLettrages() {
         return lettrages;
@@ -476,11 +416,9 @@ public class Bd {
 
     /**
      * Sets the value of the lettrages property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link LettragesType }
-     *     
+     *
+     * @param value allowed object is {@link LettragesType }
+     *
      */
     public void setLettrages(LettragesType value) {
         this.lettrages = value;
@@ -488,11 +426,9 @@ public class Bd {
 
     /**
      * Gets the value of the encrages property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EncragesType }
-     *     
+     *
+     * @return possible object is {@link EncragesType }
+     *
      */
     public EncragesType getEncrages() {
         return encrages;
@@ -500,11 +436,9 @@ public class Bd {
 
     /**
      * Sets the value of the encrages property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EncragesType }
-     *     
+     *
+     * @param value allowed object is {@link EncragesType }
+     *
      */
     public void setEncrages(EncragesType value) {
         this.encrages = value;
@@ -512,11 +446,9 @@ public class Bd {
 
     /**
      * Gets the value of the tome property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TomeType }
-     *     
+     *
+     * @return possible object is {@link TomeType }
+     *
      */
     public TomeType getTome() {
         return tome;
@@ -524,11 +456,9 @@ public class Bd {
 
     /**
      * Sets the value of the tome property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TomeType }
-     *     
+     *
+     * @param value allowed object is {@link TomeType }
+     *
      */
     public void setTome(TomeType value) {
         this.tome = value;
@@ -536,11 +466,9 @@ public class Bd {
 
     /**
      * Gets the value of the isbn property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getIsbn() {
         return isbn;
@@ -548,11 +476,9 @@ public class Bd {
 
     /**
      * Sets the value of the isbn property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setIsbn(String value) {
         this.isbn = value;
@@ -560,11 +486,9 @@ public class Bd {
 
     /**
      * Gets the value of the serie property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getSerie() {
         if (serie == null) {
@@ -576,11 +500,9 @@ public class Bd {
 
     /**
      * Sets the value of the serie property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setSerie(String value) {
         this.serie = value;
@@ -588,11 +510,9 @@ public class Bd {
 
     /**
      * Gets the value of the planches property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is {@link BigInteger }
+     *
      */
     public BigInteger getPlanches() {
         return planches;
@@ -600,11 +520,9 @@ public class Bd {
 
     /**
      * Sets the value of the planches property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is {@link BigInteger }
+     *
      */
     public void setPlanches(BigInteger value) {
         this.planches = value;
@@ -612,11 +530,9 @@ public class Bd {
 
     /**
      * Gets the value of the langue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getLangue() {
         return langue;
@@ -624,14 +540,11 @@ public class Bd {
 
     /**
      * Sets the value of the langue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setLangue(String value) {
         this.langue = value;
     }
-
 }

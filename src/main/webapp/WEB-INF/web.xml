@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-	<jsp-config>
+    <jsp-config>
         <jsp-property-group>
             <url-pattern>*.jsp</url-pattern>
             <include-prelude>/WEB-INF/jsp/taglibs.jsp</include-prelude>
         </jsp-property-group>
     </jsp-config>
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/jsp/error/404.jsp</location>
+    </error-page>
 
     <context-param>
         <description>Nombre max de requête en parallèle à la base</description>
@@ -19,6 +24,11 @@
         <res-type>org.xmldb.api.base.Database</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>
+
+    <listener>
+        <listener-class>fr.univ_rouen.bd.config.InitialisationDaoFactory</listener-class>
+    </listener>
+
     <filter>
         <filter-name>UrlRewriteFilter</filter-name>
         <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
@@ -31,6 +41,23 @@
         <filter-name>UrlRewriteFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+	<filter>
+		<filter-name>Set Character Encoding</filter-name>
+		<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+		<init-param>
+		    <param-name>encoding</param-name>
+		    <param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+		    <param-name>ignore</param-name>
+		    <param-value>false</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>Set Character Encoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
     <servlet>
         <servlet-name>Test</servlet-name>
         <servlet-class>fr.univ_rouen.bd.controller.Test</servlet-class>

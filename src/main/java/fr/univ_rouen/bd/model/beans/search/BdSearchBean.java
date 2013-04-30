@@ -10,7 +10,7 @@ import fr.univ_rouen.bd.model.beans.ScenaristesType;
  *
  * @author bissoqu1
  */
-public class BdSearchBean {
+public class BdSearchBean implements SearchBean {
 
     protected String titre;
     protected String editeur;

@@ -20,6 +20,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.UnmarshallerHandler;
 import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import org.apache.commons.collections.CollectionUtils;
@@ -267,6 +268,7 @@ public class DBManager {
         DatatypeFactory datatypeFactory = DatatypeFactory.newInstance();
         XMLGregorianCalendar now =
                 datatypeFactory.newXMLGregorianCalendar(gregorianCalendar);
+        now.setTimezone(DatatypeConstants.FIELD_UNDEFINED);
         return now;
     }
 

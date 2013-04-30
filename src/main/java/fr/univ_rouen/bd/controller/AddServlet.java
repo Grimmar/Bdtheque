@@ -1,5 +1,7 @@
 package fr.univ_rouen.bd.controller;
 
+import fr.univ_rouen.bd.model.dao.BdDao;
+import fr.univ_rouen.bd.model.dao.DAOFactory;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,9 +14,15 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AddServlet extends HttpServlet {
 
+    public static final String CONF_DAO_FACTORY = "daofactory";
     private static final String VIEW = "/WEB-INF/jsp/addBd.jsp";
-    
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    private BdDao bdDao;
+
+    @Override
+    public void init() throws ServletException {
+        this.bdDao = ((DAOFactory) getServletContext().getAttribute(CONF_DAO_FACTORY)).getBdDao();
+    }
+
     /**
      * Handles the HTTP
      * <code>GET</code> method.
@@ -27,8 +35,8 @@ public class AddServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         response.setContentType("text/html;charset=UTF-8");
-         this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
     }
 
     /**
@@ -43,7 +51,7 @@ public class AddServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
     }
 
     /**
@@ -54,5 +62,5 @@ public class AddServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Servlet used to add a new bd";
-    }// </editor-fold>
+    }
 }

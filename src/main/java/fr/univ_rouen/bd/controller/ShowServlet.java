@@ -1,10 +1,10 @@
 package fr.univ_rouen.bd.controller;
 
 import fr.univ_rouen.bd.model.beans.Bd;
-import fr.univ_rouen.bd.model.dao.DBManager;
+import fr.univ_rouen.bd.model.dao.BdDao;
+import fr.univ_rouen.bd.model.dao.DAOFactory;
+import fr.univ_rouen.bd.model.dao.exception.DAOException;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +21,14 @@ public class ShowServlet extends HttpServlet {
     private static final String CONTENT_TYPE = "text/html;charset=UTF-8";
     private static final String ATTR_BD = "bd";
     private static final String ATTR_RESOURCE = "resource";
+    private static final String ATTR_MESSAGE = "message";
+    public static final String CONF_DAO_FACTORY = "daofactory";
+    private BdDao bdDao;
+
+    @Override
+    public void init() throws ServletException {
+        this.bdDao = ((DAOFactory) getServletContext().getAttribute(CONF_DAO_FACTORY)).getBdDao();
+    }
 
     /**
      * Processes requests for both HTTP
@@ -37,26 +45,22 @@ public class ShowServlet extends HttpServlet {
         response.setContentType(CONTENT_TYPE);
         String resource_id = request.getParameter(ATTR_RESOURCE);
         if (StringUtils.isBlank(resource_id)) {
-            //TODO throw error
-            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Le code " + resource_id + " est inexistant");
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Il est obligatoire de passer le nom d'une ressource en paramètre pour pouvoir accéder à cette page.");
         } else {
 
-            Bd bd = null;
             try {
-                bd = DBManager.getInstance().get(resource_id);
-            } catch (Exception ex) {
-                Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+                Bd bd = bdDao.get(resource_id);
+                if (bd == null) {
+                    request.setAttribute(ATTR_MESSAGE, "La BD ayant l'identifiant '" + resource_id + "' n'existe pas dans notre application");
+                } else {
+                    request.setAttribute(ATTR_BD, bd);
+                }
+            } catch (DAOException e) {
+                
+                request.setAttribute(ATTR_MESSAGE, "Une erreur a eu lieu lors de l'accès aux données.");
             }
 
-            if (bd == null) {
-                //TODO throw error
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Le code " + resource_id + " est inexistant");
-            } else {
-                request.setAttribute(ATTR_BD, bd);
-
-                this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
-            }
-
+            this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
         }
     }
 

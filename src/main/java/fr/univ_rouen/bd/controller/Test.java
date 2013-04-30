@@ -1,8 +1,8 @@
 package fr.univ_rouen.bd.controller;
 
 import fr.univ_rouen.bd.model.beans.Bd;
-import fr.univ_rouen.bd.model.beans.search.BdSearchBean;
-import fr.univ_rouen.bd.model.dao.DBManager;
+import fr.univ_rouen.bd.model.dao.BdDao;
+import fr.univ_rouen.bd.model.dao.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
@@ -13,10 +13,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
-import org.apache.fop.apps.FOPException;
 
 /**
  *
@@ -24,33 +20,14 @@ import org.apache.fop.apps.FOPException;
  */
 public class Test extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, FOPException {
-        response.setContentType("text/html;charset=UTF-8");
+    public static final String CONF_DAO_FACTORY = "daofactory";
+    private BdDao bdDao;
 
-
+    @Override
+    public void init() throws ServletException {
+        this.bdDao = ((DAOFactory) getServletContext().getAttribute(CONF_DAO_FACTORY)).getBdDao();
     }
-
-    private XMLGregorianCalendar getXMLGregorianCalendarNow()
-            throws DatatypeConfigurationException {
-        GregorianCalendar gregorianCalendar = new GregorianCalendar();
-        DatatypeFactory datatypeFactory = DatatypeFactory.newInstance();
-        XMLGregorianCalendar now =
-                datatypeFactory.newXMLGregorianCalendar(gregorianCalendar);
-        return now;
-    }
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-
+  
     /**
      * Handles the HTTP
      * <code>GET</code> method.
@@ -64,35 +41,34 @@ public class Test extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            DBManager model = DBManager.getInstance();
             PrintWriter out = response.getWriter();
 
             out.println("Hello World");
-/*            Bd bd = new Bd();
+            Bd bd = new Bd();
             bd.setIsbn("6565684985");
             bd.setTitre("Une ressource");
 
-            bd.setParution(getXMLGregorianCalendarNow());
+            bd.setParution(DAOFactory.getXMLGregorianCalendar(new GregorianCalendar()));
             bd.setEditeur("un editeur");
             bd.setResume("un resume");
             bd.setFormat("un format");
-            bd.setCreationDate(getXMLGregorianCalendarNow());
-            bd.setImage("un editeur");
+            bd.setCreationDate(DAOFactory.getXMLGregorianCalendar(new GregorianCalendar()));
+            bd.setImage("http://www.romainblachier.fr/wp-content/uploads/2013/03/google.jpg");
             bd.setScenaristes(null);
             bd.setDessinateurs(null);
             bd.setSerie("One-Shot");
             bd.setPlanches(BigInteger.valueOf(40));
             bd.setLangue("FR");
-            out.println(model.add(bd));*/
+            out.println(bdDao.add(bd));
 
-            BdSearchBean searchBean = new BdSearchBean();
-            searchBean.setTitre("ress");
-            System.out.println(model.searchFor(searchBean, null).size());
+            /*BdSearchBean searchBean = new BdSearchBean();
+             searchBean.setTitre("ress");
+             System.out.println(model.searchFor(searchBean, null).size());
             
            
-            searchBean.setTitre("resss");
-            System.out.println(model.searchFor(searchBean, null).size());
-            
+             searchBean.setTitre("resss");
+             System.out.println(model.searchFor(searchBean, null).size());*/
+
         } catch (Exception ex) {
             Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -149,11 +125,6 @@ public class Test extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (FOPException ex) {
-            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
@@ -164,5 +135,5 @@ public class Test extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 }
