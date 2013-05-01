@@ -1,6 +1,7 @@
 package fr.univ_rouen.bd.model.dao;
 
 import fr.univ_rouen.bd.model.beans.Bd;
+import fr.univ_rouen.bd.model.beans.IndividuType;
 import fr.univ_rouen.bd.model.beans.search.BdSearchBean;
 import fr.univ_rouen.bd.model.beans.search.SearchBean;
 import fr.univ_rouen.bd.model.dao.exception.DAOException;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import org.apache.commons.collections.CollectionUtils;
+
 import java.util.Map;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -110,6 +113,35 @@ public class BdDao implements Dao<Bd> {
                 separator = " and ";
             }
 
+            if (CollectionUtils.isNotEmpty(searchBean.getScenaristes().getScenariste())) {
+                query.append(separator);
+                setParameterList(query, params, searchBean.getScenaristes().getScenariste(), "scenariste");
+                separator = " and ";
+            }
+
+            if (CollectionUtils.isNotEmpty(searchBean.getColoristes().getColoriste())) {
+                query.append(separator);
+                setParameterList(query, params, searchBean.getColoristes().getColoriste(), "coloriste");
+                separator = " and ";
+            }
+
+            if (CollectionUtils.isNotEmpty(searchBean.getDessinateurs().getDessinateur())) {
+                query.append(separator);
+                setParameterList(query, params, searchBean.getDessinateurs().getDessinateur(), "dessinateur");
+                separator = " and ";
+            }
+
+            if (CollectionUtils.isNotEmpty(searchBean.getEncrages().getEncrage())) {
+                query.append(separator);
+                setParameterList(query, params, searchBean.getEncrages().getEncrage(), "encrage");
+                separator = " and ";
+            }
+
+            if (CollectionUtils.isNotEmpty(searchBean.getLettrages().getLettrage())) {
+                query.append(separator);
+                setParameterList(query, params, searchBean.getLettrages().getLettrage(), "lettrage");
+            }
+
             if (MapUtils.isNotEmpty(orderBy)) {
                 separator = " order by ";
                 query.append(separator);
@@ -144,6 +176,29 @@ public class BdDao implements Dao<Bd> {
         }
     }
 
+    private void setParameterList(StringBuilder query, Map<String, String> params, List<IndividuType> l, String prefix) {
+        int i = 0;
+        query.append("(");
+        String separator = "";
+        for (IndividuType ind : l) {
+            //params.put(prefix + i, ind.getNom() + " " + ind.getPrenom());
+            i++;
+            query.append(separator)
+                    .append("( contains(upper-case($bd/bd:").append(prefix).append("s").append("/bd:").append(prefix).append("/bd:nom), upper-case(\"")
+                    .append(ind.getNom())
+                    .append("\" )) == 0 )")
+                    .append("and ( contains(upper-case($bd/bd:").append(prefix).append("s").append("/bd:").append(prefix).append("/bd:prenom), upper-case(\"")
+                    .append(ind.getPrenom())
+                    .append("\" ))==0 )");
+            
+            if (i <= 1) {
+                separator = " or ";
+            }
+        }
+        query.append(")");
+
+    }
+    
     @Override
     public boolean add(Bd bd) throws DAOException {
         try {

@@ -1,0 +1,190 @@
+@font-face {
+    font-family: 'Black Ops One';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Black Ops One'), local('BlackOpsOne-Regular'), url(http://themes.googleusercontent.com/static/fonts/blackopsone/v4/2XW-DmDsGbDLE372KrMW1fn8qdNnd5eCmWXua5W-n7c.woff) format('woff');
+}
+
+body, html{
+    width:100%;
+    height: 100%;
+    margin : 0;
+    padding:0;
+    font-family: 'Source Sans Pro',sans-serif;
+}
+
+body{
+    background-image: url("../img/background.jpg");
+}
+
+header.main-header{
+    background-color :darkred;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.7); 
+    height: 60px;
+    border-bottom: 4px solid #03638b;
+}
+
+.menu-right {
+    float: right;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+header.main-header .searchForm {
+    position: relative;
+}
+
+header.main-header .searchForm input[type="search"] {
+    width: 200px;
+    background: -webkit-linear-gradient(top,#ededed,#ededed 5%,#fff 15%,#fff);
+    background: -moz-linear-gradient(top,#ededed,#ededed 5%,#fff 15%,#fff);
+    background: -o-linear-gradient(top,#ededed,#ededed 5%,#fff 15%,#fff);
+    background: -ms-linear-gradient(top,#ededed,#ededed 5%,#fff 15%,#fff);
+    background: linear-gradient(top,#ededed,#ededed 5%,#fff 15%,#fff);
+    padding: 4px;
+}
+
+header.main-header .searchForm input[type="submit"] {
+    padding: 0;
+    border-radius: 0 4px 4px 0;
+    -webkit-border-radius: 0 4px 4px 0;
+    -moz-border-radius: 0 4px 4px 0;
+    background: 0;
+    border: 0;
+    color: #FFF;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 4px;
+    background: url('../img/search.png') 4px no-repeat scroll #f8f8f4;
+    background-size: 20px;
+    height: 28px;
+    margin-right: 0;
+    position: absolute;
+    right: 2px;
+    top: 1px;
+    width: 28px;
+}
+
+header.main-header nav, .content {
+    margin:auto;
+    width: 1024px;
+    display: block;
+}
+
+header.main-header nav h1{
+    margin:0;
+    padding:0;
+    color :white;
+    font-size: 52px;
+    font-family: 'Black Ops One', cursive;
+}
+
+a.home {
+    display: block;
+    text-decoration: none;
+    outline: none;
+    width: auto;
+    float: left;
+}
+
+.content {
+    background-color: white;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    min-height: 1024px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.7); 
+    margin: 10px auto;
+}
+
+.content header h1 {
+    margin: 0;
+}
+
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+footer.main-footer{
+    min-height: 70px;
+    background-color:black;
+    border-top: 4px solid #03638b;
+}
+
+.btn {
+    display: inline-block;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #333333;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    background-color: #f5f5f5;
+    background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+    border: 1px solid #cccccc;
+    border-bottom-color: #b3b3b3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+}
+
+.btn:hover, .btn:focus, .btn:active, 
+.btn[disabled], .disabled-btn {
+    color: #333333;
+    background-color: #e6e6e6;
+    text-decoration: none;
+    background-position: 0 -15px;
+    -webkit-transition: background-position 0.1s linear;
+    -moz-transition: background-position 0.1s linear;
+    -o-transition: background-position 0.1s linear;
+    transition: background-position 0.1s linear;
+}
+
+.btn:active {
+    background-color: #cccccc \9;
+    background-image: none;
+    outline: 0;
+    -webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
+    -moz-box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
+}
+
+.btn[disabled], .disabled-btn {
+    cursor: default;
+    background-image: none;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.disabled-btn:hover, .btn[disabled]:hover {
+    color: #333333;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    background-color: #f5f5f5;
+    background-image: none;
+}

@@ -1,0 +1,24 @@
+.bd-main-content {
+    margin: 0; 
+}
+
+.bd-title {
+    display: inline-block;
+}
+
+.bd-export-html, .bd-export-pdf {
+   display: inline-block;
+   text-decoration: none;
+}
+
+.bd-export-html:before {
+    content: url(../img/html_file.png);
+    vertical-align:-50%;
+    margin-left: 2px;
+}
+
+.bd-export-pdf:before {
+    content: url(../img/pdf_file.png);
+    vertical-align:-50%;
+    margin-left: 2px;
+}
