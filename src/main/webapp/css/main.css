@@ -2,7 +2,7 @@
     font-family: 'Black Ops One';
     font-style: normal;
     font-weight: 400;
-    src: local('Black Ops One'), local('BlackOpsOne-Regular'), url(http://themes.googleusercontent.com/static/fonts/blackopsone/v4/2XW-DmDsGbDLE372KrMW1fn8qdNnd5eCmWXua5W-n7c.woff) format('woff');
+    src: local('Black Ops One'), local('BlackOpsOne-Regular'), url(../font/blackOpsFont.woff) format('woff');
 }
 
 body, html{
@@ -68,7 +68,7 @@ header.main-header .searchForm input[type="submit"] {
 
 header.main-header nav, .content {
     margin:auto;
-    width: 1024px;
+    max-width: 1024px;
     display: block;
 }
 
@@ -78,6 +78,7 @@ header.main-header nav h1{
     color :white;
     font-size: 52px;
     font-family: 'Black Ops One', cursive;
+    text-shadow: 2px 5px 4px #000;
 }
 
 a.home {
@@ -113,6 +114,10 @@ a.home {
     clear: both;
 }
 
+.no-margin {
+    margin: 0;
+}
+
 footer.main-footer{
     min-height: 70px;
     background-color:black;
@@ -121,10 +126,10 @@ footer.main-footer{
 
 .btn {
     display: inline-block;
-    padding: 4px 12px;
+    padding: 4px 5px;
     margin-bottom: 0;
     font-size: 14px;
-    line-height: 20px;
+    line-height: 18px;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;

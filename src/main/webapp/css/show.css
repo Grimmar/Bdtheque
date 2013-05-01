@@ -7,8 +7,8 @@
 }
 
 .bd-export-html, .bd-export-pdf {
-   display: inline-block;
-   text-decoration: none;
+    display: block;
+    text-decoration: none;
 }
 
 .bd-export-html:before {
@@ -21,4 +21,62 @@
     content: url(../img/pdf_file.png);
     vertical-align:-50%;
     margin-left: 2px;
+}
+
+.left {
+    margin-left: 20px;
+}
+
+.bd-image {
+    height: auto;
+    width: 180px;
+    margin:auto;
+    display: block;
+    box-shadow: 1px 1px 12px #555;
+}
+
+.export-buttons {
+    margin-top: 10px;
+}
+
+.bd-main-content p {
+    margin: 2px 0;
+}
+
+.bd-main-content > div {
+        min-width: 30%;
+    }
+
+h3.bd-normal-title {
+    padding: 10px 10px;
+    background-color: #ccc;
+    font-size: 18px;
+    color: #505050;
+    border-left: 4px solid #053a6c;
+    font-weight: normal;    
+}
+
+.bd-resume-content h3 {
+    max-width: 30%;
+}
+
+@media screen and (max-width: 480px) {
+    .bd-main-content {
+        -moz-column-count: 1;
+        -webkit-column-count: 1;
+        column-count: 1;
+    }
+
+    .bd-main-content > div {
+        min-width: 100%;
+        margin-bottom: 10px;
+    }
+
+    h3.bd-normal-title {
+        max-width: 75%;
+        margin: auto;
+    }
+    .left {
+        margin-left: 0;
+    }
 }
