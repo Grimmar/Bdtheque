@@ -88,7 +88,7 @@
                                 <div class="bd-individus bd-scenaristes">
                                     <p><span class="bd-key-name">Scénaristes:&nbsp;</span></p>
                                     <ul>
-                                        <c:forEach var="individu" items="${requestScope.bd.scenaristes}">
+                                        <c:forEach var="individu" items="${requestScope.bd.scenaristes.scenariste}">
                                             <li>
                                                 <span><c:out value="${individu.prenom}" /></span>
                                                 &nbsp;
@@ -102,7 +102,7 @@
                                 <div class="bd-individus bd-dessinateurs">
                                     <p><span class="bd-key-name">Dessinateurs&nbsp;</span></p>
                                     <ul>
-                                        <c:forEach var="individu" items="${requestScope.bd.dessinateurs}">
+                                        <c:forEach var="individu" items="${requestScope.bd.dessinateurs.dessinateur}">
                                             <li>
                                                 <span><c:out value="${individu.prenom}" /></span>
                                                 &nbsp;
@@ -116,7 +116,7 @@
                                 <div class="bd-individus bd-coloristes">
                                     <p><span class="bd-key-name">Coloristes:&nbsp;</span></p>
                                     <ul>
-                                        <c:forEach var="individu" items="${requestScope.bd.coloristes}">
+                                        <c:forEach var="individu" items="${requestScope.bd.coloristes.coloriste}">
                                             <li>
                                                 <span><c:out value="${individu.prenom}" /></span>
                                                 &nbsp;
@@ -130,7 +130,7 @@
                                 <div class="bd-individus bd-lettrages">
                                     <p><span class="bd-key-name">Lettreurs&nbsp;</span></p>
                                     <ul>
-                                        <c:forEach var="individu" items="${requestScope.bd.lettrages}">
+                                        <c:forEach var="individu" items="${requestScope.bd.lettrages.lettrage}">
                                             <li>
                                                 <span><c:out value="${individu.prenom}" /></span>
                                                 &nbsp;
@@ -144,7 +144,7 @@
                                 <div class="bd-individus bd-encrages">
                                     <p><span class="bd-key-name">Encreurs:&nbsp;</span></p>
                                     <ul>
-                                        <c:forEach var="individu" items="${requestScope.bd.encrages}">
+                                        <c:forEach var="individu" items="${requestScope.bd.encrages.encrage}">
                                             <li>
                                                 <span><c:out value="${individu.prenom}" /></span>
                                                 &nbsp;
