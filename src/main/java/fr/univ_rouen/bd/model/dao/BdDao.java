@@ -148,7 +148,7 @@ public class BdDao implements Dao<Bd> {
                     String value = orderBy.get(key);
                     if (StringUtils.equals("ascending", value)
                             || StringUtils.equals("descending", value)) {
-                        query.append(separator).append("$bd/bd:").append(key).append(" ").append(value);
+                        query.append(separator).append("$bd/bd:bd/bd:").append(key).append(" ").append(value);
                         separator = ", ";
                     }
                 }

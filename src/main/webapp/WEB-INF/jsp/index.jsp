@@ -7,7 +7,6 @@
         <link rel="stylesheet" href="<c:url value = "/css/main.css" />" type="text/css" media="screen"/>
         <link rel="stylesheet" href="<c:url value = "/css/form.css" />" type="text/css" media="screen"/>
         <link rel="stylesheet" href="<c:url value = "/css/index.css" />" type="text/css" media="screen"/>
-        <link rel="stylesheet" href="<c:url value = "/css/icons.css" />" type="text/css" media="screen"/>
         <title>Bdthèque</title>
     </head>
     <body>
