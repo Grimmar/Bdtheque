@@ -83,79 +83,78 @@ public class BdDao implements Dao<Bd> {
 
             query.append("for $bd in collection(\"bedetheque\")");
             String separator = " where ";
+            if (sb != null) {
+                if (StringUtils.isNotBlank(searchBean.getTitre())) {
+                    params.put("titre", searchBean.getTitre());
+                    query.append(separator).append("contains(upper-case($bd/bd:bd/bd:titre/text()), upper-case($titre))");
+                    separator = " and ";
+                }
+                if (StringUtils.isNotBlank(searchBean.getEditeur())) {
+                    params.put("editeur", searchBean.getEditeur());
+                    query.append(separator).append("compare(upper-case($bd/bd:bd/bd:editeur/text()), upper-case($editeur)) == 0");
+                    separator = " and ";
+                }
 
-            if (StringUtils.isNotBlank(searchBean.getTitre())) {
-                params.put("titre", searchBean.getTitre());
-                query.append(separator).append("contains(upper-case($bd/bd:bd/bd:titre/text()), upper-case($titre))");
-                separator = " and ";
-            }
-            if (StringUtils.isNotBlank(searchBean.getEditeur())) {
-                params.put("editeur", searchBean.getEditeur());
-                query.append(separator).append("compare(upper-case($bd/bd:bd/bd:editeur/text()), upper-case($editeur)) == 0");
-                separator = " and ";
-            }
+                if (StringUtils.isNotBlank(searchBean.getLangue())) {
+                    params.put("langue", searchBean.getLangue());
+                    query.append(separator).append("compare(upper-case($bd/bd:bd/@bd:langue), upper-case($langue)) == 0");
+                    separator = " and ";
+                }
 
-            if (StringUtils.isNotBlank(searchBean.getLangue())) {
-                params.put("langue", searchBean.getLangue());
-                query.append(separator).append("compare(upper-case($bd/bd:bd/@bd:langue), upper-case($langue)) == 0");
-                separator = " and ";
-            }
+                if (StringUtils.isNotBlank(searchBean.getResume())) {
+                    params.put("resume", searchBean.getResume());
+                    query.append(separator).append("contains(upper-case($bd/bd:bd/bd:resume/text()), upper-case($resume))");
+                    separator = " and ";
+                }
 
-            if (StringUtils.isNotBlank(searchBean.getResume())) {
-                params.put("resume", searchBean.getResume());
-                query.append(separator).append("contains(upper-case($bd/bd:bd/bd:resume/text()), upper-case($resume))");
-                separator = " and ";
-            }
+                if (StringUtils.isNotBlank(searchBean.getSerie())) {
+                    params.put("serie", searchBean.getSerie());
+                    query.append(separator).append("compare(upper-case($bd/bd:bd/@bd:serie), upper-case($serie)) == 0");
+                    separator = " and ";
+                }
 
-            if (StringUtils.isNotBlank(searchBean.getSerie())) {
-                params.put("serie", searchBean.getSerie());
-                query.append(separator).append("compare(upper-case($bd/bd:bd/@bd:serie), upper-case($serie)) == 0");
-                separator = " and ";
-            }
+                if (CollectionUtils.isNotEmpty(searchBean.getScenaristes().getScenariste())) {
+                    query.append(separator);
+                    setParameterList(query, params, searchBean.getScenaristes().getScenariste(), "scenariste");
+                    separator = " and ";
+                }
 
-            if (CollectionUtils.isNotEmpty(searchBean.getScenaristes().getScenariste())) {
-                query.append(separator);
-                setParameterList(query, params, searchBean.getScenaristes().getScenariste(), "scenariste");
-                separator = " and ";
-            }
+                if (CollectionUtils.isNotEmpty(searchBean.getColoristes().getColoriste())) {
+                    query.append(separator);
+                    setParameterList(query, params, searchBean.getColoristes().getColoriste(), "coloriste");
+                    separator = " and ";
+                }
 
-            if (CollectionUtils.isNotEmpty(searchBean.getColoristes().getColoriste())) {
-                query.append(separator);
-                setParameterList(query, params, searchBean.getColoristes().getColoriste(), "coloriste");
-                separator = " and ";
-            }
+                if (CollectionUtils.isNotEmpty(searchBean.getDessinateurs().getDessinateur())) {
+                    query.append(separator);
+                    setParameterList(query, params, searchBean.getDessinateurs().getDessinateur(), "dessinateur");
+                    separator = " and ";
+                }
 
-            if (CollectionUtils.isNotEmpty(searchBean.getDessinateurs().getDessinateur())) {
-                query.append(separator);
-                setParameterList(query, params, searchBean.getDessinateurs().getDessinateur(), "dessinateur");
-                separator = " and ";
-            }
+                if (CollectionUtils.isNotEmpty(searchBean.getEncrages().getEncrage())) {
+                    query.append(separator);
+                    setParameterList(query, params, searchBean.getEncrages().getEncrage(), "encrage");
+                    separator = " and ";
+                }
 
-            if (CollectionUtils.isNotEmpty(searchBean.getEncrages().getEncrage())) {
-                query.append(separator);
-                setParameterList(query, params, searchBean.getEncrages().getEncrage(), "encrage");
-                separator = " and ";
+                if (CollectionUtils.isNotEmpty(searchBean.getLettrages().getLettrage())) {
+                    query.append(separator);
+                    setParameterList(query, params, searchBean.getLettrages().getLettrage(), "lettrage");
+                }
             }
-
-            if (CollectionUtils.isNotEmpty(searchBean.getLettrages().getLettrage())) {
-                query.append(separator);
-                setParameterList(query, params, searchBean.getLettrages().getLettrage(), "lettrage");
-            }
-
             if (MapUtils.isNotEmpty(orderBy)) {
                 separator = " order by ";
-                query.append(separator);
                 for (String key : orderBy.keySet()) {
                     String value = orderBy.get(key);
                     if (StringUtils.equals("ascending", value)
                             || StringUtils.equals("descending", value)) {
-                        query.append(separator).append(value);
+                        query.append(separator).append("$bd/bd:").append(key).append(" ").append(value);
                         separator = ", ";
                     }
                 }
             }
 
-            query.append("return $bd");
+            query.append(" return $bd");
 
             ResourceSet result = daoFactory.executeXQuery(query.toString(), params);
             Unmarshaller u = daoFactory.getJAXBContext().createUnmarshaller();
@@ -190,7 +189,7 @@ public class BdDao implements Dao<Bd> {
                     .append("and ( contains(upper-case($bd/bd:").append(prefix).append("s").append("/bd:").append(prefix).append("/bd:prenom), upper-case(\"")
                     .append(ind.getPrenom())
                     .append("\" ))==0 )");
-            
+
             if (i <= 1) {
                 separator = " or ";
             }
@@ -198,7 +197,7 @@ public class BdDao implements Dao<Bd> {
         query.append(")");
 
     }
-    
+
     @Override
     public boolean add(Bd bd) throws DAOException {
         try {

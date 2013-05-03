@@ -10,15 +10,17 @@ and open the template in the editor.
     xmlns:ns1='http://univ-rouen.fr/bd'
     xsi:schemaLocation='http://univ-rouen.fr/bd bd.xsd'
     ns1:isbn="9782365770217" ns1:planches="160 " ns1:langue="FR" ns1:serie="">
-    <titre>Batman-Sombre reflet</titre>
-    <depotLegal>2012-04</depotLegal>
-    <finImpression>2012-03</finImpression>
-    <parution>2012-04-11</parution>
-    <editeur>Urban Comics</editeur>
-    <resume>Tandis que le retour de James Gordon Jr. ravive les tensions au sein de son entourage et rouvre des cicatrices, Batman rencontre la fille du responsable de la mort de ses parents ! Tiraillé entre son attirance pour la jeune femme et son désir de vengeance, le chevalier noir a bien du mal à mener son enquête à terme. Et lorsque le Joker se joint à la danse, la tension monte d’un cran et vengeances et trahisons s’enchaînent à un rythme étouffant !</resume>
-    <format>Format comics</format>
-    <creation>2012-04-11</creation>
-    <image>http://www.bedetheque.com/thb_couv/Couv_160824.jpg</image>
+    <ns1:titre>Batman-Sombre reflet</ns1:titre>
+    <ns1:id>bd1</ns1:id>
+    <ns1:depotLegal>2012-04</ns1:depotLegal>
+    <ns1:finImpression>2012-03</ns1:finImpression>
+    <ns1:parution>2012-04-11</ns1:parution>
+    <ns1:editeur>Urban Comics</ns1:editeur>
+    <ns1:resume>Tandis que le retour de James Gordon Jr. ravive les tensions au sein de son entourage et rouvre des cicatrices, Batman rencontre la fille du responsable de la mort de ses parents ! Tiraillé entre son attirance pour la jeune femme et son désir de vengeance, le chevalier noir a bien du mal à mener son enquête à terme. Et lorsque le Joker se joint à la danse, la tension monte d’un cran et vengeances et trahisons s’enchaînent à un rythme étouffant !</ns1:resume>
+    <ns1:format>Format comics</ns1:format>
+    <ns1:creation>2012-04-11</ns1:creation>
+    <ns1:insertedDate>2013-03-17</ns1:insertedDate>
+    <ns1:image>http://www.bedetheque.com/thb_couv/Couv_160824.jpg</ns1:image>
     <ns1:scenaristes>
         <ns1:scenariste>
             <ns1:nom>Snyder</ns1:nom>

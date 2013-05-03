@@ -1,53 +1,34 @@
-/* 
-    Document   : index.css
-    Created on : 16 avr. 2013, 11:31:54
-    Author     : David
-    Description:
-        Purpose of the stylesheet follows.
-*/
-body, html{
-    width:100%;
-    height: 96%;
-    margin : 0;
-    padding:0;
+.miniature{
+    float : left;
 }
 
-body{
-    background-image: url("../img/bg2.jpeg");
-}
-
-.page{
-    width : 70%;
-    height: 100%;
-    margin: auto;
+.info{
     display:block;
-    border-radius: 5px;
-    min-width: 800px;
-    background-color : white;
-    position: relative;
-    margin-top:75px;
+    float :left;
+    margin-left:5px;
+    width:63%;
 }
 
-.header{
-    width:100%;
-    height: 100px;
-    background-color :darkred;
-    border-radius: 5px 5px 0px 0px;
-}
+.bd{
+    border: 1px solid black;
+    display: block;
+    float: left;
+    margin: 10px 2px 2px 10px;
+    padding: 5px 2px 2px 5px;
+    width: 47%;
+    height: 275px;
+    box-shadow: 1px 1px 12px rgb(85, 85, 85);
 
-.footer{
-    width:100%;
-    height: 100px;
-    position: absolute;
-    bottom: 0;
-    background-color:black;
 }
-
-h1{
-    margin:0;
+.info h2{
     padding:0;
-    color :white;
-    font-size: 52px;
-    text-align: center;
-    font-family: 'Black Ops One', cursive;
+    margin:0;
+    font-size: 22px;
+}
+a{
+    color :black;
+}
+
+.bd:hover{
+    background-color: #ededed;
 }
