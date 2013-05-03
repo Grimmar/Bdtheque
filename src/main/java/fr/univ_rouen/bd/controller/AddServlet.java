@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AddServlet extends HttpServlet {
 
     public static final String CONF_DAO_FACTORY = "daofactory";
-    private static final String VIEW = "/WEB-INF/jsp/addBd.jsp";
+    private static final String VIEW = "/WEB-INF/jsp/bd/addBd.jsp";
     private BdDao bdDao;
 
     @Override

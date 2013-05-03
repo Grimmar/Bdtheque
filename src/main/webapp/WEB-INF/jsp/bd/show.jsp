@@ -13,9 +13,6 @@
         <c:import url="/WEB-INF/jsp/header.jsp"/>
 
         <section class="content">
-            <header>
-                <h1>Consultation</h1>
-            </header>
             <c:if test="${empty requestScope.message}">
                 <section class="page-content">
                     <h2 class="bd-title">

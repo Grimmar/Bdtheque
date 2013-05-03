@@ -1,10 +1,8 @@
 package fr.univ_rouen.bd.controller;
 
-import static fr.univ_rouen.bd.controller.Test.CONF_DAO_FACTORY;
 import fr.univ_rouen.bd.model.dao.BdDao;
 import fr.univ_rouen.bd.model.dao.DAOFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

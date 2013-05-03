@@ -66,13 +66,13 @@ header.main-header .searchForm input[type="submit"] {
     width: 28px;
 }
 
-header.main-header nav, .content {
+header.main-header section, .content {
     margin:auto;
     max-width: 1024px;
     display: block;
 }
 
-header.main-header nav h1{
+header.main-header section h1{
     margin:0;
     padding:0;
     color :white;
@@ -89,6 +89,66 @@ a.home {
     float: left;
 }
 
+.menu {
+    width: 1024px;
+    background: linear-gradient(darkgray, black);
+    margin: 10px auto;
+    height: 40px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.7);
+}
+
+nav {
+    line-height: 20px;
+}
+
+nav ul {
+    margin: 0;
+    min-width: 1024px;
+    padding: 0;
+}
+
+nav ul li {
+    float: left;
+    list-style-type: none;
+    display: inline;
+    height: 30px;
+    padding: 5px 5px 5px 5px;    
+    vertical-align: top;
+}
+
+nav ul li.menu-link:hover {
+    background: linear-gradient(red, darkred);
+}
+
+nav .sep {
+    box-shadow: 1px 0 rgba(3,99,139,0.5),-1px 0 rgba(255,255,255,0.5) inset;
+    margin-top: 3px;
+    width: 1px;
+    height: 25px;
+    vertical-align: top;
+    margin: 0 -6px 0 -6px;
+    padding-left: 0;
+}
+
+nav .home-link img {
+    width: 32px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    min-width: 40px;
+    font-size: 16px;
+    text-align: center;
+    display: inline-block;
+    text-shadow: 0 1px 0 #000;
+}
+
+nav ul li a p {
+    margin: 0;
+    margin-top: 5px;
+}
+
 .content {
     background-color: white;
     -moz-border-radius: 2px;
@@ -97,6 +157,7 @@ a.home {
     min-height: 1024px;
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.7); 
     margin: 10px auto;
+    clear: both;
 }
 
 .content header h1 {
