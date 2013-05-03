@@ -39,7 +39,6 @@
     <xsd:element name="encrages" type="bd:encragesType" />
     <xsd:element name="tome" type="bd:tomeType" />
 	
-		
     <!-- definition of simple types -->
     <xsd:simpleType name="partialDateType">
         <xsd:restriction base="xsd:string">
@@ -66,8 +65,8 @@
     <xsd:element name="bd">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="bd:id" minOccurs="1" maxOccurs="1"/>
-                <xsd:element ref="bd:insertedDate" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="bd:id" minOccurs="0" maxOccurs="1"/>
+                <xsd:element ref="bd:insertedDate" minOccurs="0" maxOccurs="1" />
                 <xsd:element ref="bd:titre" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="bd:depotLegal" minOccurs="0" maxOccurs="1" />
                 <xsd:element ref="bd:finImpression" minOccurs="0" maxOccurs="1" />
@@ -75,7 +74,7 @@
                 <xsd:element ref="bd:editeur" minOccurs="1" maxOccurs="1"/>
                 <xsd:element ref="bd:resume" minOccurs="1" maxOccurs="1"/>
                 <xsd:element ref="bd:format" minOccurs="1" maxOccurs="1"/>
-                <xsd:element ref="bd:creationDate"  minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="bd:creationDate"  minOccurs="0" maxOccurs="1"/>
                 <xsd:element ref="bd:image" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="bd:scenaristes" minOccurs="1" maxOccurs="1" />
                 <xsd:element ref="bd:dessinateurs" minOccurs="1" maxOccurs="1" />

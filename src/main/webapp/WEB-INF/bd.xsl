@@ -15,13 +15,13 @@
                 <div class="bd">
                     <div class="bd-image">
                         <xsl:variable name="img2">
-                            <xsl:value-of select="image"/>
+                            <xsl:value-of select="bd:image"/>
                         </xsl:variable>
                         <img src='{$img2}' alt="Image de couverture"/>
                     </div>
                     <div class="bd-infos">
                         <div class="header">
-                            <xsl:value-of select="titre" />
+                            <xsl:value-of select="bd:titre" />
                         </div>
                         <p>ISBN: 
                             <xsl:value-of select="@bd:isbn" />
@@ -36,19 +36,19 @@
                             <xsl:value-of select="@bd:serie" />
                         </p>
                         <p>Date de dépôt légal: 
-                            <xsl:value-of select="depotLegal" />
+                            <xsl:value-of select="bd:depotLegal" />
                         </p>
                         <p>Date de fin d'impression: 
-                            <xsl:value-of select="finImpression" />
+                            <xsl:value-of select="bd:finImpression" />
                         </p>
                         <p>Date de parution: 
-                            <xsl:value-of select="parution" />
+                            <xsl:value-of select="bd:parution" />
                         </p>
                         <p>Editeur: 
-                            <xsl:value-of select="editeur" />
+                            <xsl:value-of select="bd:editeur" />
                         </p>
                         <p>Format: 
-                            <xsl:value-of select="format" />
+                            <xsl:value-of select="bd:format" />
                         </p>
                         <xsl:apply-templates select="bd:scenaristes" />
                         <xsl:apply-templates select="bd:dessinateurs" />
@@ -60,7 +60,7 @@
                     <div class="bd-resume">
                         <p>Résumé:</p>
                         <p>
-                            <xsl:value-of select="resume" />
+                            <xsl:value-of select="bd:resume" />
                         </p>
                     </div>
                 </div>
