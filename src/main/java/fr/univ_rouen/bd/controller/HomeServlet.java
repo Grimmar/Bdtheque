@@ -1,9 +1,13 @@
 package fr.univ_rouen.bd.controller;
 
 import static fr.univ_rouen.bd.controller.Test.CONF_DAO_FACTORY;
+import fr.univ_rouen.bd.model.beans.Bd;
 import fr.univ_rouen.bd.model.dao.BdDao;
 import fr.univ_rouen.bd.model.dao.DAOFactory;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +21,7 @@ public class HomeServlet extends HttpServlet {
 
     private static final String VIEW = "/WEB-INF/jsp/index.jsp";
     public static final String CONF_DAO_FACTORY = "daofactory";
+    public static final String ATTR_LIST_BD = "listBd";
     private BdDao bdDao;
 
     @Override
@@ -37,6 +42,10 @@ public class HomeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        Map<String, String> orderBy = new HashMap<String, String>();
+        orderBy.put("insertedDate", "ascending");
+        List<Bd> allBd = bdDao.searchFor(null, orderBy);
+        request.setAttribute(ATTR_LIST_BD, allBd);
         this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
     }
 

@@ -198,7 +198,6 @@ public class DAOFactory {
             for (String s : params.keySet()) {
                 xqs.declareVariable(s, params.get(s));
             }
-
             CompiledExpression compiled = xqs.compile(query);
             ResourceSet result = xqs.execute(compiled);
             col.close();
