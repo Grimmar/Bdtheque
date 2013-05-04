@@ -4,10 +4,7 @@
     xmlns:ns1='http://univ-rouen.fr/bd'
     xsi:schemaLocation='http://univ-rouen.fr/bd bd.xsd'
     ns1:isbn="9781401240936" ns1:planches="40" ns1:langue="FR" ns1:serie=""> 
-    <ns1:id>bd</ns1:id>
     <ns1:titre>Hellblazer Death and cigarettes</ns1:titre>
-    <ns1:numero>1.0</ns1:numero>
-    <ns1:informations></ns1:informations>
     <ns1:depotLegal>2013-04</ns1:depotLegal>
     <ns1:finImpression>2013-04</ns1:finImpression>
     <ns1:parution>2013-03-19</ns1:parution>
@@ -16,7 +13,7 @@
         In this penultimate chapter to Vertigo's longest series, Death and Cigarettes is the latest chapter in critically acclaimed writer Peter Milligan's run on HELLBLAZER.
     </ns1:resume>
     <ns1:format>Format comics</ns1:format>
-    <ns1:creation>2013-03-19</ns1:creation>
+    <ns1:creationDate>2013-03-19</ns1:creationDate>
     <ns1:image>http://www.bedetheque.com/thb_couv/Couv_185426.jpg</ns1:image>
     <ns1:scenaristes>
         <ns1:scenariste>

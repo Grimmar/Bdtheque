@@ -8,7 +8,9 @@ import java.util.List;
  */
 public interface Validator<E> {
      
-    List<String> getValidationMessages();
+    public List<String> getValidationMessages();
 
     boolean isValid(E e);
+
+    void setFieldName(String s);
 }

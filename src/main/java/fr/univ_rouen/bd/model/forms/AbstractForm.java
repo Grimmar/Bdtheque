@@ -1,8 +1,11 @@
 package fr.univ_rouen.bd.model.forms;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -12,22 +15,36 @@ import org.apache.commons.lang.StringUtils;
  */
 public abstract class AbstractForm<E> implements Form<E> {
 
-    private Map<String, String> errors;
+    private Map<String, List<String>> errors;
     private String result;
 
     public AbstractForm() {
-        errors = new HashMap<String, String>();
+        errors = new HashMap<String, List<String>>();
     }
 
     @Override
-    public Map<String, String> getErrors() {
+    public Map<String, List<String>> getErrors() {
         return MapUtils.unmodifiableMap(errors);
     }
 
-    protected void setError(String field, String message) {
-        errors.put(field, message);
+    protected void addError(String field, String message) {
+        List<String> l;
+        if (CollectionUtils.isEmpty(errors.get(field))) {
+            l = new ArrayList<String>();
+            errors.put(field, l);
+            
+        } else {
+            l = errors.get(field);
+        }
+        l.add(message);        
     }
 
+    protected void addAllErrors(String field, List<String> messages) {
+        for (String m : messages) {
+            addError(field, m);
+        }
+    }    
+    
     @Override
     public String getResult() {
         return result;
@@ -40,11 +57,6 @@ public abstract class AbstractForm<E> implements Form<E> {
 
     protected void setResult(String result) {
         this.result = result;
-    }
-
-    @Override
-    public void clearErrors() {
-        errors.clear();
     }
 
     protected static String getFieldValue(HttpServletRequest request, String field) {

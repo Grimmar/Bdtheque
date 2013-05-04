@@ -74,6 +74,36 @@ public class BdDao implements Dao<Bd> {
         }
     }
 
+    public Bd getByISBN(String isbn) throws DAOException {
+        StringBuilder query = new StringBuilder();
+        Map<String, String> params = new HashMap<String, String>();
+        query.append("for $bd in collection(\"bedetheque\")");
+        params.put("isbn", isbn);
+        query.append(" where contains(upper-case($bd/bd:bd/@bd:isbn), upper-case($isbn))");
+        query.append(" return $bd");
+
+        try {
+            ResourceSet result = daoFactory.executeXQuery(query.toString(), params);
+            Unmarshaller u = daoFactory.getJAXBContext().createUnmarshaller();
+            UnmarshallerHandler handler = u.getUnmarshallerHandler();
+            ResourceIterator i = result.getIterator();
+            List<Bd> l = new ArrayList<Bd>();
+            while (i.hasMoreResources()) {
+                XMLResource r = (XMLResource) i.nextResource();
+                r.getContentAsSAX(handler);
+                l.add((Bd) handler.getResult());
+            }
+            if (CollectionUtils.isEmpty(l)) {
+                return null;
+            }
+            return l.get(0);
+        } catch (XMLDBException e) {
+            throw new DAOException(e);
+        } catch (JAXBException e) {
+            throw new DAOException(e);
+        }
+    }
+
     @Override
     public List<Bd> searchFor(SearchBean sb, Map<String, String> orderBy) throws DAOException {
         BdSearchBean searchBean = (BdSearchBean) sb;
@@ -190,7 +220,7 @@ public class BdDao implements Dao<Bd> {
                     .append("and ( contains(upper-case($bd/bd:").append(prefix).append("s").append("/bd:").append(prefix).append("/bd:prenom), upper-case(\"")
                     .append(ind.getPrenom())
                     .append("\" ))==0 )");
-            
+
             if (i <= 1) {
                 separator = " or ";
             }
@@ -198,7 +228,7 @@ public class BdDao implements Dao<Bd> {
         query.append(")");
 
     }
-    
+
     @Override
     public boolean add(Bd bd) throws DAOException {
         try {

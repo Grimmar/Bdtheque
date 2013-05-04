@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/Bdtheque">
+<Context path="/Bdtheque" allowCasualMultipartParsing="true">
   <Resource auth="Container" driverClassName="org.exist.xmldb.DatabaseImpl" name="exist/xmlDB" password="" type="org.xmldb.api.base.Database" url="xmldb:exist://localhost:8084/exist/xmlrpc/db/bds" username="admin"/>
 </Context>

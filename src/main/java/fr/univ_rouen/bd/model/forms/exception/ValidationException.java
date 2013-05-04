@@ -1,6 +1,6 @@
 package fr.univ_rouen.bd.model.validation.exception;
  
-public class ValidationException extends RuntimeException {
+public class ValidationException extends Exception {
     /*
      * Constructeurs
      */

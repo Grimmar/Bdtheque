@@ -1,12 +1,15 @@
 package fr.univ_rouen.bd.controller;
 
+import fr.univ_rouen.bd.model.beans.Bd;
 import fr.univ_rouen.bd.model.dao.BdDao;
 import fr.univ_rouen.bd.model.dao.DAOFactory;
+import fr.univ_rouen.bd.model.forms.UploadForm;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -14,8 +17,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AddServlet extends HttpServlet {
 
+    private static final String SESSION_NOTICE = "notice";
     public static final String CONF_DAO_FACTORY = "daofactory";
+    private static final String REDIRECT_URL = "/show/";
     private static final String VIEW = "/WEB-INF/jsp/bd/addBd.jsp";
+    private static final String UPLOAD_VIEW = "/WEB-INF/jsp/bd/upload.jsp";
+    private static final String ATTR_FORM = "form";
+    private static final String ATTR_BD = "bd";
     private BdDao bdDao;
 
     @Override
@@ -36,7 +44,7 @@ public class AddServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+        this.getServletContext().getRequestDispatcher(UPLOAD_VIEW).forward(request, response);
     }
 
     /**
@@ -52,6 +60,23 @@ public class AddServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        UploadForm form = new UploadForm(bdDao);
+        Bd bd = form.validateForm(request);
+
+        request.setAttribute(ATTR_FORM, form);
+        request.setAttribute(ATTR_BD, bd);
+        
+        HttpSession session = request.getSession();
+        
+        if (form.isValid()) {
+            session.setAttribute(SESSION_NOTICE, "La bd a bien été ajoutée.");
+            
+            String context = this.getServletContext().getContextPath();
+            response.sendRedirect(context + REDIRECT_URL + bd.getId());
+        } else {
+            this.getServletContext().getRequestDispatcher(UPLOAD_VIEW).forward(request, response);
+        }
     }
 
     /**

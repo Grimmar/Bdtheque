@@ -1,5 +1,6 @@
 package fr.univ_rouen.bd.model.forms;
 
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,13 +10,11 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface Form<E> {
 
-    Map<String, String> getErrors();
+    Map<String, List<String>> getErrors();
 
     String getResult();
     
     E validateForm(HttpServletRequest request);
 
     boolean isValid();
-
-    void clearErrors();
 }
