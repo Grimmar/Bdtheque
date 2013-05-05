@@ -29,6 +29,11 @@
                             Tome: <c:out value="${bd.tome.numero}" />
                             <c:out value="${bd.tome.informations}" /> <br/>
                             Série: <c:out value="${bd.serie}" /> <br/>
+                            <br/>
+                            <div class="resume">
+                                <c:out value="${bd.resume}" />
+                            </div>...
+                            
                         </div>
                     </section>
                 </a>

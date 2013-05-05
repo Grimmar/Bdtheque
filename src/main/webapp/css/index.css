@@ -9,6 +9,15 @@
     float :left;
     margin-left:5px;
     width:63%;
+    height: 100%;
+
+}
+
+.resume{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align:justify;
+    max-height: 21%;
 }
 
 .bd{
@@ -20,7 +29,6 @@
     width: 47%;
     height: 275px;
     box-shadow: 1px 1px 12px rgb(85, 85, 85);
-
 }
 .info h2{
     padding:0;
