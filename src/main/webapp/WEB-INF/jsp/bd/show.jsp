@@ -11,7 +11,9 @@
     </head>
     <body>
         <c:import url="/WEB-INF/jsp/header.jsp"/>
-
+        <c:if test="${!empty requestScope.notice}">
+        <div class="flash-notice">${requestScope.notice}</div>
+        </c:if>
         <section class="content">
             <c:if test="${empty requestScope.message}">
                 <section class="page-content">

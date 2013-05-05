@@ -16,24 +16,24 @@ import javax.servlet.http.HttpSession;
  *
  * @author bissoqu1
  */
-public class AddServlet extends HttpServlet {
+public class UploadServlet extends HttpServlet {
 
+    private static final String UPLOAD_VIEW = "/WEB-INF/jsp/bd/uploadForm.jsp";
+    private static final String VIEW = "/WEB-INF/jsp/bd/add.jsp";
     private static final String SESSION_NOTICE = "notice";
     private static final String CONF_DAO_FACTORY = "daofactory";
     private static final String REDIRECT_URL = "/show/";
-    private static final String VIEW = "/WEB-INF/jsp/bd/add.jsp";
-    private static final String ADD_VIEW = "/WEB-INF/jsp/bd/addForm.jsp";
     private static final String ATTR_FORM = "form";
     private static final String ATTR_BD = "bd";
     private static final String ATTR_FORM_NAME = "formName";
-    private static final String FORM_NAME = "add";
+    private static final String FORM_NAME = "upload";
     private BdDao bdDao;
 
     @Override
     public void init() throws ServletException {
         this.bdDao = ((DAOFactory) getServletContext().getAttribute(CONF_DAO_FACTORY)).getBdDao();
     }
-
+    
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute(ATTR_FORM_NAME, FORM_NAME);
         this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
@@ -52,11 +52,10 @@ public class AddServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
         if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
-            this.getServletContext().getRequestDispatcher(ADD_VIEW).forward(request, response);
+            this.getServletContext().getRequestDispatcher(UPLOAD_VIEW).forward(request, response);
         } else {
-             processRequest(request, response);
+            processRequest(request, response);
         }
     }
 
@@ -88,8 +87,9 @@ public class AddServlet extends HttpServlet {
             String context = this.getServletContext().getContextPath();
             response.sendRedirect(context + REDIRECT_URL + bd.getId());
         } else {
-             processRequest(request, response);
+            processRequest(request, response);
         }
+        
     }
 
     /**
@@ -99,6 +99,6 @@ public class AddServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Servlet used to add a new bd";
+        return "Short description";
     }
 }

@@ -1,9 +1,42 @@
-input[type="search"] {
+form {
+    width: 95%;
+    margin: auto;
+}
+
+input {
+    float: left;
+    width: 200px;
+    clear: both;
+    height: 30px;
+}
+
+fieldset {
+    padding: 10px;
+    margin-bottom: 5px;
+    border-top: 1px solid #ccc;
+    border-left: 0;
+    border-bottom: 0;
+    border-right: 0;
+}
+
+fieldset legend {
+    text-align: left;
+    color: #505050;
+    font-size: 18px;
+    padding: 0px 4px 0px 4px;
+    margin-left: 20px;
+}
+
+.searchForm input[type="search"] {
     box-sizing: content-box;
     -webkit-appearance: textfield;
 }
 
-input[type="text"], input[type="search"] {
+.searchForm input[type="text"], .searchForm input[type="search"] {
+    height: 20px;
+}
+
+input[type="text"], input[type="search"], input[type="file"] {
     border: 1px solid #ccc;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
     -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
@@ -13,7 +46,6 @@ input[type="text"], input[type="search"] {
     -o-transition: border linear .2s,box-shadow linear .2s;
     transition: border linear .2s,box-shadow linear .2s;
     display: inline-block;
-    height: 20px;
     padding: 4px 6px;
     margin-bottom: 10px;
     font-size: 14px;
@@ -24,3 +56,30 @@ input[type="text"], input[type="search"] {
     -webkit-border-radius: 4px;
     vertical-align: middle;
 }
+
+.file-input {
+    position : relative;
+}
+.file-input div {
+    float: left;
+}
+
+.file-input input[type="file"] {
+    opacity : 0; /* for !IE */
+    filter : alpha(opacity = 0); /* for IE */
+    position : absolute;
+    left: 200px;
+}
+
+.xml-upload-button {
+    vertical-align: middle;
+    height: 40px;
+    margin-left: 2px;
+}
+
+label {
+    width: 180px;
+    float: left;
+    margin-right: 10px;
+    margin-top: 10px;
+} 

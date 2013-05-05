@@ -3,7 +3,7 @@
     xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
     xmlns:ns1='http://univ-rouen.fr/bd'
     xsi:schemaLocation='http://univ-rouen.fr/bd bd.xsd'
-    ns1:isbn="9782365770217" ns1:planches="160 " ns1:langue="FR" ns1:serie="">
+    ns1:isbn="2100571346" ns1:planches="160 " ns1:langue="FR" ns1:serie="">
     <ns1:titre>Batman-Sombre reflet</ns1:titre>
     <ns1:depotLegal>2012-04</ns1:depotLegal>
     <ns1:finImpression>2012-03</ns1:finImpression>

@@ -23,29 +23,40 @@
         <from>/rewrite-status</from>
         <to>/test/status/</to>
     </outbound-rule>
+    <outbound-rule encodefirst="true">
+        <note>Remove jsessionid from embedded urls - for urls WITH query parameters</note>
+        <from>^/(.*);jsessionid=.*[?](.*)$</from>
+        <to encode="false">/$1?$2</to>
+    </outbound-rule>
 
-        <rule>
-            <from>/show/(.+)?</from>
-            <to>/show?resource=$1</to>
-        </rule>
-        <rule>
-            <from>/update/(.+)?</from>
-            <to>/update?resource=$1</to>
-        </rule>
-        
-        <rule>
-            <from>/delete/(.+)?</from>
-            <to>/delete?resource=$1</to>
-        </rule>
 
-        <rule>
-            <from>/export/(html|pdf)?/(.+)?</from>
-            <to>/export?format=$1&amp;resource=$2</to>
-        </rule>
+    <outbound-rule encodefirst="true">
+        <note>Remove jsessionid from embedded urls - for urls WITHOUT query parameters</note>
+        <from>^/(.*);jsessionid=.*[^?]$</from>
+        <to encode="false">/$1</to>
+    </outbound-rule>
+    <rule>
+        <from>/show/(.+)?</from>
+        <to>/show?resource=$1</to>
+    </rule>
+    <rule>
+        <from>/update/(.+)?</from>
+        <to>/update?resource=$1</to>
+    </rule>
         
-        <rule>
-            <from>^/$</from>
-            <to>/home</to>
-        </rule>
+    <rule>
+        <from>/delete/(.+)?</from>
+        <to>/delete?resource=$1</to>
+    </rule>
+
+    <rule>
+        <from>/export/(html|pdf)?/(.+)?</from>
+        <to>/export?format=$1&amp;resource=$2</to>
+    </rule>
+        
+    <rule>
+        <from>^/$</from>
+        <to>/home</to>
+    </rule>
 
 </urlrewrite>

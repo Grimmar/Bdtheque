@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -19,6 +20,7 @@ public class ShowServlet extends HttpServlet {
 
     private static final String VIEW = "/WEB-INF/jsp/bd/show.jsp";
     private static final String CONTENT_TYPE = "text/html;charset=UTF-8";
+    private static final String SESSION_NOTICE = "notice";
     private static final String ATTR_BD = "bd";
     private static final String ATTR_RESOURCE = "resource";
     private static final String ATTR_MESSAGE = "message";
@@ -56,10 +58,16 @@ public class ShowServlet extends HttpServlet {
                     request.setAttribute(ATTR_BD, bd);
                 }
             } catch (DAOException e) {
-                
+
                 request.setAttribute(ATTR_MESSAGE, "Une erreur a eu lieu lors de l'accès aux données.");
             }
 
+            HttpSession session = request.getSession();
+            if (session.getAttribute(SESSION_NOTICE) != null) {
+                String notice = (String) session.getAttribute(SESSION_NOTICE);
+                session.setAttribute(SESSION_NOTICE, null);
+                request.setAttribute(SESSION_NOTICE, notice);
+            }
             this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
         }
     }
