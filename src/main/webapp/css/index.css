@@ -1,5 +1,9 @@
 @import "main.css";
 @import "form.css";
+.content {
+    overflow: hidden;
+}
+
 .miniature{
     float : left;
 }

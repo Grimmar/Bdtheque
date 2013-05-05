@@ -13,8 +13,8 @@
         <section class="content">
             <c:forEach items="${requestScope.listBd}" var="bd">
                 <c:url value="/show/${bd.id}" var="show" />
-                <a href="${show}">
-                    <section class="bd">
+                <a href="${show}" class="bd">
+                    <section >
                         <div class="miniature">
                             <c:url value="${bd.image}" var="image" />
                             <img class="bd-image" src="${image}" alt="${bd.titre}">
