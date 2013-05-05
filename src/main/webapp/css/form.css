@@ -3,11 +3,27 @@ form {
     margin: auto;
 }
 
+form fieldset > div, form fieldset .file-input {
+    margin-right: 20px;
+    float:left;
+}
+
 input {
-    float: left;
     width: 200px;
-    clear: both;
     height: 30px;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+}
+
+.full-size {
+    width: 90%;
+}
+
+input.datepicked {
+    width: 160px;
 }
 
 fieldset {
@@ -36,7 +52,9 @@ fieldset legend {
     height: 20px;
 }
 
-input[type="text"], input[type="search"], input[type="file"] {
+input[type="text"], input[type="search"],
+input[type="file"], input[type="number"],
+input[type="url"], textarea{
     border: 1px solid #ccc;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
     -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
