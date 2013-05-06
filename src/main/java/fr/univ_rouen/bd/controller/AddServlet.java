@@ -3,6 +3,7 @@ package fr.univ_rouen.bd.controller;
 import fr.univ_rouen.bd.model.beans.Bd;
 import fr.univ_rouen.bd.model.dao.BdDao;
 import fr.univ_rouen.bd.model.dao.DAOFactory;
+import fr.univ_rouen.bd.model.forms.AddForm;
 import fr.univ_rouen.bd.model.forms.Form;
 import fr.univ_rouen.bd.model.forms.UploadForm;
 import java.io.IOException;
@@ -74,10 +75,12 @@ public class AddServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        Form<Bd> form = new UploadForm(bdDao);
+        Form<Bd> form = new AddForm(bdDao);
 
         Bd bd = form.validateForm(request);
 
+        System.out.println(bd.getParution());
+        
         request.setAttribute(ATTR_FORM, form);
         request.setAttribute(ATTR_BD, bd);
 

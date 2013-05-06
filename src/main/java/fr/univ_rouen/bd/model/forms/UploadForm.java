@@ -8,6 +8,8 @@ import fr.univ_rouen.bd.model.validation.Validator;
 import fr.univ_rouen.bd.model.validation.MIMETypeValidator;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -84,7 +86,10 @@ public class UploadForm extends AbstractForm<Bd> {
         if (bd != null) {
             Validator<Bd> validator = new BdValidator("bd", bdDao);
             if (!validator.isValid(bd)) {
-                addAllErrors("file", validator.getValidationMessages());
+                Map<String, List<String>> map = validator.getValidationMessages();
+                for (String s : map.keySet()) {
+                    addAllErrors("file", map.get(s));
+                }
             }
             if (isValid()) {
                 bdDao.add(bd);
@@ -105,7 +110,10 @@ public class UploadForm extends AbstractForm<Bd> {
         Validator<String> validator = new MIMETypeValidator("file", XML_MIME_TYPE);
         String mimeType = f.getContentType();
         if (!validator.isValid(mimeType)) {
-            addAllErrors("file", validator.getValidationMessages());
+            Map<String, List<String>> map = validator.getValidationMessages();
+            for (String s : map.keySet()) {
+                addAllErrors("file", map.get(s));
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 package fr.univ_rouen.bd.model.validation;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -8,9 +9,11 @@ import java.util.List;
  */
 public interface Validator<E> {
      
-    public List<String> getValidationMessages();
+    public Map<String, List<String>> getValidationMessages();
 
     boolean isValid(E e);
 
     void setFieldName(String s);
+    
+    void setErrorName(String s);
 }

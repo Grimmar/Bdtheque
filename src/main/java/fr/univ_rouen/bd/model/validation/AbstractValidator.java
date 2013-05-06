@@ -1,7 +1,11 @@
 package fr.univ_rouen.bd.model.validation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 
 /**
  *
@@ -9,38 +13,58 @@ import java.util.List;
  */
 public abstract class AbstractValidator<E> implements Validator<E> {
 
-    private List<String> messages;
+    private Map<String, List<String>> messages;
     private String fieldName;
+    private String errorName;
 
     public AbstractValidator(String fieldName) {
         this.fieldName = fieldName;
-        messages = new ArrayList<String>();
+        messages = new HashMap<String, List<String>>();
     }
 
     @Override
-    public List<String> getValidationMessages() {
+    public Map<String, List<String>> getValidationMessages() {
         return messages;
     }
 
     protected String getFieldName() {
         return fieldName;
     }
+    
+    protected String getErrorName() {
+        return errorName;
+    }
 
     @Override
     public void setFieldName(String s) {
         this.fieldName = s;
     }
-
-    protected void addValidationMessage(String message) {
-        this.messages.add(message);
+    
+    @Override
+    public void setErrorName(String s) {
+        this.errorName = s;
     }
 
-    protected void addAllValidationMessage(List<String> l) {
-        for (String s : l) {
-            addValidationMessage(s);
+    protected void addValidationMessage(String field, String message) {
+        List<String> l;
+        if (CollectionUtils.isNotEmpty(this.messages.get(field))) {
+            l = this.messages.get(field);
+        } else {
+            l = new ArrayList<String>();
+        }
+        l.add(message);
+        this.messages.put(field, l);
+    }
+
+    protected void addAllValidationMessage(Map<String, List<String>> m) {
+        for (String key : m.keySet()) {
+            List<String> l = m.get(key);
+            for (String s : l) {
+                addValidationMessage(key, s);
+            }
         }
     }
-    
+
     protected abstract boolean validate(E e);
 
     @Override

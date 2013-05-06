@@ -3,7 +3,7 @@
 <h2>Charger un fichier XML</h2>
 
 <div class="flash-info">Pour simplifier l'ajout de bande dessinée, vous avez la possibilité d'ajouter une bd en chargeant un fichier XML validé par notre fichier XSL.</div>
-<form  ng-controller="FileUploadCtrl" action="<c:url value="/upload" />" method="post"name="uploadForm" enctype="multipart/form-data" ng-app="directives">
+<form ng-controller="FileUploadCtrl" action="<c:url value="/upload" />" method="post"name="uploadForm" enctype="multipart/form-data" ng-app="directives">
     <fieldset>
         <legend>Fichier</legend>
         <c:if test="${!empty requestScope.form.errors}">

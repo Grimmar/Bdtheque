@@ -17,7 +17,7 @@ public class EmptyStringValidator extends AbstractValidator<String> {
     protected boolean validate(String e) {
         boolean result = StringUtils.isNotBlank(e);
         if (!result) {
-            addValidationMessage("Le champ " + getFieldName() + " ne peut être vide");
+            addValidationMessage(getErrorName(), "Le champ " + getFieldName() + " ne peut être vide");
         }
         return result;
     }

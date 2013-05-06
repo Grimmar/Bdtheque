@@ -39,7 +39,7 @@ public class ISBNValidator extends AbstractValidator<String> {
                 break;
         }
         if (!result) {
-            addValidationMessage("L'ISBN saisi n'est pas un ISBN-10 ou un ISBN-13 valide.");
+            addValidationMessage(getErrorName(), "L'ISBN saisi n'est pas un ISBN-10 ou un ISBN-13 valide.");
         }
         return result;
     }

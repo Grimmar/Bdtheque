@@ -55,7 +55,7 @@ public class ExistingUrlValidator extends AbstractValidator<String> {
         }
         
         if (result && !exists(e)) {
-            addValidationMessage("L'url fourni pour le champ " + getFieldName() + " ne correspond pas à une url fonctionnelle ou le Content-Type est invalide.");
+            addValidationMessage(getErrorName(), "L'url fourni pour le champ " + getFieldName() + " ne correspond pas à une url fonctionnelle ou le Content-Type est invalide.");
             result = false;
         }
         return result;

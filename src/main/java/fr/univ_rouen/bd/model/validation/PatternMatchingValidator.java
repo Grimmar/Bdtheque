@@ -1,7 +1,5 @@
 package fr.univ_rouen.bd.model.validation;
 
-import org.apache.commons.lang.StringUtils;
-
 /**
  *
  * @author bissoqu1
@@ -25,7 +23,7 @@ public class PatternMatchingValidator extends AbstractValidator<String> {
         }
         
         if (result && !e.matches(pattern)) {
-            addValidationMessage("Le valeur du champ " + getFieldName() + " ne correspond pas au format attendu (AAAA-MM ou AAAA-MM-JJ)");
+            addValidationMessage(getErrorName(), "Le valeur du champ " + getFieldName() + " ne correspond pas au format attendu (AAAA-MM ou AAAA-MM-JJ)");
             result = false;
         }
         return result;

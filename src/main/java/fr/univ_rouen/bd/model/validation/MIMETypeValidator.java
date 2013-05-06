@@ -17,7 +17,7 @@ public class MIMETypeValidator extends AbstractValidator<String> {
     protected boolean validate(String e) {
         boolean result = mimeType.equals(e);
         if (!result) {
-            addValidationMessage("Le type MIME du fichier " + e + " ne correspond pas au type attendu (" + mimeType + ").");
+            addValidationMessage(getErrorName(), "Le type MIME du fichier " + e + " ne correspond pas au type attendu (" + mimeType + ").");
         }
         return result;
     }

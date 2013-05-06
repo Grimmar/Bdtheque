@@ -22,11 +22,12 @@ public class IndividuTypeValidator extends AbstractValidator<IndividuType> {
         boolean result = true;
 
         if (e == null) {
-            addValidationMessage("Le champ " + getFieldName() + " ne peut être vide.");
+            addValidationMessage(getErrorName(), "Le champ " + getFieldName() + " ne peut être vide.");
             return !result;
         }
 
         Validator<String> minLengthValidator = new MinLengthValidator("nom du " + getFieldName(), 3);
+        minLengthValidator.setErrorName(getErrorName());
         if (!minLengthValidator.isValid(e.getNom())) {
             addAllValidationMessage(minLengthValidator.getValidationMessages());
             result = false;

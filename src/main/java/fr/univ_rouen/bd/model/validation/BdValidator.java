@@ -6,6 +6,7 @@ import fr.univ_rouen.bd.model.beans.TomeType;
 import fr.univ_rouen.bd.model.dao.BdDao;
 import java.util.Arrays;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -32,16 +33,18 @@ public class BdValidator extends AbstractValidator<Bd> {
         isbn = StringUtils.remove(isbn, ".");
 
         Validator<String> stringValidator = new ISBNValidator("isbn");
+        stringValidator.setErrorName("isbn");
         if (!stringValidator.isValid(isbn)) {
             addAllValidationMessage(stringValidator.getValidationMessages());
         }
         bd.setIsbn(isbn);
 
         if (bdDao.getByISBN(isbn) != null) {
-            addValidationMessage("L'ISBN correspond à une bd déjà présente dans la base.");
+            addValidationMessage("isbn", "L'ISBN correspond à une bd déjà présente dans la base.");
         }
 
         stringValidator = new MinLengthValidator("titre", 3);
+        stringValidator.setErrorName("titre");
         if (!stringValidator.isValid(bd.getTitre())) {
             addAllValidationMessage(stringValidator.getValidationMessages());
         }
@@ -51,60 +54,67 @@ public class BdValidator extends AbstractValidator<Bd> {
         }
 
         stringValidator = new MinLengthValidator("éditeur", 5);
+        stringValidator.setErrorName("editeur");
         if (!stringValidator.isValid(bd.getEditeur())) {
             addAllValidationMessage(stringValidator.getValidationMessages());
         }
 
         stringValidator = new MinLengthValidator("résumé", 30);
+        stringValidator.setErrorName("resume");
         if (!stringValidator.isValid(bd.getResume())) {
             addAllValidationMessage(stringValidator.getValidationMessages());
         }
 
         stringValidator = new MinLengthValidator("format", 5);
+        stringValidator.setErrorName("format");
         if (!stringValidator.isValid(bd.getFormat())) {
             addAllValidationMessage(stringValidator.getValidationMessages());
         }
 
         stringValidator = new MinLengthValidator("langue", 2);
+        stringValidator.setErrorName("langue");
         if (!stringValidator.isValid(bd.getLangue())) {
             addAllValidationMessage(stringValidator.getValidationMessages());
         }
 
         stringValidator = new MaxLengthValidator("langue", 2);
+        stringValidator.setErrorName("langue");
         if (!stringValidator.isValid(bd.getLangue())) {
             addAllValidationMessage(stringValidator.getValidationMessages());
         }
         bd.setLangue(StringUtils.upperCase(bd.getLangue()));
 
         if (bd.getParution() == null || !bd.getParution().isValid()) {
-            addValidationMessage("La date de parution est invalide");
+            addValidationMessage("parution", "La date de parution est invalide");
         }
 
         if (bd.getCreationDate() != null && !bd.getCreationDate().isValid()) {
-            addValidationMessage("La date de création est invalide");
+            addValidationMessage("creationDate", "La date de création est invalide");
         }
 
         if (bd.getPlanches().intValue() <= 0) {
-            addValidationMessage("Le nombre de planche doit être supérieur à 0.");
+            addValidationMessage("planches", "Le nombre de planche doit être supérieur à 0.");
         }
 
         Validator<IndividuType> individuValidator = new IndividuTypeValidator();
         if (bd.getScenaristes() != null && CollectionUtils.isNotEmpty(bd.getScenaristes().getScenariste())) {
             int i = 1;
             for (IndividuType ind : bd.getScenaristes().getScenariste()) {
-                individuValidator.setFieldName("scénariste " + i);
+                individuValidator.setFieldName("scenariste " + i);
+                individuValidator.setErrorName("scenariste");
                 if (!individuValidator.isValid(ind)) {
                     addAllValidationMessage(individuValidator.getValidationMessages());
                 }
             }
         } else {
-            addValidationMessage("Au moins un scénariste doit être dans le fichier XML.");
+            addValidationMessage("scenariste", "Il doit y avoir au moins un scénariste.");
         }
 
         if (bd.getColoristes() != null && CollectionUtils.isNotEmpty(bd.getColoristes().getColoriste())) {
             int i = 1;
             for (IndividuType ind : bd.getColoristes().getColoriste()) {
                 individuValidator.setFieldName("coloriste " + i);
+                individuValidator.setErrorName("coloriste");
                 if (!individuValidator.isValid(ind)) {
                     addAllValidationMessage(individuValidator.getValidationMessages());
                 }
@@ -115,6 +125,7 @@ public class BdValidator extends AbstractValidator<Bd> {
             int i = 1;
             for (IndividuType ind : bd.getDessinateurs().getDessinateur()) {
                 individuValidator.setFieldName("dessinateur " + i);
+                individuValidator.setErrorName("dessinateur");
                 if (!individuValidator.isValid(ind)) {
                     addAllValidationMessage(individuValidator.getValidationMessages());
                 }
@@ -125,6 +136,7 @@ public class BdValidator extends AbstractValidator<Bd> {
             int i = 1;
             for (IndividuType ind : bd.getEncrages().getEncrage()) {
                 individuValidator.setFieldName("encrage " + i);
+                individuValidator.setErrorName("encrage");
                 if (!individuValidator.isValid(ind)) {
                     addAllValidationMessage(individuValidator.getValidationMessages());
                 }
@@ -135,6 +147,7 @@ public class BdValidator extends AbstractValidator<Bd> {
             int i = 1;
             for (IndividuType ind : bd.getLettrages().getLettrage()) {
                 individuValidator.setFieldName("lettrages " + i);
+                individuValidator.setErrorName("lettrages");
                 if (!individuValidator.isValid(ind)) {
                     addAllValidationMessage(individuValidator.getValidationMessages());
                 }
@@ -143,6 +156,7 @@ public class BdValidator extends AbstractValidator<Bd> {
 
         if (StringUtils.isNotBlank(bd.getImage())) {
             stringValidator = new ExistingUrlValidator("image", Arrays.asList(PNG_CONTENT_TYPE, JPEG_CONTENT_TYPE));
+            stringValidator.setErrorName("image");
             if (!stringValidator.isValid(bd.getImage())) {
                 addAllValidationMessage(stringValidator.getValidationMessages());
             }
@@ -150,6 +164,7 @@ public class BdValidator extends AbstractValidator<Bd> {
 
         if (StringUtils.isNotBlank(bd.getDepotLegal())) {
             stringValidator = new PatternMatchingValidator("dépôt légal", PARTIAL_DATE_PATTERN);
+            stringValidator.setErrorName("depotLegal");
             if (!stringValidator.isValid(bd.getDepotLegal())) {
                 addAllValidationMessage(stringValidator.getValidationMessages());
             }
@@ -157,6 +172,7 @@ public class BdValidator extends AbstractValidator<Bd> {
 
         if (StringUtils.isNotBlank(bd.getFinImpression())) {
             stringValidator = new PatternMatchingValidator("fin d'impression", PARTIAL_DATE_PATTERN);
+            stringValidator.setErrorName("finImpression");
             if (!stringValidator.isValid(bd.getFinImpression())) {
                 addAllValidationMessage(stringValidator.getValidationMessages());
             }
@@ -165,12 +181,12 @@ public class BdValidator extends AbstractValidator<Bd> {
         if (bd.getTome() != null) {
             TomeType tome = bd.getTome();
             if (tome.getNumero() < 0) {
-                addValidationMessage("Le numéro du tome doit être supérieur à 0");
+                addValidationMessage("tome", "Le numéro du tome doit être supérieur à 0");
             }
         }
 
         System.out.println(getValidationMessages());
         
-        return CollectionUtils.isEmpty(getValidationMessages());
+        return MapUtils.isEmpty(getValidationMessages());
     }
 }

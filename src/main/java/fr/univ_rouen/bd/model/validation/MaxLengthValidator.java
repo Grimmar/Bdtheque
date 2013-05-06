@@ -24,7 +24,7 @@ public class MaxLengthValidator extends AbstractValidator<String> {
             result = false;
         }
         if (result && e.length() > length) {
-            addValidationMessage("Le champ " + getFieldName() + " doit contenir moins de " + length + " caractères.");
+            addValidationMessage(getErrorName(), "Le champ " + getFieldName() + " doit contenir moins de " + length + " caractères.");
             result = false;
         }
         return result;
