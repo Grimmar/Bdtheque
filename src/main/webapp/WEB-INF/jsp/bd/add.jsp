@@ -5,12 +5,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="shortcut icon" href="<c:url value = "/img/favicon.ico" />" />
         <link rel="stylesheet" href="<c:url value = "/css/addBd.css" />" type="text/css" media="screen"/>
-        <script src="<c:url value = "/js/vendor/jquery-1.7.1.min.js" />"></script>
-        <script src="<c:url value = "/js/vendor/jquery-ui-1.8.18.custom.min.js" />"></script>
-        <script src="<c:url value = "/js/vendor/angular.min.js" />"></script>
-        <script src="<c:url value = "/js/app.js" />"></script>
-        <script src="<c:url value = "/js/controllers/FileUploadCtrl.js" />"></script>
-        <script src="<c:url value = "/js/controllers/AddBdCtrl.js" />"></script>
+        <c:set scope="request" var="jquery" > <c:url value = "/js/vendor/jquery-1.7.1.min.js" /> </c:set>
+        <c:set scope="request" var="jqueryUI" > <c:url value = "/js/vendor/jquery-ui-1.8.18.custom.min.js" /> </c:set>
+        <c:set scope="request" var="angular" > <c:url value = "/js/vendor/angular.min.js" /> </c:set>
+        <c:set scope="request" var="app" > <c:url value = "/js/app.js" /> </c:set>
+        <c:set scope="request" var="addCtrl" > <c:url value = "/js/controllers/AddBdCtrl.js" /></c:set>
+        <c:set scope="request" var="fileCtrl" > <c:url value = "/js/controllers/FileUploadCtrl.js" /></c:set>
+        <script type="text/javascript" src="${jquery}"></script>
+        <script type="text/javascript" src="${jqueryUI}"></script>
+        <script type="text/javascript" src="${angular}"></script>
+        <script type="text/javascript" src="${app}"></script>
+        <script type="text/javascript" src="${addCtrl}"></script>
+        <script type="text/javascript" src="${fileCtrl}"></script>
         <title>Ajouter une nouvelle bd</title>
     </head>
 

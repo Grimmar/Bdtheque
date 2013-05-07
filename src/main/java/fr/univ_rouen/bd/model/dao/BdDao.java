@@ -121,13 +121,13 @@ public class BdDao implements Dao<Bd> {
                 }
                 if (StringUtils.isNotBlank(searchBean.getEditeur())) {
                     params.put("editeur", searchBean.getEditeur());
-                    query.append(separator).append("compare(upper-case($bd/bd:bd/bd:editeur/text()), upper-case($editeur)) == 0");
+                    query.append(separator).append("contains(upper-case($bd/bd:bd/bd:editeur/text()), upper-case($editeur))");
                     separator = " and ";
                 }
 
                 if (StringUtils.isNotBlank(searchBean.getLangue())) {
                     params.put("langue", searchBean.getLangue());
-                    query.append(separator).append("compare(upper-case($bd/bd:bd/@bd:langue), upper-case($langue)) == 0");
+                    query.append(separator).append("contains(upper-case($bd/bd:bd/@bd:langue), upper-case($langue))");
                     separator = " and ";
                 }
 
@@ -139,7 +139,7 @@ public class BdDao implements Dao<Bd> {
 
                 if (StringUtils.isNotBlank(searchBean.getSerie())) {
                     params.put("serie", searchBean.getSerie());
-                    query.append(separator).append("compare(upper-case($bd/bd:bd/@bd:serie), upper-case($serie)) == 0");
+                    query.append(separator).append("contains(upper-case($bd/bd:bd/@bd:serie), upper-case($serie))");
                     separator = " and ";
                 }
 
@@ -213,13 +213,14 @@ public class BdDao implements Dao<Bd> {
             //params.put(prefix + i, ind.getNom() + " " + ind.getPrenom());
             i++;
             query.append(separator)
-                    .append("( contains(upper-case($bd/bd:").append(prefix).append("s").append("/bd:").append(prefix).append("/bd:nom), upper-case(\"")
+                    .append("$bd/bd:bd/bd:").append(prefix).append("s").append("/bd:").append(prefix).append("/bd:nom= \"")
                     .append(ind.getNom())
-                    .append("\" )) == 0 )")
-                    .append("and ( contains(upper-case($bd/bd:").append(prefix).append("s").append("/bd:").append(prefix).append("/bd:prenom), upper-case(\"")
-                    .append(ind.getPrenom())
-                    .append("\" ))==0 )");
-
+                    .append("\"");
+            if (StringUtils.isNotBlank(ind.getPrenom())) {
+                query.append("and $bd/bd:bd/bd:").append(prefix).append("s").append("/bd:").append(prefix).append("/bd:prenom=\"")
+                        .append(ind.getPrenom())
+                        .append("\"");
+            }
             if (i <= 1) {
                 separator = " or ";
             }

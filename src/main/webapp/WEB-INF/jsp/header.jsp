@@ -7,7 +7,7 @@
             <c:url value="/search" var="searchLink" />
             <form class="searchForm" method="post" action="${searchLink}">
                 <input type="submit" value="">
-                <input type="search" name="q" placeholder="Titre ..." value=""/>
+                <input type="search" name="search-titre" placeholder="Titre ..." value=""/>
             </form>
         </div>
         <div class="clear"></div>
