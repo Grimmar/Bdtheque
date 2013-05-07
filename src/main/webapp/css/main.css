@@ -180,6 +180,7 @@ nav ul li a p {
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.7); 
     margin: 10px auto;
     clear: both;
+    min-height: 650px;
 }
 
 .content header h1 {
