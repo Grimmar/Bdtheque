@@ -23,7 +23,7 @@ public class PatternMatchingValidator extends AbstractValidator<String> {
         }
         
         if (result && !e.matches(pattern)) {
-            addValidationMessage(getErrorName(), "Le valeur du champ " + getFieldName() + " ne correspond pas au format attendu (AAAA-MM ou AAAA-MM-JJ)");
+            addValidationMessage(getErrorName(), "Le valeur du champ " + getFieldName() + " ne correspond pas au format attendu");
             result = false;
         }
         return result;

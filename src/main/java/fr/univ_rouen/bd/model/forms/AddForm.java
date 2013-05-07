@@ -53,7 +53,7 @@ public class AddForm extends AbstractForm<Bd> {
     private static final String COLORISTE_ATTR = "coloriste";
     private static final String LETTRAGE_ATTR = "lettrage";
     private static final String ENCRAGE_ATTR = "encrage";
-    private static final String PARTIAL_DATE_PATTERN = "((([1-9][0-9]{3}))/((0[1-9])|(1[0-2])))|(((([1-9][0-9]{3}))/((0[1-9])|(1[012])))/((0[1-9])|([12][0-9])|(3[0-1])))";
+    private static final String PARTIAL_DATE_PATTERN = "(((0[1-9])|(1[0-2]))/(([1-9][0-9]{3})))|(((0[1-9])|([12][0-9])|(3[0-1]))/((0[1-9])|(1[012]))/(([1-9][0-9]{3})))";
     private final BdDao bdDao;
 
     public AddForm(BdDao dao) {
@@ -101,17 +101,29 @@ public class AddForm extends AbstractForm<Bd> {
         }
 
         if (request.getParameter(DEPOT_LEGAL_ATTR).matches(PARTIAL_DATE_PATTERN)) {
-            String s = StringUtils.reverse(request.getParameter(DEPOT_LEGAL_ATTR));
-            bd.setDepotLegal(s.replace("/", "-"));
+            String[] tab = StringUtils.split(request.getParameter(DEPOT_LEGAL_ATTR), "/");
+            String s = "";
+            String separator = "";
+            for (int i = tab.length - 1; i >= 0; i--) {
+                s += separator + tab[i];
+                separator = "-";
+            }
+            bd.setDepotLegal(s);
         } else {
-            bd.setDepotLegal("");
+            bd.setDepotLegal(request.getParameter(DEPOT_LEGAL_ATTR));
         }
 
         if (request.getParameter(FIN_IMPRESSION_ATTR).matches(PARTIAL_DATE_PATTERN)) {
-            String s = StringUtils.reverse(request.getParameter(FIN_IMPRESSION_ATTR));
-            bd.setDepotLegal(s.replace("/", "-"));
+            String[] tab = StringUtils.split(request.getParameter(FIN_IMPRESSION_ATTR), "/");
+            String s = "";
+            String separator = "";
+            for (int i = tab.length - 1; i > 0; i--) {
+                s += separator + tab[i];
+                separator = "-";
+            }
+            bd.setFinImpression(s);
         } else {
-            bd.setDepotLegal("");
+            bd.setFinImpression(request.getParameter(FIN_IMPRESSION_ATTR));
         }
 
 
@@ -125,7 +137,6 @@ public class AddForm extends AbstractForm<Bd> {
                 GregorianCalendar gc = (GregorianCalendar) c;
                 gc.setTime(date);
                 creationDate = DAOFactory.getXMLGregorianCalendar(gc);
-                System.out.println(creationDate);
             }
             if (StringUtils.isNotBlank(request.getParameter(PARUTION_ATTR))) {
                 Date date = sdf.parse(request.getParameter(PARUTION_ATTR));
@@ -146,26 +157,47 @@ public class AddForm extends AbstractForm<Bd> {
         List<IndividuType> inds = getIndividuFromRequest(request, SCENARISTE_ATTR);
         scenaristes.getScenariste().addAll(inds);
         bd.setScenaristes(scenaristes);
+        setStringInRequest(request, inds, "scenaristesString");
 
         DessinateursType dessinateurs = new DessinateursType();
         inds = getIndividuFromRequest(request, DESSINATEUR_ATTR);
         dessinateurs.getDessinateur().addAll(inds);
         bd.setDessinateurs(dessinateurs);
+        setStringInRequest(request, inds, "dessinateursString");
 
         ColoristesType coloristes = new ColoristesType();
         inds = getIndividuFromRequest(request, COLORISTE_ATTR);
         coloristes.getColoriste().addAll(inds);
         bd.setColoristes(coloristes);
+        setStringInRequest(request, inds, "coloristesString");
 
         LettragesType lettrages = new LettragesType();
         inds = getIndividuFromRequest(request, LETTRAGE_ATTR);
         lettrages.getLettrage().addAll(inds);
         bd.setLettrages(lettrages);
+        setStringInRequest(request, inds, "lettreursString");
 
         EncragesType encrages = new EncragesType();
         inds = getIndividuFromRequest(request, ENCRAGE_ATTR);
         encrages.getEncrage().addAll(inds);
         bd.setEncrages(encrages);
+        setStringInRequest(request, inds, "encreursString");
+
+        if (bd.getCreationDate() != null) {
+            GregorianCalendar gc = bd.getCreationDate().toGregorianCalendar();
+            Date d = gc.getTime();
+            request.setAttribute(CREATION_DATE_ATTR, d);
+        }
+
+        if (bd.getParution() != null) {
+            GregorianCalendar gc = bd.getParution().toGregorianCalendar();
+            Date d = gc.getTime();
+            request.setAttribute(PARUTION_ATTR, d);
+        }
+        
+            request.setAttribute(DEPOT_LEGAL_ATTR, request.getParameter(DEPOT_LEGAL_ATTR));
+            request.setAttribute(FIN_IMPRESSION_ATTR, request.getParameter(FIN_IMPRESSION_ATTR));
+
         return bd;
     }
 
@@ -179,11 +211,21 @@ public class AddForm extends AbstractForm<Bd> {
                 IndividuType i = new IndividuType();
                 i.setNom(ind[0]);
                 if (ind.length > 1) {
-                    i.setPrenom(ind[0]);
+                    i.setPrenom(ind[1]);
                 }
                 inds.add(i);
             }
         }
         return inds;
+    }
+
+    private void setStringInRequest(HttpServletRequest request, List<IndividuType> inds, String attribute) {
+        StringBuilder sb = new StringBuilder();
+        String separator = "";
+        for (IndividuType ind : inds) {
+            sb.append(separator).append(ind.getNom()).append(" ").append(ind.getPrenom());
+            separator = ";";
+        }
+        request.setAttribute(attribute, sb.toString());
     }
 }

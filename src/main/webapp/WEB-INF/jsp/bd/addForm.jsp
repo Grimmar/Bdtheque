@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:out value="${requestScope.form.result}" />
 <h2>Saisie manuelle des données</h2>
 <form action="<c:url value="/add" />" method="post" ng-controller="AddBdCtrl" ng-app="directives">
@@ -99,8 +100,11 @@
                         </c:forEach>    
                 </ul>
             </c:if>
+            <c:set var="parution">
+                <fmt:formatDate type="date" pattern="dd/MM/yyyy" value="${requestScope.parution}" />
+            </c:set>
             <label for="parution">Date de parution</label>
-            <input type="text" name="parution" class="datepicked" required ng-init="parution='<c:out value="${requestScope.bd.parution}"/>'" placeholder="Date de parution" ng-model="parution" datepicker/>
+            <input type="text" name="parution" class="datepicked" required ng-init="parution='${parution}'" placeholder="Date de parution" ng-model="parution" datepicker/>
         </div>
         <div>
             <c:if test="${!empty requestScope.form.errors['creationDate']}">
@@ -110,8 +114,11 @@
                         </c:forEach>    
                 </ul>
             </c:if>
+            <c:set var="creationDate">
+                <fmt:formatDate type="date" pattern="dd/MM/yyyy" value="${requestScope.creationDate}" />
+            </c:set>
             <label for="creationDate">Date de création</label>
-            <input type="text" class="datepicked" name="creationDate" ng-init="creationDate='<c:out value="${requestScope.bd.creationDate}"/>'" placeholder="Date de création" ng-model="creation" datepicker/>
+            <input type="text" class="datepicked" name="creationDate" ng-init="creationDate='${creationDate}'" placeholder="Date de création" ng-model="creation" datepicker/>
         </div>
         <div>
             <c:if test="${!empty requestScope.form.errors['depotLegal']}">
@@ -122,7 +129,7 @@
                 </ul>
             </c:if>
             <label for="depotLegal">Date de dépôt légal</label>
-            <input type="text" name="depotLegal" value="<c:out value="${requestScope.bd.depotLegal}"/>" placeholder="mm/aaaa ou jj/mm/aaaa"/>
+            <input type="text" name="depotLegal" value="<c:out value="${requestScope.depotLegal}"/>" placeholder="mm/aaaa ou jj/mm/aaaa"/>
         </div>
         <div>
             <c:if test="${!empty requestScope.form.errors['finImpression']}">
@@ -133,7 +140,7 @@
                 </ul>
             </c:if>
             <label for="finImpression">Date de fin d'impression</label>
-            <input type="text" name="finImpression" value="<c:out value="${requestScope.bd.finImpression}"/>" placeholder="mm/aaaa ou jj/mm/aaaa"/>
+            <input type="text" name="finImpression" value="<c:out value="${requestScope.finImpression}"/>" placeholder="mm/aaaa ou jj/mm/aaaa"/>
         </div>
         <div>
             <c:if test="${!empty requestScope.form.errors['tome']}">
@@ -161,7 +168,7 @@
     </fieldset>
     <fieldset>
         <legend>Informations complémentaires</legend>
-        <div>
+        <div ng-init="setScenaristes('<c:out value="${requestScope.scenaristesString}');"/>">
             <c:if test="${!empty requestScope.form.errors['scenariste']}">
                 <ul>
                     <c:forEach items="${requestScope.form.errors['scenariste']}" var="error">
@@ -172,19 +179,33 @@
             <label>Scénaristes:</label>
             <input type="text" name="nom" ng-model="scenaristeLastname" value="" placeholder="Nom ou pseudo"/>
             <input type="text" name="prenom" ng-model="scenaristeFirstname" value="" placeholder="Prénom"/>
-            <input type="button" value="add" ng-click="addScenariste();">
-            <ul>
-                <li ng-repeat="scenariste in scenaristes">
-                    <p class="individu">{{scenariste.lastname}}&nbsp;{{scenariste.firstname}}</p>
-                    <a href="" ng-click="deleteScenariste(scenariste)">X</a>
-                </li>
-            </ul>
+            <input type="button" value="Ajouter" class="add-btn" ng-click="addScenariste();">
+            <table ng-show="scenaristes.length">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="scenariste in scenaristes">
+                        <td>{{$index + 1}}</td>
+                        <td>{{scenariste.lastname}}</td>
+                        <td>{{scenariste.firstname}}</td>
+                        <td>
+                            <a href="" class="rmv-btn" ng-click="deleteScenariste(scenariste)">X</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <input type="hidden" name="scenariste" ng-model="scenaristesString" value="{{scenaristesString}}"/>
             <br />
         </div>
-        <div>
+        <div ng-init="setDessinateurs('<c:out value="${requestScope.dessinateursString}');"/>">
             <c:if test="${!empty requestScope.form.errors['dessinateur']}">
-                <ul>
+                <ul class="unstyled">
                     <c:forEach items="${requestScope.form.errors['dessinateur']}" var="error">
                         <li><c:out value="${error}" /></li>
                         </c:forEach>    
@@ -193,17 +214,31 @@
             <label>Dessinateurs:</label>
             <input type="text" name="nom" ng-model="dessinateurLastname" value="" placeholder="Nom ou pseudo"/>
             <input type="text" name="prenom" ng-model="dessinateurFirstname" value="" placeholder="Prénom"/>
-            <input type="button" value="add" ng-click="addDessinateur();">
-            <ul>
-                <li ng-repeat="des in dessinateurs">
-                    <p class="individu">{{des.lastname}}&nbsp;{{des.firstname}}</p>
-                    <a href="" ng-click="deleteDessinateur(des)">X</a>
-                </li>
-            </ul>
+            <input type="button" value="Ajouter" class="add-btn" ng-click="addDessinateur();">
+            <table ng-show="dessinateurs.length">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="des in dessinateurs">
+                        <td>{{$index + 1}}</td>
+                        <td>{{des.lastname}}</td>
+                        <td>{{des.firstname}}</td>
+                        <td>
+                            <a href="" class="rmv-btn" ng-click="deleteDessinateur(des)">X</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <input type="hidden" name="dessinateur" ng-model="dessinateursString" value=""/>
             <br />
         </div>
-        <div>
+        <div ng-init="setColoristes('<c:out value="${requestScope.coloristesString}');"/>">
             <c:if test="${!empty requestScope.form.errors['coloriste']}">
                 <ul>
                     <c:forEach items="${requestScope.form.errors['coloriste']}" var="error">
@@ -214,17 +249,31 @@
             <label>Coloristes:</label>
             <input type="text" name="nom" ng-model="coloristeLastname" value="" placeholder="Nom ou pseudo"/>
             <input type="text" name="prenom" ng-model="coloristeFirstname" value="" placeholder="Prénom"/>
-            <input type="button" value="add" ng-click="addColoriste();">
-            <ul>
-                <li ng-repeat="col in coloristes">
-                    <p class="individu">{{col.lastname}}&nbsp;{{col.firstname}}</p>
-                    <a href="" ng-click="coloristeColoriste(coloriste)">X</a>
-                </li>
-            </ul>
+            <input type="button" value="Ajouter" class="add-btn" ng-click="addColoriste();">
+            <table ng-show="coloristes.length">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="col in coloristes">
+                        <td>{{$index + 1}}</td>
+                        <td>{{col.lastname}}</td>
+                        <td>{{col.firstname}}</td>
+                        <td>
+                            <a href="" class="rmv-btn" ng-click="deleteColoriste(col)">X</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <input type="hidden" name="coloriste" ng-model="coloristesString" />
             <br />
         </div>
-        <div>
+        <div ng-init="setLettreurs('<c:out value="${requestScope.lettreursString}');"/>">
             <c:if test="${!empty requestScope.form.errors['lettrage']}">
                 <ul>
                     <c:forEach items="${requestScope.form.errors['lettrage']}" var="error">
@@ -235,34 +284,60 @@
             <label>Lettreurs:</label>
             <input type="text" name="nom" ng-model="lettreurLastname" value="" placeholder="Nom ou pseudo"/>
             <input type="text" name="prenom" ng-model="lettreurFirstname" value="" placeholder="Prénom"/>
-            <input type="button" value="add" ng-click="addLettreur();">
-            <ul>
-                <li ng-repeat="lettreur in lettreurs">
-                    <p class="individu">{{lettreur.lastname}}&nbsp;{{lettreur.firstname}}</p>
-                    <a href="" ng-click="deleteLettreur(lettreur)">X</a>
-                </li>
-            </ul>
+            <input type="button" value="Ajouter" class="add-btn" ng-click="addLettreur();">
+            <table ng-show="lettreurs.length">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="lettreur in lettreurs">
+                        <td>{{$index + 1}}</td>
+                        <td>{{lettreur.lastname}}</td>
+                        <td>{{lettreur.firstname}}</td>
+                        <td>
+                            <a href="" class="rmv-btn" ng-click="deleteLettreur(lettreur)">X</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <input type="hidden" name="lettrage" ng-model="lettreursString" />
             <br />
         </div>
-        <div>
+        <div ng-init="setEncreurs('<c:out value="${requestScope.encreursString}');"/>">
             <c:if test="${!empty requestScope.form.errors['encrages']}">
-                <ul>
-                    <c:forEach items="${requestScope.form.errors['encrages']}" var="error">
-                        <li><c:out value="${error}" /></li>
-                        </c:forEach>    
-                </ul>
-            </c:if>
+                <c:forEach items="${requestScope.form.errors['encrages']}" var="error">
+                    <li><c:out value="${error}" /></li>
+                    </c:forEach>  
+                </c:if>
             <label>Encrage:</label>
             <input type="text" name="nom" ng-model="encreurLastname" value="" placeholder="Nom ou pseudo"/>
             <input type="text" name="prenom" ng-model="encreurFirstname" value="" placeholder="Prénom"/>
-            <input type="button" value="add" ng-click="addEncreur();">
-            <ul>
-                <li ng-repeat="encreur in encreurs">
-                    <p class="individu">{{encreur.lastname}}&nbsp;{{encreur.firstname}}</p>
-                    <a href="" ng-click="deleteEncreur(encreur)">X</a>
-                </li>
-            </ul>
+            <input type="button" value="Ajouter" class="add-btn" ng-click="addEncreur();">
+            <table ng-show="encreurs.length">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="encreur in encreurs">
+                        <td>{{$index + 1}}</td>
+                        <td>{{encreur.lastname}}</td>
+                        <td>{{encreur.firstname}}</td>
+                        <td>
+                            <a href="" class="rmv-btn" ng-click="deleteEncreur(encreur)">X</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <input type="hidden" name="encrage" ng-model="encreursString" />
             <br />
         </div>

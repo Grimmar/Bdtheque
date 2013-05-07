@@ -19,7 +19,6 @@
         <input type="hidden" value="<c:url value = "/add" />" />
         <input type="hidden" value="<c:url value = "/upload" />" />
 
-
         <section class="tabs">
             <ul>
                 <c:choose>
@@ -38,10 +37,10 @@
             <section class="bd-form">
                 <c:choose>
                     <c:when test="${requestScope.formName == 'add'}">
-                        <c:import url="/WEB-INF/jsp/bd/addForm.jsp"/>
+                        <c:import url="/WEB-INF/jsp/bd/addForm.jsp" />
                     </c:when>
                     <c:otherwise>
-                        <c:import url="/WEB-INF/jsp/bd/uploadForm.jsp"/>
+                        <c:import url="/WEB-INF/jsp/bd/uploadForm.jsp" />
                     </c:otherwise>
                 </c:choose>
             </section>

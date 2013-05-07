@@ -5,7 +5,6 @@ import fr.univ_rouen.bd.model.dao.BdDao;
 import fr.univ_rouen.bd.model.dao.DAOFactory;
 import fr.univ_rouen.bd.model.forms.AddForm;
 import fr.univ_rouen.bd.model.forms.Form;
-import fr.univ_rouen.bd.model.forms.UploadForm;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,6 +27,7 @@ public class AddServlet extends HttpServlet {
     private static final String ATTR_BD = "bd";
     private static final String ATTR_FORM_NAME = "formName";
     private static final String FORM_NAME = "add";
+    
     private BdDao bdDao;
 
     @Override
@@ -57,7 +57,7 @@ public class AddServlet extends HttpServlet {
         if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
             this.getServletContext().getRequestDispatcher(ADD_VIEW).forward(request, response);
         } else {
-             processRequest(request, response);
+            processRequest(request, response);
         }
     }
 
@@ -78,8 +78,6 @@ public class AddServlet extends HttpServlet {
         Form<Bd> form = new AddForm(bdDao);
 
         Bd bd = form.validateForm(request);
-
-        System.out.println(bd.getParution());
         
         request.setAttribute(ATTR_FORM, form);
         request.setAttribute(ATTR_BD, bd);
@@ -91,7 +89,7 @@ public class AddServlet extends HttpServlet {
             String context = this.getServletContext().getContextPath();
             response.sendRedirect(context + REDIRECT_URL + bd.getId());
         } else {
-             processRequest(request, response);
+            processRequest(request, response);
         }
     }
 

@@ -34,12 +34,39 @@ function AddBdCtrl($scope) {
     $scope.add = function(col, lastname, firstname, mandatory, exists) {
         var isIn = $scope.isAlreadyIn(col, lastname, firstname);
         if (!isIn && $scope.isNotBlank(lastname)) {
+            if (firstname === undefined) {
+                firstname = "";
+            }
             col.push({lastname: lastname, firstname: firstname});
         } else if ($scope.isBlank(lastname)) {
             $scope.display(mandatory);
             return;
         } else {
             $scope.display(exists);
+        }
+    };
+
+    $scope.splitIndividusString = function(string) {
+        var tmp = string.split(";");
+        var result = [];
+        for (var i = 0; i < tmp.length; i++) {
+            var ar = tmp[i].split(" ");
+            if (ar.length > 1) {
+                result.push({lastname: ar[0], firstname: ar[1].firstname});
+            } else {
+                result.push({lastname: ar[0], firstname: ""});
+            }
+
+        }
+        return result;
+    };
+
+    $scope.setScenaristes = function(v) {
+        if (v !== null && v !== undefined && v.trim() !== "") {
+            var inds = $scope.splitIndividusString(v);
+            angular.forEach(inds, function(i) {
+                $scope.scenaristes.push(i);
+            });
         }
     };
 
@@ -51,9 +78,8 @@ function AddBdCtrl($scope) {
         $scope.scenaristesString = '';
         var separator = "";
         angular.forEach($scope.scenaristes, function(i) {
-            $scope.scenaristesString += separator + i.lastname + " " + i.firstname;
+            $scope.scenaristesString += separator + i.lastname + " " + (i.firstname === undefined ? "" : i.firstname);
             separator = ";";
-            alert($scope.scenaristesString);
         });
         $scope.scenaristeLastname = '';
         $scope.scenaristeFirstname = '';
@@ -67,10 +93,19 @@ function AddBdCtrl($scope) {
         angular.forEach(old, function(i) {
             if (i.lastname !== scenariste.lastname || i.firstname !== scenariste.firstname) {
                 col.push(i);
-                $scope.scenaristesString += separator + i.lastname + " " + i.firstname;
+                $scope.scenaristesString += separator + i.lastname + " " + (i.firstname === undefined ? "" : i.firstname);
                 separator = ";";
             }
         });
+    };
+
+    $scope.setDessinateurs = function(v) {
+        if (v !== null && v !== undefined && v.trim() !== "") {
+            var inds = $scope.splitIndividusString(v);
+            angular.forEach(inds, function(i) {
+                $scope.dessinateurs.push(i);
+            });
+        }
     };
 
     $scope.addDessinateur = function() {
@@ -81,7 +116,7 @@ function AddBdCtrl($scope) {
         $scope.dessinateursString = '';
         var separator = "";
         angular.forEach($scope.dessinateurs, function(i) {
-            $scope.dessinateursString += separator + i.lastname + " " + i.firstname;
+            $scope.dessinateursString += separator + i.lastname + " " + (i.firstname === undefined ? "" : i.firstname);
             separator = ";";
         });
         $scope.dessinateurLastname = '';
@@ -96,10 +131,19 @@ function AddBdCtrl($scope) {
         angular.forEach(old, function(d) {
             if (d.nom !== dessinateur.nom || d.prenom !== dessinateur.prenom) {
                 $scope.dessinateurs.push(d);
-                $scope.dessinateursString += separator + i.lastname + " " + i.firstname;
+                $scope.dessinateursString += separator + i.lastname + " " + (i.firstname === undefined ? "" : i.firstname);
                 separator = ";";
             }
         });
+    };
+
+    $scope.setColoristes = function(v) {
+        if (v !== null && v !== undefined && v.trim() !== "") {
+            var inds = $scope.splitIndividusString(v);
+            angular.forEach(inds, function(i) {
+                $scope.coloristes.push(i);
+            });
+        }
     };
 
     $scope.addColoriste = function() {
@@ -110,7 +154,7 @@ function AddBdCtrl($scope) {
         $scope.coloristesString = '';
         var separator = "";
         angular.forEach($scope.coloristes, function(i) {
-            $scope.coloristesString += separator + i.lastname + " " + i.firstname;
+            $scope.coloristesString += separator + i.lastname + " " + (i.firstname === undefined ? "" : i.firstname);
             separator = ";";
         });
         $scope.coloristeLastname = '';
@@ -125,10 +169,19 @@ function AddBdCtrl($scope) {
         angular.forEach(old, function(c) {
             if (c.nom !== coloriste.nom || c.prenom !== coloriste.prenom) {
                 $scope.coloristes.push(c);
-                $scope.coloristesString += separator + i.lastname + " " + i.firstname;
+                $scope.coloristesString += separator + i.lastname + " " + (i.firstname === undefined ? "" : i.firstname);
                 separator = ";";
             }
         });
+    };
+
+    $scope.setLettreurs = function(v) {
+        if (v !== null && v !== undefined && v.trim() !== "") {
+            var inds = $scope.splitIndividusString(v);
+            angular.forEach(inds, function(i) {
+                $scope.lettreurs.push(i);
+            });
+        }
     };
 
     $scope.addLettreur = function() {
@@ -139,7 +192,7 @@ function AddBdCtrl($scope) {
         $scope.lettreursString = '';
         var separator = "";
         angular.forEach($scope.lettreurs, function(i) {
-            $scope.lettreursString += separator + i.lastname + " " + i.firstname;
+            $scope.lettreursString += separator + i.lastname + " " + (i.firstname === undefined ? "" : i.firstname);
             separator = ";";
         });
         $scope.lettreurLastname = '';
@@ -154,10 +207,19 @@ function AddBdCtrl($scope) {
         angular.forEach(old, function(l) {
             if (l.nom !== lettreur.nom || l.prenom !== lettreur.prenom) {
                 $scope.lettreurs.push(l);
-                $scope.lettreursString += separator + i.lastname + " " + i.firstname;
+                $scope.lettreursString += separator + i.lastname + " " + (i.firstname === undefined ? "" : i.firstname);
                 separator = ";";
             }
         });
+    };
+
+    $scope.setEncreurs = function(v) {
+        if (v !== null && v !== undefined && v.trim() !== "") {
+            var inds = $scope.splitIndividusString(v);
+            angular.forEach(inds, function(i) {
+                $scope.encreurs.push(i);
+            });
+        }
     };
 
     $scope.addEncreur = function() {
@@ -168,7 +230,7 @@ function AddBdCtrl($scope) {
         $scope.encreursString = '';
         var separator = "";
         angular.forEach($scope.encreurs, function(i) {
-            $scope.encreursString += separator + i.lastname + " " + i.firstname;
+            $scope.encreursString += separator + i.lastname + " " + (i.firstname === undefined ? "" : i.firstname);
             separator = ";";
         });
         $scope.encreurLastname = '';
@@ -183,7 +245,7 @@ function AddBdCtrl($scope) {
         angular.forEach(old, function(e) {
             if (e.nom !== encreur.nom || e.prenom !== encreur.prenom) {
                 $scope.encreurs.push(e);
-                $scope.encreursString += separator + i.lastname + " " + i.firstname;
+                $scope.encreursString += separator + i.lastname + " " + (i.firstname === undefined ? "" : i.firstname);
                 separator = ";";
             }
         });
