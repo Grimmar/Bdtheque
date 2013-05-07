@@ -1,6 +1,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="deleteImage">
+    <c:url value="/img/delete.png" />
+</c:set>
 <c:out value="${requestScope.form.result}" />
-<h2>Saisie manuelle des données</h2>
+<h2 class="main-title">Saisie manuelle des données</h2>
 <form action="<c:url value="/add" />" method="post" ng-controller="AddBdCtrl" ng-app="directives">
     <fieldset>
         <legend>Informations principales</legend>
@@ -180,13 +183,13 @@
             <input type="text" name="nom" ng-model="scenaristeLastname" value="" placeholder="Nom ou pseudo"/>
             <input type="text" name="prenom" ng-model="scenaristeFirstname" value="" placeholder="Prénom"/>
             <input type="button" value="Ajouter" class="add-btn" ng-click="addScenariste();">
-            <table ng-show="scenaristes.length">
+            <table class="individus" ng-show="scenaristes.length">
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Nom</th>
                         <th>Prénom</th>
-                        <th>Delete</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -195,7 +198,9 @@
                         <td>{{scenariste.lastname}}</td>
                         <td>{{scenariste.firstname}}</td>
                         <td>
-                            <a href="" class="rmv-btn" ng-click="deleteScenariste(scenariste)">X</a>
+                            <a href="#delete" class="rmv-btn" ng-click="deleteScenariste(scenariste)">
+                                <img src="${deleteImage}" alt="Supprimer" />
+                            </a>
                         </td>
                     </tr>
                 </tbody>
@@ -215,13 +220,13 @@
             <input type="text" name="nom" ng-model="dessinateurLastname" value="" placeholder="Nom ou pseudo"/>
             <input type="text" name="prenom" ng-model="dessinateurFirstname" value="" placeholder="Prénom"/>
             <input type="button" value="Ajouter" class="add-btn" ng-click="addDessinateur();">
-            <table ng-show="dessinateurs.length">
+            <table class="individus" ng-show="dessinateurs.length">
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Nom</th>
                         <th>Prénom</th>
-                        <th>Delete</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -230,7 +235,9 @@
                         <td>{{des.lastname}}</td>
                         <td>{{des.firstname}}</td>
                         <td>
-                            <a href="" class="rmv-btn" ng-click="deleteDessinateur(des)">X</a>
+                            <a href="#delete" class="rmv-btn" ng-click="deleteDessinateur(des)">
+                                <img src="${deleteImage}" alt="Supprimer" />
+                            </a>
                         </td>
                     </tr>
                 </tbody>
@@ -250,13 +257,13 @@
             <input type="text" name="nom" ng-model="coloristeLastname" value="" placeholder="Nom ou pseudo"/>
             <input type="text" name="prenom" ng-model="coloristeFirstname" value="" placeholder="Prénom"/>
             <input type="button" value="Ajouter" class="add-btn" ng-click="addColoriste();">
-            <table ng-show="coloristes.length">
+            <table class="individus" ng-show="coloristes.length">
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Nom</th>
                         <th>Prénom</th>
-                        <th>Delete</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -265,7 +272,9 @@
                         <td>{{col.lastname}}</td>
                         <td>{{col.firstname}}</td>
                         <td>
-                            <a href="" class="rmv-btn" ng-click="deleteColoriste(col)">X</a>
+                            <a href="#delete" class="rmv-btn" ng-click="deleteColoriste(col)"></a>
+                            <img src="${deleteImage}" alt="Supprimer" />
+                            </a>
                         </td>
                     </tr>
                 </tbody>
@@ -285,13 +294,13 @@
             <input type="text" name="nom" ng-model="lettreurLastname" value="" placeholder="Nom ou pseudo"/>
             <input type="text" name="prenom" ng-model="lettreurFirstname" value="" placeholder="Prénom"/>
             <input type="button" value="Ajouter" class="add-btn" ng-click="addLettreur();">
-            <table ng-show="lettreurs.length">
+            <table class="individus" ng-show="lettreurs.length">
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Nom</th>
                         <th>Prénom</th>
-                        <th>Delete</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -300,7 +309,9 @@
                         <td>{{lettreur.lastname}}</td>
                         <td>{{lettreur.firstname}}</td>
                         <td>
-                            <a href="" class="rmv-btn" ng-click="deleteLettreur(lettreur)">X</a>
+                            <a href="#delete" class="rmv-btn" ng-click="deleteLettreur(lettreur)">
+                                <img src="${deleteImage}" alt="Supprimer" />
+                            </a>
                         </td>
                     </tr>
                 </tbody>
@@ -318,13 +329,13 @@
             <input type="text" name="nom" ng-model="encreurLastname" value="" placeholder="Nom ou pseudo"/>
             <input type="text" name="prenom" ng-model="encreurFirstname" value="" placeholder="Prénom"/>
             <input type="button" value="Ajouter" class="add-btn" ng-click="addEncreur();">
-            <table ng-show="encreurs.length">
+            <table class="individus" ng-show="encreurs.length">
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Nom</th>
                         <th>Prénom</th>
-                        <th>Delete</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -333,7 +344,9 @@
                         <td>{{encreur.lastname}}</td>
                         <td>{{encreur.firstname}}</td>
                         <td>
-                            <a href="" class="rmv-btn" ng-click="deleteEncreur(encreur)">X</a>
+                            <a href="#delete" class="rmv-btn" ng-click="deleteEncreur(encreur)">
+                                <img src="${deleteImage}" alt="Supprimer" />
+                            </a>
                         </td>
                     </tr>
                 </tbody>

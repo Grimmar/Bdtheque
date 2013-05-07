@@ -46,6 +46,7 @@ fieldset legend {
 .searchForm input[type="search"] {
     box-sizing: content-box;
     -webkit-appearance: textfield;
+    margin-right: 10px;
 }
 
 .searchForm input[type="text"], .searchForm input[type="search"] {
