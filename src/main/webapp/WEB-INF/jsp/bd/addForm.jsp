@@ -4,52 +4,56 @@
 </c:set>
 <c:out value="${requestScope.form.result}" />
 <h2 class="main-title">Saisie manuelle des données</h2>
-<form action="<c:url value="/add" />" method="post" ng-controller="AddBdCtrl" ng-app="directives">
+<form name="addForm" action="<c:url value="/add" />" method="post" ng-controller="AddBdCtrl" ng-app="directives">
     <fieldset>
         <legend>Informations principales</legend>
         <div>
-            <c:if test="${!empty requestScope.form.errors['isbn']}">
-                <ul>
-                    <c:forEach items="${requestScope.form.errors['isbn']}" var="error">
-                        <li><c:out value="${error}" /></li>
-                        </c:forEach>    
-                </ul>
-            </c:if>
-            <label for="isbn">ISBN-10 ou ISBN-13</label>
-            <input type="text" name="isbn" required="required" value="<c:out value="${requestScope.bd.isbn}"/>" placeholder="Identifant unique"/>
+            <div>
+                <c:if test="${!empty requestScope.form.errors['isbn']}">
+                    <ul>
+                        <c:forEach items="${requestScope.form.errors['isbn']}" var="error">
+                            <li><c:out value="${error}" /></li>
+                            </c:forEach>    
+                    </ul>
+                </c:if>
+                <label for="isbn">ISBN-10 ou ISBN-13</label>
+                <input type="text" name="isbn" required="required" value="<c:out value="${requestScope.bd.isbn}"/>" placeholder="Identifant unique"/>
+            </div>
+            <div>
+                <c:if test="${!empty requestScope.form.errors['titre']}">
+                    <ul>
+                        <c:forEach items="${requestScope.form.errors['titre']}" var="error">
+                            <li><c:out value="${error}" /></li>
+                            </c:forEach>    
+                    </ul>
+                </c:if>
+                <label for="titre">Titre</label>
+                <input type="text" name="titre" required="required" value="<c:out value="${requestScope.bd.titre}"/>"  placeholder="Titre de la bd"/>
+            </div>
         </div>
         <div>
-            <c:if test="${!empty requestScope.form.errors['titre']}">
-                <ul>
-                    <c:forEach items="${requestScope.form.errors['titre']}" var="error">
-                        <li><c:out value="${error}" /></li>
-                        </c:forEach>    
-                </ul>
-            </c:if>
-            <label for="titre">Titre</label>
-            <input type="text" name="titre" required="required" value="<c:out value="${requestScope.bd.titre}"/>"  placeholder="Titre de la bd"/>
-        </div>
-        <div>
-            <c:if test="${!empty requestScope.form.errors['planches']}">
-                <ul>
-                    <c:forEach items="${requestScope.form.errors['planches']}" var="error">
-                        <li><c:out value="${error}" /></li>
-                        </c:forEach>    
-                </ul>
-            </c:if>
-            <label for="planches">Planches</label>
-            <input type="number" name="planches" required="required" value="<c:out value="${requestScope.bd.planches}"/>" placeholder="Nombre de pages"/>
-        </div>
-        <div>
-            <c:if test="${!empty requestScope.form.errors['serie']}">
-                <ul>
-                    <c:forEach items="${requestScope.form.errors['serie']}" var="error">
-                        <li><c:out value="${error}" /></li>
-                        </c:forEach>    
-                </ul>
-            </c:if>
-            <label for="serie">Série</label>
-            <input type="text" name="serie" value="<c:out value="${requestScope.bd.serie}"/>" placeholder="One-Shot"/>
+            <div>
+                <c:if test="${!empty requestScope.form.errors['planches']}">
+                    <ul>
+                        <c:forEach items="${requestScope.form.errors['planches']}" var="error">
+                            <li><c:out value="${error}" /></li>
+                            </c:forEach>    
+                    </ul>
+                </c:if>
+                <label for="planches">Planches</label>
+                <input type="number" name="planches" required="required" value="<c:out value="${requestScope.bd.planches}"/>" placeholder="Nombre de pages"/>
+            </div>
+            <div>
+                <c:if test="${!empty requestScope.form.errors['serie']}">
+                    <ul>
+                        <c:forEach items="${requestScope.form.errors['serie']}" var="error">
+                            <li><c:out value="${error}" /></li>
+                            </c:forEach>    
+                    </ul>
+                </c:if>
+                <label for="serie">Série</label>
+                <input type="text" name="serie" value="<c:out value="${requestScope.bd.serie}"/>" placeholder="One-Shot"/>
+            </div>
         </div>
         <div>
             <c:if test="${!empty requestScope.form.errors['langue']}">
@@ -93,7 +97,8 @@
                 </ul>
             </c:if>
             <label for="image">Image</label>
-            <input type="url" name="image" value="<c:out value="${requestScope.bd.image}"/>" placeholder="Adresse de l'image"/>
+            <input type="url" name="image" value="<c:out value="${requestScope.bd.image}"/>" ng-model="bd.image" placeholder="Adresse de l'image" required/>
+            <span class="error" ng-show="addForm.url.$error.url">invalid url</span>
         </div>
         <div>
             <c:if test="${!empty requestScope.form.errors['parution']}">
@@ -198,7 +203,7 @@
                         <td>{{scenariste.lastname}}</td>
                         <td>{{scenariste.firstname}}</td>
                         <td>
-                            <a href="#delete" class="rmv-btn" ng-click="deleteScenariste(scenariste)">
+                            <a href="" class="rmv-btn" ng-click="deleteScenariste(scenariste)">
                                 <img src="${deleteImage}" alt="Supprimer" />
                             </a>
                         </td>
@@ -235,14 +240,14 @@
                         <td>{{des.lastname}}</td>
                         <td>{{des.firstname}}</td>
                         <td>
-                            <a href="#delete" class="rmv-btn" ng-click="deleteDessinateur(des)">
+                            <a href="" class="rmv-btn" ng-click="deleteDessinateur(des)">
                                 <img src="${deleteImage}" alt="Supprimer" />
                             </a>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <input type="hidden" name="dessinateur" ng-model="dessinateursString" value=""/>
+            <input type="hidden" name="dessinateur" ng-model="dessinateursString" value="{{dessinateursString}}"/>
             <br />
         </div>
         <div ng-init="setColoristes('<c:out value="${requestScope.coloristesString}');"/>">
@@ -272,14 +277,14 @@
                         <td>{{col.lastname}}</td>
                         <td>{{col.firstname}}</td>
                         <td>
-                            <a href="#delete" class="rmv-btn" ng-click="deleteColoriste(col)"></a>
-                            <img src="${deleteImage}" alt="Supprimer" />
+                            <a href="" class="rmv-btn" ng-click="deleteColoriste(col)">
+                                <img src="${deleteImage}" alt="Supprimer" />
                             </a>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <input type="hidden" name="coloriste" ng-model="coloristesString" />
+            <input type="hidden" name="coloriste" ng-model="coloristesString" value="{{coloristesString}}"/>
             <br />
         </div>
         <div ng-init="setLettreurs('<c:out value="${requestScope.lettreursString}');"/>">
@@ -309,14 +314,14 @@
                         <td>{{lettreur.lastname}}</td>
                         <td>{{lettreur.firstname}}</td>
                         <td>
-                            <a href="#delete" class="rmv-btn" ng-click="deleteLettreur(lettreur)">
+                            <a href="" class="rmv-btn" ng-click="deleteLettreur(lettreur)">
                                 <img src="${deleteImage}" alt="Supprimer" />
                             </a>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <input type="hidden" name="lettrage" ng-model="lettreursString" />
+            <input type="hidden" name="lettrage" ng-model="lettreursString" value="{{lettreursString}}"/>
             <br />
         </div>
         <div ng-init="setEncreurs('<c:out value="${requestScope.encreursString}');"/>">
@@ -351,9 +356,9 @@
                     </tr>
                 </tbody>
             </table>
-            <input type="hidden" name="encrage" ng-model="encreursString" />
+            <input type="hidden" name="encrage" ng-model="encreursString" value="{{encreursString}}"/>
             <br />
         </div>
     </fieldset>
-    <input ng-disabled="uploadForm.$invalid" type="submit" value="Ajouter la bd"/>
+    <input ng-disabled="uploadForm.$invalid" class="btn" type="submit" value="Ajouter la bd"/>
 </form>

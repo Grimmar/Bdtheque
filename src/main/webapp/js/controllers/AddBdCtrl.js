@@ -1,4 +1,5 @@
 function AddBdCtrl($scope) {
+    $scope.isVisible = false;
     $scope.scenaristes = [];
     $scope.dessinateurs = [];
     $scope.coloristes = [];
@@ -9,6 +10,7 @@ function AddBdCtrl($scope) {
     $scope.coloristesString = null;
     $scope.encreursString = null;
     $scope.lettreursString = null;
+    $scope.toggleText = "Montrer";
 
     $scope.isAlreadyIn = function(col, lastname, firstname) {
         angular.forEach(col, function(v) {
@@ -92,7 +94,7 @@ function AddBdCtrl($scope) {
         var separator = "";
         angular.forEach(old, function(i) {
             if (i.lastname !== scenariste.lastname || i.firstname !== scenariste.firstname) {
-                col.push(i);
+                $scope.scenaristes.push(i);
                 $scope.scenaristesString += separator + i.lastname + " " + (i.firstname === undefined ? "" : i.firstname);
                 separator = ";";
             }
@@ -249,6 +251,15 @@ function AddBdCtrl($scope) {
                 separator = ";";
             }
         });
+    };
+
+    $scope.toggle = function() {
+        $scope.isVisible = !$scope.isVisible;
+        if ($scope.isVisible) {
+            $scope.toggleText = "Cacher";
+        } else {
+            $scope.toggleText = "Montrer";
+        } 
     };
 
 }
