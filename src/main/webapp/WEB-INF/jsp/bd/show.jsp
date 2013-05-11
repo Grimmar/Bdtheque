@@ -1,10 +1,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html ng-app>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="shortcut icon" href="<c:url value = "/img/favicon.ico" />" />
         <link rel="stylesheet" href="<c:url value = "/css/show.css" />" type="text/css" media="screen"/>
+        <c:set scope="request" var="angular" > <c:url value = "/js/vendor/angular.min.js" /> </c:set>
+        <c:set scope="request" var="app" > <c:url value = "/js/app.js" /> </c:set>
+        <c:set scope="request" var="showCtrl" > <c:url value = "/js/controllers/ShowBdCtrl.js" /></c:set>
+        <script type="text/javascript" src="${angular}"></script>
+        <script type="text/javascript" src="${app}"></script>
+        <script type="text/javascript" src="${showCtrl}"></script>
         <title>Consultation</title>
     </head>
     <body>
@@ -12,7 +18,16 @@
         <c:if test="${!empty requestScope.notice}">
         <div class="flash-notice">${requestScope.notice}</div>
         </c:if>
-        <section class="content">
+        <section class="content" ng-controller="ShowBdCtrl">
+            <div class="bd-actions">
+                <a class="bd-update-btn btn" href="<c:url value="/update/${requestScope.bd.id}" />">
+                    <c:url value="/img/edit.png" var="image" />
+                    <img class="bd-image-btn" src="${image}" alt="">
+                    Modifier</a>
+                <a class="bd-delete-btn btn" ng-click="areYouSure($event);" href="<c:url value="/delete/${requestScope.bd.id}" />">
+                    <c:url value="/img/delete.png" var="image" />
+                    <img class="bd-image-btn" src="${image}" alt="">Supprimer</a>
+            </div>
             <c:if test="${empty requestScope.message}">
                 <section class="page-content">
                     <h2 class="bd-title">

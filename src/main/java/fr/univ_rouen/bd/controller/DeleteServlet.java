@@ -1,14 +1,14 @@
 package fr.univ_rouen.bd.controller;
 
-import static fr.univ_rouen.bd.controller.Test.CONF_DAO_FACTORY;
+import fr.univ_rouen.bd.model.beans.Bd;
 import fr.univ_rouen.bd.model.dao.BdDao;
 import fr.univ_rouen.bd.model.dao.DAOFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang.StringUtils;
 
 /**
  *
@@ -16,15 +16,19 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class DeleteServlet extends HttpServlet {
 
-    private static final String VIEW = "/WEB-INF/jsp/deleteBd.jsp";
+    private static final String VIEW = "/WEB-INF/jsp/bd/search.jsp";
+    private static final String REDIRECT_URL = "/home";
     public static final String CONF_DAO_FACTORY = "daofactory";
+    private static final String RESOURCE_ATTR = "resource";
+    private static final String BD_ATTR = "bd";
+    private static final String REQUEST_NOTICE = "notice";
+    private static final String REQUEST_ERROR = "error";
     private BdDao bdDao;
 
     @Override
     public void init() throws ServletException {
         this.bdDao = ((DAOFactory) getServletContext().getAttribute(CONF_DAO_FACTORY)).getBdDao();
     }
-
 
     /**
      * Handles the HTTP
@@ -38,6 +42,20 @@ public class DeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String id = request.getParameter(RESOURCE_ATTR);
+        Bd bd = null;
+        if (StringUtils.isNotEmpty(id)) {
+            bd = bdDao.get(id);
+        }
+
+        if (bd != null) {
+            request.setAttribute(BD_ATTR, bd);
+            bdDao.delete(id);
+            request.setAttribute(REQUEST_NOTICE, "La bd " + bd.getTitre() + " a été supprimée.");
+        } else {
+            request.setAttribute(REQUEST_ERROR, "La bd que vous essayer de supprimer n'existe pas.");
+        }
+        this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
     }
 
     /**
@@ -52,6 +70,7 @@ public class DeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.sendError(HttpServletResponse.SC_NOT_FOUND);
     }
 
     /**
@@ -61,6 +80,6 @@ public class DeleteServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Suppression d'une bd";
     }
 }

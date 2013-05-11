@@ -24,6 +24,9 @@
         <c:import url="/WEB-INF/jsp/header.jsp"/>
         <input type="hidden" value="<c:url value = "/add" />" />
         <input type="hidden" value="<c:url value = "/upload" />" />
+        <c:if test="${!empty requestScope.form.result}">
+            <div class="flash-error">${requestScope.form.result}</div>
+        </c:if>
 
         <section class="tabs">
             <ul>

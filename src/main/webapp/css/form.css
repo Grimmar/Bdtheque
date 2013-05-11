@@ -3,7 +3,7 @@ form {
     margin: auto;
 }
 
-form fieldset > div > div, form fieldset .file-input {
+form fieldset > div, form fieldset .file-input {
     margin-right: 20px;
     float:left;
 }

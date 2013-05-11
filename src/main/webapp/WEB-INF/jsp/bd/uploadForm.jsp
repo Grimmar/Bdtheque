@@ -1,5 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<c:out value="${requestScope.form.result}" />
 <h2 class="main-title">Charger un fichier XML</h2>
 <div class="flash-info">Pour simplifier l'ajout de bande dessinée, vous avez la possibilité d'ajouter une bd en chargeant un fichier XML validé par notre fichier XSL.</div>
 <form ng-controller="FileUploadCtrl" action="<c:url value="/upload" />" method="post"name="uploadForm" enctype="multipart/form-data" ng-app="directives">

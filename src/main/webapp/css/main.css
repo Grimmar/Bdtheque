@@ -148,11 +148,13 @@ nav ul li a p {
     margin: 0;
     margin-top: 5px;
 }
-.flash-info, flash-notice {
-    width: 80%;
+.flash-info, .flash-notice, .flash-error {
+    width: 1024px;
     -webkit-border-radius: 8px;
     border-radius: 5px;
-    padding: 10px 0px;
+
+    padding: 10px 20px;
+    color: #555;
     color: #555;
     margin: auto;
     margin-bottom: 10px;
@@ -162,7 +164,6 @@ nav ul li a p {
 } 
 
 .flash-notice {
-    width: 1024px;
     background-color: #dff0d8;
     border: 1px solid #d6e9c6;
 }
@@ -170,6 +171,14 @@ nav ul li a p {
 .flash-info {
     background-color: #d9edf7;
     border: 1px solid #bce8f1;
+}
+.content .flash-info {
+    width: 80%;
+}
+
+.flash-error {
+    background-color: #f2dede;
+    border: 1px solid #eed3d7;
 }
 
 .content {
@@ -181,6 +190,7 @@ nav ul li a p {
     margin: 10px auto;
     clear: both;
     min-height: 1024px;
+    position: relative;
 }
 
 .content header h1 {
@@ -310,10 +320,10 @@ footer.main-footer{
     height: auto;
 }
 
-h2.main-title {
+h2.main-title, h2.bd-title {
     color: #343434;
     font-weight: bold;
-    font-family: 'Ultra', sans-serif;
+    font-family: 'Ultra', 'Impact' ,sans-serif;
     font-size: 35px;
     line-height: 42px;
     text-transform: uppercase;
@@ -321,5 +331,4 @@ h2.main-title {
     margin: 20px auto;
     padding-top: 20px;
     text-align: center;
-
 }

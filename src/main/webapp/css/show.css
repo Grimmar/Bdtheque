@@ -1,16 +1,29 @@
 @import "main.css";
 @import "form.css";
+
 .bd-main-content {
     margin: 0; 
 }
 
-.bd-title {
-    display: inline-block;
+.bd-actions {
+    position: absolute;
+    right: 0;    
+    width: 240px;
+    top: 10px;
+}
+
+.bd-actions a {
+    text-decoration: none;
+    width: 90px;
 }
 
 .bd-export-html, .bd-export-pdf {
     display: block;
     text-decoration: none;
+}
+
+.bd-image-btn {
+    width: 16px;
 }
 
 .bd-export-html:before {
