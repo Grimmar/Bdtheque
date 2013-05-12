@@ -22,6 +22,7 @@ public class BdSearchBean implements SearchBean {
     protected EncragesType encrages;
     protected String serie;
     protected String langue;
+    protected int pagination;
 
     public BdSearchBean() {
         titre = null;
@@ -34,6 +35,7 @@ public class BdSearchBean implements SearchBean {
         coloristes = new ColoristesType();
         lettrages = new LettragesType();
         encrages = new EncragesType();
+        pagination = 1;
     }
 
     public String getTitre() {
@@ -114,5 +116,14 @@ public class BdSearchBean implements SearchBean {
 
     public void setLangue(String langue) {
         this.langue = langue;
+
+    }
+    
+     public int getPagination() {
+        return pagination;
+    }
+
+    public void setPagination(int pagination) {
+        this.pagination = pagination;
     }
 }

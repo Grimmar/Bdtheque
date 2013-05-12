@@ -2,6 +2,7 @@ package fr.univ_rouen.bd.controller;
 
 import static fr.univ_rouen.bd.controller.Test.CONF_DAO_FACTORY;
 import fr.univ_rouen.bd.model.beans.Bd;
+import fr.univ_rouen.bd.model.beans.search.BdSearchBean;
 import fr.univ_rouen.bd.model.dao.BdDao;
 import fr.univ_rouen.bd.model.dao.DAOFactory;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang.StringUtils;
 
 /**
  *
@@ -22,6 +24,7 @@ public class HomeServlet extends HttpServlet {
     private static final String VIEW = "/WEB-INF/jsp/index.jsp";
     public static final String CONF_DAO_FACTORY = "daofactory";
     public static final String ATTR_LIST_BD = "listBd";
+    public static final String NB_TOTAL = "nbResult";
     private BdDao bdDao;
 
     @Override
@@ -44,8 +47,18 @@ public class HomeServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         Map<String, String> orderBy = new HashMap<String, String>();
         orderBy.put("insertedDate", "ascending");
-        List<Bd> allBd = bdDao.searchFor(null, orderBy);
+        BdSearchBean bdS = new BdSearchBean();
+        if(StringUtils.isNotBlank(request.getParameter("page"))){
+            bdS.setPagination(Integer.parseInt(request.getParameter("page")));
+        } else {
+            bdS.setPagination(1);
+        }
+        List<Bd> allBd = bdDao.searchFor(bdS, orderBy);
+        int count = bdDao.count();
+        System.out.println("+++"+count);
         request.setAttribute(ATTR_LIST_BD, allBd);
+        int nbPage = count/BdDao.NB_RESULT_PER_PAGE +1;
+        request.setAttribute(NB_TOTAL,nbPage );
         this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
     }
 

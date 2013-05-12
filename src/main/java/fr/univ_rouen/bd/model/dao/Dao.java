@@ -22,4 +22,5 @@ interface Dao<E> {
     boolean delete(String id) throws DAOException;
 
     boolean update(E e) throws DAOException;
+    
 }
