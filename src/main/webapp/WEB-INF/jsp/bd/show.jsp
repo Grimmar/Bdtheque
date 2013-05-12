@@ -16,19 +16,19 @@
     <body>
         <c:import url="/WEB-INF/jsp/header.jsp"/>
         <c:if test="${!empty requestScope.notice}">
-        <div class="flash-notice">${requestScope.notice}</div>
+            <div class="flash-notice">${requestScope.notice}</div>
         </c:if>
-        <section class="content" ng-controller="ShowBdCtrl">
-            <div class="bd-actions">
-                <a class="bd-update-btn btn" href="<c:url value="/update/${requestScope.bd.id}" />">
-                    <c:url value="/img/edit.png" var="image" />
-                    <img class="bd-image-btn" src="${image}" alt="">
-                    Modifier</a>
-                <a class="bd-delete-btn btn" ng-click="areYouSure($event);" href="<c:url value="/delete/${requestScope.bd.id}" />">
-                    <c:url value="/img/delete.png" var="image" />
-                    <img class="bd-image-btn" src="${image}" alt="">Supprimer</a>
-            </div>
+        <section class="content" ng-controller="ShowBdCtrl">          
             <c:if test="${empty requestScope.message}">
+                <div class="bd-actions">
+                    <a class="bd-update-btn btn" href="<c:url value="/update/${requestScope.bd.id}" />">
+                        <c:url value="/img/edit.png" var="image" />
+                        <img class="bd-image-btn" src="${image}" alt="">
+                        Modifier</a>
+                    <a class="bd-delete-btn btn" ng-click="areYouSure($event);" href="<c:url value="/delete/${requestScope.bd.id}" />">
+                        <c:url value="/img/delete.png" var="image" />
+                        <img class="bd-image-btn" src="${image}" alt="">Supprimer</a>
+                </div>
                 <section class="page-content">
                     <h2 class="bd-title">
                         <c:out value="${requestScope.bd.titre}" />

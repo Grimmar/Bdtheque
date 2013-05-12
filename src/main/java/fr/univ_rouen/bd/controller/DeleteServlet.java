@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -16,14 +17,12 @@ import org.apache.commons.lang.StringUtils;
  */
 public class DeleteServlet extends HttpServlet {
 
-    private static final String VIEW = "/WEB-INF/jsp/bd/search.jsp";
-    private static final String REDIRECT_URL = "/home";
-    public static final String CONF_DAO_FACTORY = "daofactory";
+    private static final String CONF_DAO_FACTORY = "daofactory";
     private static final String RESOURCE_ATTR = "resource";
-    private static final String BD_ATTR = "bd";
-    private static final String REQUEST_NOTICE = "notice";
-    private static final String REQUEST_ERROR = "error";
+    private static final String SESSION_NOTICE = "notice";
+    private static final String SESSION_ERROR = "error";
     private BdDao bdDao;
+    private static final String SEARCH_PAGE = "/search";
 
     @Override
     public void init() throws ServletException {
@@ -48,14 +47,14 @@ public class DeleteServlet extends HttpServlet {
             bd = bdDao.get(id);
         }
 
+        HttpSession session = request.getSession();
         if (bd != null) {
-            request.setAttribute(BD_ATTR, bd);
             bdDao.delete(id);
-            request.setAttribute(REQUEST_NOTICE, "La bd " + bd.getTitre() + " a été supprimée.");
+            session.setAttribute(SESSION_NOTICE, "La bd " + bd.getTitre() + " a été supprimée.");
         } else {
-            request.setAttribute(REQUEST_ERROR, "La bd que vous essayer de supprimer n'existe pas.");
+            session.setAttribute(SESSION_ERROR, "La bd que vous essayer de supprimer n'existe pas.");
         }
-        this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+        response.sendRedirect(request.getContextPath() + SEARCH_PAGE);
     }
 
     /**
