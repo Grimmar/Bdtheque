@@ -55,8 +55,8 @@
     </rule>
         
     <rule>
-        <from>^/$</from>
-        <to>/home</to>
+        <from>^/([0-9]+)?/$</from>
+        <to>/home?page=$1</to>
     </rule>
 
 </urlrewrite>

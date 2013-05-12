@@ -19,6 +19,9 @@
     </head>
 
     <body>
+        <c:set var="deleteImage">
+            <c:url value="/img/delete.png" />
+        </c:set>
         <c:import url="/WEB-INF/jsp/header.jsp"/>
         <c:if test="${!empty requestScope.notice}">
             <div class="flash-notice">${requestScope.notice}</div>
@@ -30,20 +33,25 @@
             <h2 class="main-title">Recherche</h2>
             <div class="search">
                 <form action="<c:url value="/search" />" method="post" name="searchForm" ng-controller="AddBdCtrl" ng-app="directives">
-                    <div class="titre">
-                        <label>Titre:</label><input type="text" name="search-titre" value="${requestScope.searchTitre}"/>
+                    <div class="search-left">
+                        <div class="titre">
+                            <label>Titre:</label><input type="text" name="searchTitre" value="${requestScope.searchTitre}"/>
+                        </div>
+                        <div class="editeur">
+                            <label>Editeur:</label><input type="text" name="searchEditeur" value="${requestScope.searchEditeur}"/>
+                        </div>
+                        <div class="resume">
+                            <label>Résumé:</label><input type="text" name="searchResume" value="${requestScope.searchResume}"/>
+                        </div>
                     </div>
-                    <div class="editeur">
-                        <label>Editeur:</label><input type="text" name="search-editeur" value="${requestScope.searchEditeur}"/>
-                    </div>
-                    <div class="resume">
-                        <label>Résumé:</label><input type="text" name="search-resume" value="${requestScope.searchResume}"/>
-                    </div>
-                    <div class="serie">
-                        <label>Serie:</label><input type="text" name="search-serie" value="${requestScope.serie}"/>
-                    </div>
-                    <div class="langue">
-                        <label>Langue:</label><input type="text" name="search-langue" value="${requestScope.langue}"/>
+                    <div class="search-right">
+                        <div class="serie">
+                            <label>Serie:</label><input type="text" name="searchSerie" value="${requestScope.serie}"/>
+                        </div>
+                        <div class="langue">
+                            <label>Langue:</label><input type="text" name="searchLangue" value="${requestScope.langue}"/>
+                        </div>
+
                     </div>
                     <fieldset class="advanced">
                         <legend>Recherche avancée
@@ -61,7 +69,7 @@
                                             <th>Id</th>
                                             <th>Nom</th>
                                             <th>Prénom</th>
-                                            <th>$nbsp;</th>
+                                            <th>&nbsp;</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -91,7 +99,7 @@
                                             <th>Id</th>
                                             <th>Nom</th>
                                             <th>Prénom</th>
-                                            <th>$nbsp;</th>
+                                            <th>&nbsp;</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -121,7 +129,7 @@
                                             <th>Id</th>
                                             <th>Nom</th>
                                             <th>Prénom</th>
-                                            <th>$nbsp;</th>
+                                            <th>&nbsp;</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -137,7 +145,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <input type="hidden" name="coloriste" ng-model="coloristesString" />
+                                <input type="hidden" name="coloriste" ng-model="coloristesString" value="{{coloristesString}}"/>
                                 <br />
                             </div>
                             <div ng-init="setLettreurs('<c:out value="${requestScope.lettreursString}');"/>">
@@ -151,7 +159,7 @@
                                             <th>Id</th>
                                             <th>Nom</th>
                                             <th>Prénom</th>
-                                            <th>$nbsp;</th>
+                                            <th>&nbsp;</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -167,7 +175,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <input type="hidden" name="lettrage" ng-model="lettreursString" />
+                                <input type="hidden" name="lettrage" ng-model="lettreursString" value="{{lettreursString}}" />
                                 <br />
                             </div>
                         </div>
@@ -176,59 +184,24 @@
                 </form>
             </div>
             <div class="result-section">
-                <table class="result" border="1">
-                    <tr>
+                <h2>Résultats</h2>
+                <table class="result">
+                    <tr class="header-result">
                         <th>Titre</th>
                         <th>Editeur</th>
-                        <th>Scénaristes</th>
-                        <th>Déssinateurs</th>
-                        <th>Coloristes</th>
-                        <th>Lettrages</th>
                         <th>Serie</th>
                         <th>Langue</th>
+                        <th>Action</th>
                     </tr>
-                    <c:forEach items="${requestScope.searchBd}" var="bd"> 
-                        <tr>
+                    <c:forEach items="${requestScope.searchBd}" var="bd" varStatus="counter"> 
+                        <c:if test="${counter.count % 2 == 0}"><tr class="pair"></c:if>
+                        <c:if test="${counter.count % 2 == 1}"><tr class="impair"></c:if>
                             <td><c:out value="${bd.titre}" /></td>
                             <td><c:out value="${bd.editeur}" /></td>
-                            <td>
-                                <c:forEach var="individu" items="${bd.scenaristes.scenariste}">
-                            <li>
-                                <span><c:out value="${individu.prenom}" /></span>
-                                &nbsp;
-                                <span><c:out value="${individu.nom}"/></span>
-                            </li>
-                        </c:forEach>
-                        </td> 
-                        <td>
-                            <c:forEach var="individu" items="${bd.dessinateurs.dessinateur}">
-                            <li>
-                                <span><c:out value="${individu.prenom}" /></span>
-                                &nbsp;
-                                <span><c:out value="${individu.nom}"/></span>
-                            </li>
-                        </c:forEach>
-                        </td>
-                        <td>
-                            <c:forEach var="individu" items="${bd.coloristes.coloriste}">
-                            <li>
-                                <span><c:out value="${individu.prenom}" /></span>
-                                &nbsp;
-                                <span><c:out value="${individu.nom}"/></span>
-                            </li>
-                        </c:forEach>
-                        </td> 
-                        <td>
-                            <c:forEach var="individu" items="${bd.lettrages.lettrage}">
-                            <li>
-                                <span><c:out value="${individu.prenom}" /></span>
-                                &nbsp;
-                                <span><c:out value="${individu.nom}"/></span>
-                            </li>
-                        </c:forEach>
-                        </td>
-                        <td><c:out value="${bd.serie}" /></td>
-                        <td><c:out value="${bd.langue}" /></td>
+                            <td><c:out value="${bd.serie}" /></td>
+                            <td><c:out value="${bd.langue}" /></td>
+                            <td><c:url value="/show/${bd.id}" var="show" />
+                                <a href="${show}">Consulter</a></td>
                         </tr>
                     </c:forEach>
                 </table>

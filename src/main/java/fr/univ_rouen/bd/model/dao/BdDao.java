@@ -33,6 +33,7 @@ public class BdDao implements Dao<Bd> {
 
     private static final String XML_SUFFIX = ".xml";
     private DAOFactory daoFactory;
+    public static final int NB_RESULT_PER_PAGE = 15;
 
     public BdDao(DAOFactory daoFactory) {
         this.daoFactory = daoFactory;
@@ -110,8 +111,16 @@ public class BdDao implements Dao<Bd> {
         try {
             Map<String, String> params = new HashMap<String, String>();
             StringBuilder query = new StringBuilder();
-
-            query.append("for $bd in collection(\"bedetheque\")");
+            int minNbResult = 0;
+            int maxNbResult = NB_RESULT_PER_PAGE;
+            if (sb != null) {
+                maxNbResult *= searchBean.getPagination();
+                minNbResult = maxNbResult - NB_RESULT_PER_PAGE;
+            }
+            System.out.println("minNbResult " +minNbResult+" maxNbresult "+maxNbResult);
+            query.append("for $bd in subsequence(collection(\'bedetheque\'),").append(minNbResult).append(",").append(maxNbResult).append(")");
+            //query.append("for $bd in collection(\'bedetheque\')");
+            //.append(minNbResult).append(",").append(maxNbResult).append(")");
             String separator = " where ";
             if (sb != null) {
                 if (StringUtils.isNotBlank(searchBean.getTitre())) {

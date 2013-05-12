@@ -33,11 +33,18 @@
                             <div class="resume">
                                 <c:out value="${bd.resume}" />
                             </div>...
-                            
+
                         </div>
                     </section>
                 </a>
             </c:forEach>
+            <c:if test="${nbResult != 1}">
+                <div class="paginator">
+                    <c:forEach var="i" begin="1" end="${nbResult}">
+                        <a href="<c:url value = "/${i}/"/>">${i}</a>
+                    </c:forEach>
+                </div>
+            </c:if>
         </section>
 
         <c:import url="/WEB-INF/jsp/footer.jsp"/>

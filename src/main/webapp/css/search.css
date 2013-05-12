@@ -1,15 +1,40 @@
 @import "main.css";
 @import "form.css";
+@import "table.css";
+
 .result{
-    width:100%;
+    width:95%;
+    margin:auto;
 }
 
 .result-section{
-    float:left;
     display:block;
     width:100%;
 }
 
 .search{
     width: 100%;
+}
+
+.search-left{
+    float:left;
+    width: 50%;
+    height: 160px;
+}
+
+.search-right{
+    float:left;
+    width: 50%;   
+    height: 160px;
+}
+
+.pair{
+    background-color: #b3b3b3;
+}
+.impair{
+    background-color: #eaebec;
+}
+
+table{
+    border-spacing: 0;
 }
