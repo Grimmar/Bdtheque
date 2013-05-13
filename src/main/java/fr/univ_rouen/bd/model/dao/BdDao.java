@@ -12,8 +12,6 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
@@ -35,7 +33,7 @@ public class BdDao implements Dao<Bd> {
 
     private static final String XML_SUFFIX = ".xml";
     private DAOFactory daoFactory;
-    public static final int NB_RESULT_PER_PAGE = 15;
+    public static final int NB_RESULT_PER_PAGE = 13;
 
     public BdDao(DAOFactory daoFactory) {
         this.daoFactory = daoFactory;
