@@ -49,7 +49,10 @@ public class BdDao implements Dao<Bd> {
         } catch (XMLDBException e) {
             throw new DAOException(e);
         }
+    }
 
+    public int countSearch(SearchBean sb, Map<String, String> orderBy) {
+        return searchForWithoutPaginator(sb, orderBy).size();
     }
 
     @Override
@@ -118,6 +121,105 @@ public class BdDao implements Dao<Bd> {
                 minNbResult = maxNbResult - NB_RESULT_PER_PAGE;
             }
             query.append("for $bd in subsequence(collection(\'bedetheque\'),").append(minNbResult).append(",").append(maxNbResult).append(")");
+            String separator = " where ";
+            if (sb != null) {
+                if (StringUtils.isNotBlank(searchBean.getTitre())) {
+                    params.put("titre", searchBean.getTitre());
+                    query.append(separator).append("contains(upper-case($bd/bd:bd/bd:titre/text()), upper-case($titre))");
+                    separator = " and ";
+                }
+                if (StringUtils.isNotBlank(searchBean.getEditeur())) {
+                    params.put("editeur", searchBean.getEditeur());
+                    query.append(separator).append("contains(upper-case($bd/bd:bd/bd:editeur/text()), upper-case($editeur))");
+                    separator = " and ";
+                }
+
+                if (StringUtils.isNotBlank(searchBean.getLangue())) {
+                    params.put("langue", searchBean.getLangue());
+                    query.append(separator).append("contains(upper-case($bd/bd:bd/@bd:langue), upper-case($langue))");
+                    separator = " and ";
+                }
+
+                if (StringUtils.isNotBlank(searchBean.getResume())) {
+                    params.put("resume", searchBean.getResume());
+                    query.append(separator).append("contains(upper-case($bd/bd:bd/bd:resume/text()), upper-case($resume))");
+                    separator = " and ";
+                }
+
+                if (StringUtils.isNotBlank(searchBean.getSerie())) {
+                    params.put("serie", searchBean.getSerie());
+                    query.append(separator).append("contains(upper-case($bd/bd:bd/@bd:serie), upper-case($serie))");
+                    separator = " and ";
+                }
+
+                if (CollectionUtils.isNotEmpty(searchBean.getScenaristes().getScenariste())) {
+                    query.append(separator);
+                    setParameterList(query, params, searchBean.getScenaristes().getScenariste(), "scenariste");
+                    separator = " and ";
+                }
+
+                if (CollectionUtils.isNotEmpty(searchBean.getColoristes().getColoriste())) {
+                    query.append(separator);
+                    setParameterList(query, params, searchBean.getColoristes().getColoriste(), "coloriste");
+                    separator = " and ";
+                }
+
+                if (CollectionUtils.isNotEmpty(searchBean.getDessinateurs().getDessinateur())) {
+                    query.append(separator);
+                    setParameterList(query, params, searchBean.getDessinateurs().getDessinateur(), "dessinateur");
+                    separator = " and ";
+                }
+
+                if (CollectionUtils.isNotEmpty(searchBean.getEncrages().getEncrage())) {
+                    query.append(separator);
+                    setParameterList(query, params, searchBean.getEncrages().getEncrage(), "encrage");
+                    separator = " and ";
+                }
+
+                if (CollectionUtils.isNotEmpty(searchBean.getLettrages().getLettrage())) {
+                    query.append(separator);
+                    setParameterList(query, params, searchBean.getLettrages().getLettrage(), "lettrage");
+                }
+            }
+            if (MapUtils.isNotEmpty(orderBy)) {
+                separator = " order by ";
+                for (String key : orderBy.keySet()) {
+                    String value = orderBy.get(key);
+                    if (StringUtils.equals("ascending", value)
+                            || StringUtils.equals("descending", value)) {
+                        query.append(separator).append("$bd/bd:bd/bd:").append(key).append(" ").append(value);
+                        separator = ", ";
+                    }
+                }
+            }
+
+            query.append(" return $bd");
+
+            ResourceSet result = daoFactory.executeXQuery(query.toString(), params);
+            Unmarshaller u = daoFactory.getJAXBContext().createUnmarshaller();
+            UnmarshallerHandler handler = u.getUnmarshallerHandler();
+            ResourceIterator i = result.getIterator();
+            List<Bd> l = new ArrayList<Bd>();
+            while (i.hasMoreResources()) {
+                XMLResource r = (XMLResource) i.nextResource();
+                r.getContentAsSAX(handler);
+                l.add((Bd) handler.getResult());
+            }
+
+            return l;
+        } catch (JAXBException e) {
+            throw new DAOException(e);
+        } catch (XMLDBException e) {
+            throw new DAOException(e);
+        }
+    }
+
+    private List<Bd> searchForWithoutPaginator(SearchBean sb, Map<String, String> orderBy) throws DAOException {
+        BdSearchBean searchBean = (BdSearchBean) sb;
+        try {
+            Map<String, String> params = new HashMap<String, String>();
+            StringBuilder query = new StringBuilder();
+            query.append("for $bd in collection(\'bedetheque\')");
             String separator = " where ";
             if (sb != null) {
                 if (StringUtils.isNotBlank(searchBean.getTitre())) {

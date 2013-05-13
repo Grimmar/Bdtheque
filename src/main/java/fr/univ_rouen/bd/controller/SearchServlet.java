@@ -59,8 +59,8 @@ public class SearchServlet extends HttpServlet {
             searchAttributes.setPagination(1);
         }
         List<Bd> searchBd = bdDao.searchFor(searchAttributes, orderBy);
-        int count = bdDao.count();
-        int nbPage = count/BdDao.NB_RESULT_PER_PAGE +1;
+        int nbPage = bdDao.countSearch(searchAttributes, orderBy)/BdDao.NB_RESULT_PER_PAGE+1;
+        System.out.println(nbPage+" "+searchBd.size());
         request.setAttribute(NB_TOTAL,nbPage );
         request.setAttribute(ATTR_LIST_BD, searchBd);
 
