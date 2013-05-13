@@ -4,7 +4,7 @@
         <c:url value="/1/" var="homeLink" />
         <a class="home" href="${homeLink}"><h1>BDtheque</h1></a>
         <div class="menu-right">
-            <c:url value="/search" var="searchLink" />
+            <c:url value="/search/1/" var="searchLink" />
             <form class="searchForm" method="post" action="${searchLink}">
                 <input type="submit" value="">
                 <input type="search" name="searchTitre" placeholder="Titre ..." value=""/>

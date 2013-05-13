@@ -34,21 +34,21 @@
             <div class="search">
                 <form method="post" name="searchForm" ng-submit="submit();">
                     <div class="search-left">
-                        <div class="titre">
-                            <label>Titre:</label><input type="text" ng-model="formData.searchTitre" name="searchTitre" value="${requestScope.searchTitre}"/>
+                        <div class="titre" ng-init="formData.searchTitre='${requestScope.searchTitre}'">
+                            <label>Titre:</label><input type="text" ng-model="formData.searchTitre" name="searchTitre"/>
                         </div>
-                        <div class="editeur">
-                            <label>Editeur:</label><input type="text" ng-model="formData.searchEditeur" name="searchEditeur" value="${requestScope.searchEditeur}"/>
+                        <div class="editeur"  ng-init="formData.searchEditeur='${requestScope.searchEditeur}'">
+                            <label>Editeur:</label><input type="text" ng-model="formData.searchEditeur" name="searchEditeur"/>
                         </div>
-                        <div class="resume">
-                            <label>Résumé:</label><input type="text" ng-model="formData.searchResume" name="searchResume" value="${requestScope.searchResume}"/>
+                        <div class="resume" ng-init="formData.searchResume='${requestScope.searchResume}'">
+                            <label>Résumé:</label><input type="text" ng-model="formData.searchResume" name="searchResume"/>
                         </div>
                     </div>
                     <div class="search-right">
-                        <div class="serie">
+                        <div class="serie" ng-init="formData.searchSerie='${requestScope.searchSerie}'">
                             <label>Serie:</label><input type="text" ng-model="formData.searchSerie" name="searchSerie" value="${requestScope.serie}"/>
                         </div>
-                        <div class="langue">
+                        <div class="langue" ng-init="formData.searchLangue='${requestScope.searchLangue}'">
                             <label>Langue:</label><input type="text" ng-model="formData.searchLangue" name="searchLangue" value="${requestScope.langue}"/>
                         </div>
 
@@ -186,8 +186,9 @@
             <input type="hidden" id="serialized-form" />
             <input type="hidden" id="ajax-url" value="<c:url value="/search" />"/>
             <input type="hidden" id="current-page" value="<c:out value="${page}" />"/>
+
             <section id="search-content" ng-bind-html-unsafe="searchContent" ng-init="submit()">
-            
+                <c:import url="/WEB-INF/jsp/bd/searchResults.jsp" />
             </section>
         </section>
 

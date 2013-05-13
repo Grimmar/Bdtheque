@@ -77,6 +77,7 @@ public class SearchServlet extends HttpServlet {
             session.setAttribute(SESSION_ERROR, null);
             request.setAttribute(SESSION_ERROR, error);
         }
+        
         if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
             this.getServletContext().getRequestDispatcher(AJAX_VIEW).forward(request, response);
         } else {
