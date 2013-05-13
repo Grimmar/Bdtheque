@@ -237,5 +237,5 @@
             <br />
         </div>
     </fieldset>
-    <input ng-disabled="updateForm.$invalid" class="btn" type="submit" value="Modifier la bd"/>
+    <input class="btn" type="submit" value="Modifier la bd"/>
 </form>

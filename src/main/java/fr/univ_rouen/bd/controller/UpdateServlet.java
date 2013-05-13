@@ -151,10 +151,22 @@ public class UpdateServlet extends HttpServlet {
                 Date d = gc.getTime();
                 request.setAttribute(PARUTION_ATTR, d);
             }
-            //TOdO format
-            request.setAttribute(DEPOT_LEGAL_ATTR, bd.getDepotLegal());
-            request.setAttribute(FIN_IMPRESSION_ATTR, bd.getFinImpression());
-
+            if (StringUtils.isNotBlank(bd.getDepotLegal())) {
+                String[] split = bd.getDepotLegal().split("-");
+                String s = null;
+                if (split.length > 1) {
+                    s = split[1] + "/" + split[0];
+                }
+                request.setAttribute(DEPOT_LEGAL_ATTR, s);
+            }
+            if (StringUtils.isNotBlank(bd.getFinImpression())) {
+                String[] split = bd.getFinImpression().split("-");
+                String s = null;
+                if (split.length > 1) {
+                    s = split[1] + "/" + split[0];
+                }
+                request.setAttribute(FIN_IMPRESSION_ATTR, s);
+            }
             if (bd.getScenaristes() != null
                     && CollectionUtils.isNotEmpty(bd.getScenaristes().getScenariste())) {
                 setStringInRequest(request, bd.getScenaristes().getScenariste(), "scenaristesString");

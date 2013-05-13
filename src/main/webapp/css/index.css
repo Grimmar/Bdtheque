@@ -26,14 +26,22 @@
 }
 
 .bd{
-    border: 1px solid black;
+    border: 2px solid black;
     display: block;
-    float: left;
-    margin: 10px 2px 2px 10px;
     padding: 5px 2px 2px 5px;
     width: 47%;
     height: 275px;
     box-shadow: 1px 1px 12px rgb(85, 85, 85);
+}
+
+.bd-left {
+    float: left;
+    margin: 10px 2px 2px 10px;
+}
+
+.bd-right {
+    float: right;
+    margin: 10px 10px 2px 2px;
 }
 .info h2{
     padding:0;

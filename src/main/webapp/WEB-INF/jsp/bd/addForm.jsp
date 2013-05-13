@@ -234,5 +234,5 @@
             <br />
         </div>
     </fieldset>
-    <input ng-disabled="addForm.$invalid" class="btn" type="submit" value="Ajouter la bd"/>
+    <input class="btn" type="submit" value="Ajouter la bd"/>
 </form>

@@ -11,9 +11,20 @@
         <c:import url="/WEB-INF/jsp/header.jsp"/>
 
         <section class="content">
-            <c:forEach items="${requestScope.listBd}" var="bd">
+            <c:forEach items="${requestScope.listBd}" var="bd" varStatus="status">
+                <c:set var="classValue">
+                    <c:choose>
+                    <c:when test="${(status.index % 2) == 0}" >
+                        bd-left
+                    </c:when>
+                    <c:otherwise>
+                        bd-right
+                    </c:otherwise>
+                    </c:choose>
+                </c:set>
+                
                 <c:url value="/show/${bd.id}" var="show" />
-                <a href="${show}" class="bd">
+                <a href="${show}" class="bd ${classValue}">
                     <section >
                         <div class="miniature">
                             <c:url value="${bd.image}" var="image" />
