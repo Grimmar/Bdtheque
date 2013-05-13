@@ -205,10 +205,16 @@
                     </c:forEach>
                 </div>
             </div>
-            <c:if test="${nbResult != 1}">
+             <c:if test="${nbResult != 1}">
                 <div class="paginator">
                     <c:forEach var="i" begin="1" end="${nbResult}">
-                        <a href="<c:url value = "/search/${i}/"/>">${i}</a>
+                        <c:if test="${i == page}">
+                            <a class="paginator-number selected-page" href="<c:url value = "/search/${i}/"/>">${i}</a>
+                        </c:if>
+                        <c:if test="${i != page}">
+                            <a class="paginator-number" href="<c:url value = "/search/${i}/"/>">${i}</a>
+                        </c:if>
+                        
                     </c:forEach>
                 </div>
             </c:if>

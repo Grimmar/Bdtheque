@@ -60,7 +60,6 @@ public class SearchServlet extends HttpServlet {
         }
         List<Bd> searchBd = bdDao.searchFor(searchAttributes, orderBy);
         int nbPage = bdDao.countSearch(searchAttributes, orderBy)/BdDao.NB_RESULT_PER_PAGE+1;
-        System.out.println(nbPage+" "+searchBd.size());
         request.setAttribute(NB_TOTAL,nbPage );
         request.setAttribute(ATTR_LIST_BD, searchBd);
 
@@ -75,7 +74,7 @@ public class SearchServlet extends HttpServlet {
             session.setAttribute(SESSION_ERROR, null);
             request.setAttribute(SESSION_ERROR, error);
         }
-
+        request.setAttribute("page", searchAttributes.getPagination());
         this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
     }
 
