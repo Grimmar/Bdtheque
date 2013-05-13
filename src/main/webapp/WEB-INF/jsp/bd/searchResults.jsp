@@ -21,13 +21,13 @@
     </div>
 </div>
 <c:if test="${nbResult != 1}">
-    <div class="paginator">
+    <div id="paginator" class="paginator">
         <c:forEach var="i" begin="1" end="${nbResult}">
             <c:if test="${i == page}">
-                <a class="paginator-number selected-page" href="<c:url value = "/search/${i}/"/>">${i}</a>
+                <a class="paginator-number selected-page" ng-click="ajaxClick(${i});" href="">${i}</a>
             </c:if>
             <c:if test="${i != page}">
-                <a class="paginator-number" href="<c:url value = "/search/${i}/"/>">${i}</a>
+                <a class="paginator-number" ng-click="ajaxClick(${i});" href="">${i}</a>
             </c:if>
 
         </c:forEach>

@@ -1,4 +1,4 @@
-function AddBdCtrl($scope, $http) {
+function AddBdCtrl($scope, $http, $compile) {
     $scope.isVisible = false;
     $scope.scenaristes = [];
     $scope.dessinateurs = [];
@@ -272,29 +272,50 @@ function AddBdCtrl($scope, $http) {
 
     $scope.submit = function() {
         if ($scope.scenaristesString !== null && $scope.scenaristesString !== "") {
-            $scope.formData.scenaristesString = $scope.scenaristesString;
+            $scope.formData.scenariste = $scope.scenaristesString;
         }
         if ($scope.dessinateursString !== null && $scope.dessinateursString !== "") {
-            $scope.formData.dessinateursString = $scope.dessinateursString;
+            $scope.formData.dessinateur = $scope.dessinateursString;
         }
         if ($scope.coloristesString !== null && $scope.coloristesString !== "") {
-            $scope.formData.coloristesString = $scope.coloristesString;
+            $scope.formData.coloriste = $scope.coloristesString;
         }
         if ($scope.lettreursString !== null && $scope.lettreursString !== "") {
-            $scope.formData.lettreursString = $scope.lettreursString;
+            $scope.formData.lettrage = $scope.lettreursString;
         }
 
         var url = document.getElementById("ajax-url").value + '/'
                 + document.getElementById("current-page").value + '/';
         var form = document.getElementById("serialized-form");
-        document.getElementById("serialized-form").value = $.param($scope.formData);
+        form.value = $.param($scope.formData);
+
         $http({
             url: url,
             method: "POST",
             data: $.param($scope.formData),
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function(data, status, headers, config) {
-            $scope.searchContent = data;
+            var elm = angular.element(document.getElementById('search-content'));
+            elm.append(data);
+            $compile(elm.contents())($scope);
+        }).error(function(data, status, headers, config) {
+            $scope.searchContent = 'Veuillez nous excuser, une erreur à eu lieu';
+        });
+    };
+
+    $scope.ajaxClick = function(page) {
+        var url = document.getElementById("ajax-url").value + '/'
+                + page + '/';
+        var form = document.getElementById("serialized-form");
+        $http({
+            url: url,
+            method: "POST",
+            data: $.param(form.value),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).success(function(data, status, headers, config) {
+            var elm = angular.element(document.getElementById('search-content'));
+            elm.html(data);
+            $compile(elm.contents())($scope);
         }).error(function(data, status, headers, config) {
             $scope.searchContent = 'Veuillez nous excuser, une erreur à eu lieu';
         });
