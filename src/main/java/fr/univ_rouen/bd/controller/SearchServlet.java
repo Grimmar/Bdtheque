@@ -1,7 +1,6 @@
 package fr.univ_rouen.bd.controller;
 
 import fr.univ_rouen.bd.model.beans.Bd;
-import fr.univ_rouen.bd.model.beans.IndividuType;
 import fr.univ_rouen.bd.model.beans.search.BdSearchBean;
 import fr.univ_rouen.bd.model.dao.BdDao;
 import fr.univ_rouen.bd.model.dao.DAOFactory;
@@ -14,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -23,6 +23,8 @@ public class SearchServlet extends HttpServlet {
 
     private static final String VIEW = "/WEB-INF/jsp/bd/search.jsp";
     public static final String CONF_DAO_FACTORY = "daofactory";
+    private static final String SESSION_NOTICE = "notice";
+    private static final String SESSION_ERROR = "error";
     public static final String ATTR_LIST_BD = "searchBd";
     private BdDao bdDao;
 
@@ -52,6 +54,19 @@ public class SearchServlet extends HttpServlet {
 
         List<Bd> searchBd = bdDao.searchFor(searchAttributes, orderBy);
         request.setAttribute(ATTR_LIST_BD, searchBd);
+
+        HttpSession session = request.getSession();
+        if (session.getAttribute(SESSION_NOTICE) != null) {
+            String notice = (String) session.getAttribute(SESSION_NOTICE);
+            session.setAttribute(SESSION_NOTICE, null);
+            request.setAttribute(SESSION_NOTICE, notice);
+        }
+        if (session.getAttribute(SESSION_ERROR) != null) {
+            String error = (String) session.getAttribute(SESSION_ERROR);
+            session.setAttribute(SESSION_ERROR, null);
+            request.setAttribute(SESSION_ERROR, error);
+        }
+
         this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
     }
 

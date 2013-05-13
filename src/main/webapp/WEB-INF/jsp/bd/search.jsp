@@ -23,6 +23,12 @@
             <c:url value="/img/delete.png" />
         </c:set>
         <c:import url="/WEB-INF/jsp/header.jsp"/>
+        <c:if test="${!empty requestScope.notice}">
+            <div class="flash-notice">${requestScope.notice}</div>
+        </c:if>
+        <c:if test="${!empty requestScope.error}">
+            <div class="flash-error">${requestScope.error}</div>
+        </c:if>
         <section class="content">
             <h2 class="main-title">Recherche</h2>
             <div class="search">
