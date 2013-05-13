@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.lang.StringUtils;
 
 /**
  *
@@ -26,6 +27,7 @@ public class SearchServlet extends HttpServlet {
     private static final String SESSION_NOTICE = "notice";
     private static final String SESSION_ERROR = "error";
     public static final String ATTR_LIST_BD = "searchBd";
+    public static final String NB_TOTAL = "nbResult";
     private BdDao bdDao;
 
     @Override
@@ -50,9 +52,16 @@ public class SearchServlet extends HttpServlet {
         orderBy.put("insertedDate", "ascending");
 
         SearchForm sh = new SearchForm();
-        BdSearchBean searchAttributes  = sh.validateForm(request);
-
+        BdSearchBean searchAttributes = sh.validateForm(request);
+        if (StringUtils.isNotBlank(request.getParameter("page"))) {
+            searchAttributes.setPagination(Integer.parseInt(request.getParameter("page")));
+        } else {
+            searchAttributes.setPagination(1);
+        }
         List<Bd> searchBd = bdDao.searchFor(searchAttributes, orderBy);
+        int count = bdDao.count();
+        int nbPage = count/BdDao.NB_RESULT_PER_PAGE +1;
+        request.setAttribute(NB_TOTAL,nbPage );
         request.setAttribute(ATTR_LIST_BD, searchBd);
 
         HttpSession session = request.getSession();
