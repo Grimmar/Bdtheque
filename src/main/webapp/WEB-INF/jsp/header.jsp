@@ -1,13 +1,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <header class="main-header">
     <section>
-        <c:url value="/" var="homeLink" />
+        <c:url value="/1/" var="homeLink" />
         <a class="home" href="${homeLink}"><h1>BDtheque</h1></a>
         <div class="menu-right">
             <c:url value="/search" var="searchLink" />
             <form class="searchForm" method="post" action="${searchLink}">
                 <input type="submit" value="">
-                <input type="search" name="search-titre" placeholder="Titre ..." value=""/>
+                <input type="search" name="searchTitre" placeholder="Titre ..." value=""/>
             </form>
         </div>
         <div class="clear"></div>

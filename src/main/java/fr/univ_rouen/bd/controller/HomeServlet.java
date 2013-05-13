@@ -55,7 +55,6 @@ public class HomeServlet extends HttpServlet {
         }
         List<Bd> allBd = bdDao.searchFor(bdS, orderBy);
         int count = bdDao.count();
-        System.out.println("+++"+count);
         request.setAttribute(ATTR_LIST_BD, allBd);
         int nbPage = count/BdDao.NB_RESULT_PER_PAGE +1;
         request.setAttribute(NB_TOTAL,nbPage );

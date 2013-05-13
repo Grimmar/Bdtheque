@@ -1,0 +1,47 @@
+<ns1:bd xmlns:ns1="http://univ-rouen.fr/bd" ns1:isbn="9782365770415" ns1:serie="One-Shot" ns1:planches="176" ns1:langue="FR">
+<ns1:id>bd3</ns1:id>
+<ns1:titre>Batman - La cour des hiboux</ns1:titre>
+<ns1:insertedDate>2013-05-13</ns1:insertedDate>
+<ns1:depotLegal>2012-05-01</ns1:depotLegal>
+<ns1:finImpression>2012-05-04</ns1:finImpression>
+<ns1:parution>2012-06-09</ns1:parution>
+<ns1:editeur>Urban Comics</ns1:editeur>
+<ns1:resume>
+Après une longue période d'absence, Bruce Wayne est de retour sous le masque de Batman, à la poursuite d'un mystérieux assassin aux allures de hibou, et dont la prochaine cible n'est autre que... Bruce Wayne. Plus il progresse dans son enquête, plus le Chevalier Noir rassemble d'éléments sur les motivations de son ennemi. Il découvre alors une sombre vérité mêlant la famille Wayne aux fondations troubles de Gotham City.
+</ns1:resume>
+<ns1:format>nomal</ns1:format>
+<ns1:creationDate>09-06-2012</ns1:creationDate>
+<ns1:image>
+http://www.bedetheque.com/media/Couvertures/Couv_165831.jpg
+</ns1:image>
+<ns1:scenaristes>
+<ns1:scenariste>
+<ns1:nom>Snyder</ns1:nom>
+<ns1:prenom>Scott</ns1:prenom>
+</ns1:scenariste>
+</ns1:scenaristes>
+<ns1:dessinateurs>
+	<ns1:dessinateur>
+		<ns1:nom>Capullo</ns1:nom>
+		<ns1:prenom>Greg</ns1:prenom>
+	</ns1:dessinateur>
+</ns1:dessinateurs>
+<ns1:coloristes>
+	<ns1:coloriste>
+		<ns1:nom>Palscencia</ns1:nom>
+		<ns1:prenom>Fco</ns1:prenom>
+	</ns1:coloriste>
+</ns1:coloristes>
+<ns1:lettrages>
+	<ns1:lettrage>
+		<ns1:nom>Glapion</ns1:nom>
+		<ns1:prenom>Jonathan</ns1:prenom>
+	</ns1:lettrage>
+</ns1:lettrages>
+<ns1:encrages>
+	<ns1:encrage>
+		<ns1:nom>Glapion</ns1:nom>
+		<ns1:prenom>Jonathan</ns1:prenom>
+	</ns1:encrage>
+</ns1:encrages>
+</ns1:bd>
