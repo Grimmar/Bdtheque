@@ -1,4 +1,4 @@
-function AddBdCtrl($scope) {
+function AddBdCtrl($scope, $http) {
     $scope.isVisible = false;
     $scope.scenaristes = [];
     $scope.dessinateurs = [];
@@ -11,6 +11,8 @@ function AddBdCtrl($scope) {
     $scope.encreursString = null;
     $scope.lettreursString = null;
     $scope.toggleText = "Montrer";
+    $scope.searchContent = "";
+    $scope.formData = {};
 
     $scope.isAlreadyIn = function(col, lastname, firstname) {
         angular.forEach(col, function(v) {
@@ -134,7 +136,7 @@ function AddBdCtrl($scope) {
         $scope.dessinateursString = '';
         var separator = "";
         angular.forEach(old, function(i) {
-             if (i.lastname !== dessinateur.lastname || i.firstname !== dessinateur.firstname) {
+            if (i.lastname !== dessinateur.lastname || i.firstname !== dessinateur.firstname) {
                 $scope.dessinateurs.push(i);
                 $scope.dessinateursString += separator + i.lastname + " " + (i.firstname === undefined ? "" : i.firstname);
                 separator = ";";
@@ -173,7 +175,7 @@ function AddBdCtrl($scope) {
         $scope.coloristesString = '';
         var separator = "";
         angular.forEach(old, function(i) {
-             if (i.lastname !== coloriste.lastname || i.firstname !== coloriste.firstname) {
+            if (i.lastname !== coloriste.lastname || i.firstname !== coloriste.firstname) {
                 $scope.coloristes.push(i);
                 $scope.coloristesString += separator + i.lastname + " " + (i.firstname === undefined ? "" : i.firstname);
                 separator = ";";
@@ -265,7 +267,36 @@ function AddBdCtrl($scope) {
             $scope.toggleText = "Cacher";
         } else {
             $scope.toggleText = "Montrer";
-        } 
+        }
+    };
+
+    $scope.submit = function() {
+        if ($scope.scenaristesString !== null && $scope.scenaristesString !== "") {
+            $scope.formData.scenaristesString = $scope.scenaristesString;
+        }
+        if ($scope.dessinateursString !== null && $scope.dessinateursString !== "") {
+            $scope.formData.dessinateursString = $scope.dessinateursString;
+        }
+        if ($scope.coloristesString !== null && $scope.coloristesString !== "") {
+            $scope.formData.coloristesString = $scope.coloristesString;
+        }
+        if ($scope.lettreursString !== null && $scope.lettreursString !== "") {
+            $scope.formData.lettreursString = $scope.lettreursString;
+        }
+
+        var url = document.getElementById("ajax-url").value + '/'
+                + document.getElementById("current-page").value + '/';
+        document.getElementById("serialized-form").value = $scope.formData;
+        $http({
+            url: url,
+            method: "POST",
+            data: $.param($scope.formData),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).success(function(data, status, headers, config) {
+            $scope.searchContent = data;
+        }).error(function(data, status, headers, config) {
+            $scope.searchContent = 'Veuillez nous excuser, une erreur à eu lieu';
+        });
     };
 
 }

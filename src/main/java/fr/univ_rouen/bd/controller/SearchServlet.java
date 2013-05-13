@@ -23,10 +23,12 @@ import org.apache.commons.lang.StringUtils;
 public class SearchServlet extends HttpServlet {
 
     private static final String VIEW = "/WEB-INF/jsp/bd/search.jsp";
+    private static final String AJAX_VIEW = "/WEB-INF/jsp/bd/searchResults.jsp";
     public static final String CONF_DAO_FACTORY = "daofactory";
     private static final String SESSION_NOTICE = "notice";
     private static final String SESSION_ERROR = "error";
     public static final String ATTR_LIST_BD = "searchBd";
+    public static final String ATTR_PAGE = "page";
     public static final String NB_TOTAL = "nbResult";
     private BdDao bdDao;
 
@@ -53,15 +55,16 @@ public class SearchServlet extends HttpServlet {
 
         SearchForm sh = new SearchForm();
         BdSearchBean searchAttributes = sh.validateForm(request);
-        if (StringUtils.isNotBlank(request.getParameter("page"))) {
-            searchAttributes.setPagination(Integer.parseInt(request.getParameter("page")));
+        if (StringUtils.isNotBlank(request.getParameter(ATTR_PAGE))) {
+            searchAttributes.setPagination(Integer.parseInt(request.getParameter(ATTR_PAGE)));
+            request.setAttribute(ATTR_PAGE, Integer.parseInt(request.getParameter(ATTR_PAGE)));
         } else {
             searchAttributes.setPagination(1);
+            request.setAttribute(ATTR_PAGE, 1);
         }
         List<Bd> searchBd = bdDao.searchFor(searchAttributes, orderBy);
-        int nbPage = bdDao.countSearch(searchAttributes, orderBy)/BdDao.NB_RESULT_PER_PAGE+1;
-        System.out.println(nbPage+" "+searchBd.size());
-        request.setAttribute(NB_TOTAL,nbPage );
+        int nbPage = bdDao.countSearch(searchAttributes, orderBy) / BdDao.NB_RESULT_PER_PAGE + 1;
+        request.setAttribute(NB_TOTAL, nbPage);
         request.setAttribute(ATTR_LIST_BD, searchBd);
 
         HttpSession session = request.getSession();
@@ -76,7 +79,11 @@ public class SearchServlet extends HttpServlet {
             request.setAttribute(SESSION_ERROR, error);
         }
 
-        this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+        if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+            this.getServletContext().getRequestDispatcher(AJAX_VIEW).forward(request, response);
+        } else {
+            this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+        }
     }
 
     /**

@@ -18,7 +18,7 @@
         <title>Recherche</title>
     </head>
 
-    <body>
+    <body ng-controller="AddBdCtrl" ng-app="directives" >
         <c:set var="deleteImage">
             <c:url value="/img/delete.png" />
         </c:set>
@@ -32,24 +32,24 @@
         <section class="content">
             <h2 class="main-title">Recherche</h2>
             <div class="search">
-                <form action="<c:url value="/search" />" method="post" name="searchForm" ng-controller="AddBdCtrl" ng-app="directives">
+                <form method="post" name="searchForm" ng-submit="submit();">
                     <div class="search-left">
                         <div class="titre">
-                            <label>Titre:</label><input type="text" name="searchTitre" value="${requestScope.searchTitre}"/>
+                            <label>Titre:</label><input type="text" ng-model="formData.searchTitre" name="searchTitre" value="${requestScope.searchTitre}"/>
                         </div>
                         <div class="editeur">
-                            <label>Editeur:</label><input type="text" name="searchEditeur" value="${requestScope.searchEditeur}"/>
+                            <label>Editeur:</label><input type="text" ng-model="formData.searchEditeur" name="searchEditeur" value="${requestScope.searchEditeur}"/>
                         </div>
                         <div class="resume">
-                            <label>Résumé:</label><input type="text" name="searchResume" value="${requestScope.searchResume}"/>
+                            <label>Résumé:</label><input type="text" ng-model="formData.searchResume" name="searchResume" value="${requestScope.searchResume}"/>
                         </div>
                     </div>
                     <div class="search-right">
                         <div class="serie">
-                            <label>Serie:</label><input type="text" name="searchSerie" value="${requestScope.serie}"/>
+                            <label>Serie:</label><input type="text" ng-model="formData.searchSerie" name="searchSerie" value="${requestScope.serie}"/>
                         </div>
                         <div class="langue">
-                            <label>Langue:</label><input type="text" name="searchLangue" value="${requestScope.langue}"/>
+                            <label>Langue:</label><input type="text" ng-model="formData.searchLangue" name="searchLangue" value="${requestScope.langue}"/>
                         </div>
 
                     </div>
@@ -183,35 +183,12 @@
                     <input type="submit" class="btn" value="Rechercher"/>
                 </form>
             </div>
-            <div class="result-section">
-                <h2 class="main-title">Résultats</h2>
-                <div class="search-result">
-                    <c:forEach items="${requestScope.searchBd}" var="bd">
-                        <c:url value="/show/${bd.id}" var="show" />
-                        <a href="${show}" class="bd">
-                            <section >
-                                <div class="miniature">
-                                    <c:url value="${bd.image}" var="image" />
-                                    <img class="bd-image" src="${image}" alt="${bd.titre}">
-                                </div>
-                                <div class="info">
-                                    <h2><c:out value="${bd.titre}" /> </h2> <br/>
-                                    Editeur:  <c:out value="${bd.editeur}" />
-                                    Série: <c:out value="${bd.serie}" /> <br/>
-                                    Langue:  <c:out value="${bd.langue}" />
-                                </div>
-                            </section>
-                        </a>
-                    </c:forEach>
-                </div>
-            </div>
-            <c:if test="${nbResult != 1}">
-                <div class="paginator">
-                    <c:forEach var="i" begin="1" end="${nbResult}">
-                        <a href="<c:url value = "/search/${i}/"/>">${i}</a>
-                    </c:forEach>
-                </div>
-            </c:if>
+            <input type="hidden" id="serialized-form" />
+            <input type="hidden" id="ajax-url" value="<c:url value="/search" />"/>
+            <input type="hidden" id="current-page" value="<c:out value="${page}" />"/>
+            <section id="search-content" ng-bind-html-unsafe="searchContent" ng-init="submit()">
+            
+            </section>
         </section>
 
         <c:import url="/WEB-INF/jsp/footer.jsp"/>

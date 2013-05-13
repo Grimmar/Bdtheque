@@ -34,8 +34,9 @@ public class SearchForm extends AbstractForm<SearchBean> {
     
     @Override
     public BdSearchBean validateForm(HttpServletRequest request) {
+
         BdSearchBean search = getSearchFromRequest(request);
-        request.setAttribute(SEARCH_TITRE,search.getTitre());
+        request.setAttribute(SEARCH_TITRE, search.getTitre());
         request.setAttribute(SEARCH_EDITEUR, search.getEditeur());
         request.setAttribute(SEARCH_RESUME, search.getResume());
         setStringInRequest(request, search.getScenaristes().getScenariste(), SEARCH_SCENARISTES);
@@ -49,6 +50,7 @@ public class SearchForm extends AbstractForm<SearchBean> {
     
     private BdSearchBean getSearchFromRequest(HttpServletRequest request) {
         BdSearchBean searchAttributes = new BdSearchBean();
+        
         String searchTitre = request.getParameter(SEARCH_TITRE);
         String searchEditeur = request.getParameter(SEARCH_EDITEUR);
         String searchResume = request.getParameter(SEARCH_RESUME);
