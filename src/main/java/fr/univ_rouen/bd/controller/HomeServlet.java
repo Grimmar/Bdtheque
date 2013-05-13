@@ -1,6 +1,5 @@
 package fr.univ_rouen.bd.controller;
 
-import static fr.univ_rouen.bd.controller.Test.CONF_DAO_FACTORY;
 import fr.univ_rouen.bd.model.beans.Bd;
 import fr.univ_rouen.bd.model.beans.search.BdSearchBean;
 import fr.univ_rouen.bd.model.dao.BdDao;

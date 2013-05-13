@@ -53,10 +53,6 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <servlet>
-        <servlet-name>Test</servlet-name>
-        <servlet-class>fr.univ_rouen.bd.controller.Test</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>fr.univ_rouen.bd.controller.SearchServlet</servlet-class>
     </servlet>
@@ -88,10 +84,6 @@
         <servlet-name>UploadServlet</servlet-name>
         <servlet-class>fr.univ_rouen.bd.controller.UploadServlet</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>Test</servlet-name>
-        <url-pattern>/Test</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/search</url-pattern>
