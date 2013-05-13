@@ -65,7 +65,7 @@ public abstract class BdForm extends AbstractForm<Bd> {
     @Override
     public Bd validateForm(HttpServletRequest request) {
         Bd bd = getBdFromRequest(request);
-            Validator<Bd> validator = new BdValidator("bd", bdDao, checkIsUniqueIsbn());
+        Validator<Bd> validator = new BdValidator("bd", bdDao, checkIsUniqueIsbn());
         if (!validator.isValid(bd)) {
             Map<String, List<String>> map = validator.getValidationMessages();
             for (String s : map.keySet()) {
@@ -122,7 +122,6 @@ public abstract class BdForm extends AbstractForm<Bd> {
         } else {
             bd.setFinImpression(request.getParameter(FIN_IMPRESSION_ATTR));
         }
-
 
         XMLGregorianCalendar creationDate = null;
         XMLGregorianCalendar parutionDate = null;
@@ -191,11 +190,23 @@ public abstract class BdForm extends AbstractForm<Bd> {
             Date d = gc.getTime();
             request.setAttribute(PARUTION_ATTR, d);
         }
-        
-        //TOdO format
 
-        request.setAttribute(DEPOT_LEGAL_ATTR, request.getParameter(DEPOT_LEGAL_ATTR));
-        request.setAttribute(FIN_IMPRESSION_ATTR, request.getParameter(FIN_IMPRESSION_ATTR));
+        if (StringUtils.isNotBlank(request.getParameter(DEPOT_LEGAL_ATTR))) {
+            String[] split = request.getParameter(DEPOT_LEGAL_ATTR).split("-");
+            String s = null;
+            if (split.length > 1) {
+                s = split[1] + "/" + split[0];
+            }
+            request.setAttribute(DEPOT_LEGAL_ATTR, s);
+        }
+        if (StringUtils.isNotBlank(request.getParameter(FIN_IMPRESSION_ATTR))) {
+            String[] split = request.getParameter(FIN_IMPRESSION_ATTR).split("-");
+            String s = null;
+            if (split.length > 1) {
+                s = split[1] + "/" + split[0];
+            }
+            request.setAttribute(FIN_IMPRESSION_ATTR, s);
+        }
 
         return bd;
     }
@@ -203,7 +214,7 @@ public abstract class BdForm extends AbstractForm<Bd> {
     private List<IndividuType> getIndividuFromRequest(HttpServletRequest request, String s) {
         List<IndividuType> inds = new ArrayList<IndividuType>();
         String individus = request.getParameter(s);
-         System.out.println(individus);
+        System.out.println(individus);
         if (StringUtils.isNotBlank(individus.trim())) {
             String[] split = individus.split(";");
             for (String string : split) {
@@ -228,11 +239,11 @@ public abstract class BdForm extends AbstractForm<Bd> {
         }
         request.setAttribute(attribute, sb.toString());
     }
-    
+
     private boolean checkIsUniqueIsbn() {
         return validateUniqueIsbn;
     }
-    
+
     public void setUniqueIsbn(boolean b) {
         this.validateUniqueIsbn = b;
     }

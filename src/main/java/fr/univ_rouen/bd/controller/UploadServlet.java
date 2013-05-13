@@ -18,7 +18,6 @@ import javax.servlet.http.HttpSession;
  */
 public class UploadServlet extends HttpServlet {
 
-    private static final String UPLOAD_VIEW = "/WEB-INF/jsp/bd/uploadForm.jsp";
     private static final String VIEW = "/WEB-INF/jsp/bd/add.jsp";
     private static final String SESSION_NOTICE = "notice";
     private static final String CONF_DAO_FACTORY = "daofactory";

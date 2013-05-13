@@ -9,7 +9,7 @@ app.directive('datepicker', function() {
                 element.datepicker({
                     dateFormat: 'dd/mm/yy',
                     showOn: 'both',
-                    buttonImage: "img/calendar.png",
+                    buttonImage: "/Bdtheque/img/calendar.png",
                     showOtherMonths: true,
                     dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
                     onSelect: function(date) {
