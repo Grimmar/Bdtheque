@@ -28,13 +28,46 @@
     height: 160px;
 }
 
-.pair{
-    background-color: #b3b3b3;
-}
-.impair{
-    background-color: #eaebec;
-}
-
 table{
     border-spacing: 0;
+}
+
+.miniature{
+    float : left;
+}
+
+.info{
+    display:block;
+    float :left;
+    margin-left:5px;
+    width:63%;
+    height: 100%;
+
+}
+
+.bd{
+    border: 1px solid black;
+    display: block;
+    float: left;
+    margin: 10px 2px 2px 10px;
+    padding: 5px 2px 2px 5px;
+    width: 31%;
+    height: 145px;
+    box-shadow: 1px 1px 12px rgb(85, 85, 85);
+}
+.info h2{
+    padding:0;
+    margin:0;
+    font-size: 22px;
+}
+a{
+    color :black;
+}
+
+.bd:hover{
+    background-color: #ededed;
+}
+
+.bd-image{
+    max-width:90px;
 }

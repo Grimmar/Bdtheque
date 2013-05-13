@@ -1,5 +1,6 @@
 @import "main.css";
 @import "form.css";
+
 .content {
     overflow: hidden;
 }
@@ -52,4 +53,8 @@ a{
     height: 20px;
     float:left;
     text-align: center;
+}
+
+.bd-image{
+    max-width:170px;
 }

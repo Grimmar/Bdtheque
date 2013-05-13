@@ -119,10 +119,7 @@ public class BdDao implements Dao<Bd> {
                 maxNbResult *= searchBean.getPagination();
                 minNbResult = maxNbResult - NB_RESULT_PER_PAGE;
             }
-            System.out.println("minNbResult " +minNbResult+" maxNbresult "+maxNbResult);
             query.append("for $bd in subsequence(collection(\'bedetheque\'),").append(minNbResult).append(",").append(maxNbResult).append(")");
-            //query.append("for $bd in collection(\'bedetheque\')");
-            //.append(minNbResult).append(",").append(maxNbResult).append(")");
             String separator = " where ";
             if (sb != null) {
                 if (StringUtils.isNotBlank(searchBean.getTitre())) {
