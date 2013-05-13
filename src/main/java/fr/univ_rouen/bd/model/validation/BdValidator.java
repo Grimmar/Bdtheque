@@ -175,6 +175,7 @@ public class BdValidator extends AbstractValidator<Bd> {
         if (StringUtils.isNotBlank(bd.getFinImpression())) {
             stringValidator = new PatternMatchingValidator("fin d'impression", PARTIAL_DATE_PATTERN);
             stringValidator.setErrorName("finImpression");
+            System.out.println("Fin impression" + bd.getFinImpression());
             if (!stringValidator.isValid(bd.getFinImpression())) {
                 addAllValidationMessage(stringValidator.getValidationMessages());
             }

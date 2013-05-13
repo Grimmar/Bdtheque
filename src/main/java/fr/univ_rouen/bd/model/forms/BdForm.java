@@ -114,7 +114,7 @@ public abstract class BdForm extends AbstractForm<Bd> {
             String[] tab = StringUtils.split(request.getParameter(FIN_IMPRESSION_ATTR), "/");
             String s = "";
             String separator = "";
-            for (int i = tab.length - 1; i > 0; i--) {
+            for (int i = tab.length - 1; i >= 0; i--) {
                 s += separator + tab[i];
                 separator = "-";
             }

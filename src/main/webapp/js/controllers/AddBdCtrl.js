@@ -286,7 +286,8 @@ function AddBdCtrl($scope, $http) {
 
         var url = document.getElementById("ajax-url").value + '/'
                 + document.getElementById("current-page").value + '/';
-        document.getElementById("serialized-form").value = $scope.formData;
+        var form = document.getElementById("serialized-form");
+        document.getElementById("serialized-form").value = $.param($scope.formData);
         $http({
             url: url,
             method: "POST",
