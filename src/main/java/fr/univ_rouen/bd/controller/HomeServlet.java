@@ -57,6 +57,7 @@ public class HomeServlet extends HttpServlet {
         request.setAttribute(ATTR_LIST_BD, allBd);
         int nbPage = count/BdDao.NB_RESULT_PER_PAGE +1;
         request.setAttribute(NB_TOTAL,nbPage );
+        request.setAttribute("page", bdS.getPagination());
         this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
     }
 

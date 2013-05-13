@@ -57,11 +57,10 @@ public class SearchServlet extends HttpServlet {
         BdSearchBean searchAttributes = sh.validateForm(request);
         if (StringUtils.isNotBlank(request.getParameter(ATTR_PAGE))) {
             searchAttributes.setPagination(Integer.parseInt(request.getParameter(ATTR_PAGE)));
-            request.setAttribute(ATTR_PAGE, Integer.parseInt(request.getParameter(ATTR_PAGE)));
         } else {
             searchAttributes.setPagination(1);
-            request.setAttribute(ATTR_PAGE, 1);
         }
+        request.setAttribute(ATTR_PAGE, searchAttributes.getPagination());
         List<Bd> searchBd = bdDao.searchFor(searchAttributes, orderBy);
         int nbPage = bdDao.countSearch(searchAttributes, orderBy) / BdDao.NB_RESULT_PER_PAGE + 1;
         request.setAttribute(NB_TOTAL, nbPage);
@@ -78,7 +77,6 @@ public class SearchServlet extends HttpServlet {
             session.setAttribute(SESSION_ERROR, null);
             request.setAttribute(SESSION_ERROR, error);
         }
-
         if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
             this.getServletContext().getRequestDispatcher(AJAX_VIEW).forward(request, response);
         } else {

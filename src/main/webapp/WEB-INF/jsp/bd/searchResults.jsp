@@ -4,7 +4,7 @@
         <c:forEach items="${requestScope.searchBd}" var="bd">
             <c:url value="/show/${bd.id}" var="show" />
             <a href="${show}" class="bd">
-                <section>
+                <section >
                     <div class="miniature">
                         <c:url value="${bd.image}" var="image" />
                         <img class="bd-image" src="${image}" alt="${bd.titre}">
@@ -23,7 +23,13 @@
 <c:if test="${nbResult != 1}">
     <div class="paginator">
         <c:forEach var="i" begin="1" end="${nbResult}">
-            <a href="<c:url value = "/search/${i}/"/>" ng-click="searchBds()">${i}</a>
+            <c:if test="${i == page}">
+                <a class="paginator-number selected-page" href="<c:url value = "/search/${i}/"/>">${i}</a>
+            </c:if>
+            <c:if test="${i != page}">
+                <a class="paginator-number" href="<c:url value = "/search/${i}/"/>">${i}</a>
+            </c:if>
+
         </c:forEach>
     </div>
 </c:if>
