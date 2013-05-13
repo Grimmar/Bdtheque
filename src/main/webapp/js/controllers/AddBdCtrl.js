@@ -52,9 +52,10 @@ function AddBdCtrl($scope) {
         var tmp = string.split(";");
         var result = [];
         for (var i = 0; i < tmp.length; i++) {
+
             var ar = tmp[i].split(" ");
             if (ar.length > 1) {
-                result.push({lastname: ar[0], firstname: ar[1].firstname});
+                result.push({lastname: ar[0], firstname: ar[1]});
             } else {
                 result.push({lastname: ar[0], firstname: ""});
             }
@@ -70,6 +71,7 @@ function AddBdCtrl($scope) {
                 $scope.scenaristes.push(i);
             });
         }
+        $scope.scenaristesString = v;
     };
 
     $scope.addScenariste = function() {
@@ -108,6 +110,7 @@ function AddBdCtrl($scope) {
                 $scope.dessinateurs.push(i);
             });
         }
+        $scope.dessinateursString = v;
     };
 
     $scope.addDessinateur = function() {
@@ -130,9 +133,9 @@ function AddBdCtrl($scope) {
         $scope.dessinateurs = [];
         $scope.dessinateursString = '';
         var separator = "";
-        angular.forEach(old, function(d) {
-            if (d.nom !== dessinateur.nom || d.prenom !== dessinateur.prenom) {
-                $scope.dessinateurs.push(d);
+        angular.forEach(old, function(i) {
+             if (i.lastname !== dessinateur.lastname || i.firstname !== dessinateur.firstname) {
+                $scope.dessinateurs.push(i);
                 $scope.dessinateursString += separator + i.lastname + " " + (i.firstname === undefined ? "" : i.firstname);
                 separator = ";";
             }
@@ -146,6 +149,7 @@ function AddBdCtrl($scope) {
                 $scope.coloristes.push(i);
             });
         }
+        $scope.coloristesString = v;
     };
 
     $scope.addColoriste = function() {
@@ -168,9 +172,9 @@ function AddBdCtrl($scope) {
         $scope.coloristes = [];
         $scope.coloristesString = '';
         var separator = "";
-        angular.forEach(old, function(c) {
-            if (c.nom !== coloriste.nom || c.prenom !== coloriste.prenom) {
-                $scope.coloristes.push(c);
+        angular.forEach(old, function(i) {
+             if (i.lastname !== coloriste.lastname || i.firstname !== coloriste.firstname) {
+                $scope.coloristes.push(i);
                 $scope.coloristesString += separator + i.lastname + " " + (i.firstname === undefined ? "" : i.firstname);
                 separator = ";";
             }
@@ -184,6 +188,7 @@ function AddBdCtrl($scope) {
                 $scope.lettreurs.push(i);
             });
         }
+        $scope.lettreursString = v;
     };
 
     $scope.addLettreur = function() {
@@ -206,9 +211,9 @@ function AddBdCtrl($scope) {
         $scope.lettreurs = [];
         $scope.lettreursString = '';
         var separator = "";
-        angular.forEach(old, function(l) {
-            if (l.nom !== lettreur.nom || l.prenom !== lettreur.prenom) {
-                $scope.lettreurs.push(l);
+        angular.forEach(old, function(i) {
+            if (i.lastname !== lettreur.lastname || i.firstname !== lettreur.firstname) {
+                $scope.lettreurs.push(i);
                 $scope.lettreursString += separator + i.lastname + " " + (i.firstname === undefined ? "" : i.firstname);
                 separator = ";";
             }
@@ -222,6 +227,7 @@ function AddBdCtrl($scope) {
                 $scope.encreurs.push(i);
             });
         }
+        $scope.encreursString = v;
     };
 
     $scope.addEncreur = function() {
@@ -244,9 +250,9 @@ function AddBdCtrl($scope) {
         $scope.encreurs = [];
         $scope.encreursString = '';
         var separator = "";
-        angular.forEach(old, function(e) {
-            if (e.nom !== encreur.nom || e.prenom !== encreur.prenom) {
-                $scope.encreurs.push(e);
+        angular.forEach(old, function(i) {
+            if (i.lastname !== encreur.lastname || i.firstname !== encreur.firstname) {
+                $scope.encreurs.push(i);
                 $scope.encreursString += separator + i.lastname + " " + (i.firstname === undefined ? "" : i.firstname);
                 separator = ";";
             }

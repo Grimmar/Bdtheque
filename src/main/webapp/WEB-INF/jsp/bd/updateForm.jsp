@@ -3,7 +3,10 @@
     <c:url value="/img/delete.png" />
 </c:set>
 <h2 class="main-title">Saisie manuelle des données</h2>
-<form name="addForm" action="<c:url value="/add" />" method="post" ng-controller="AddBdCtrl" ng-app="directives">
+<c:set var="formUrl">
+    <c:url value="/update" />/<c:out value="${requestScope.bd.id}" />
+</c:set>
+<form name="updateForm" action="${formUrl}" method="post" ng-controller="AddBdCtrl">
     <c:if test="${!empty requestScope.form.errors}">
         <ul>
             <c:forEach items="${requestScope.form.errors}" var="errors">
@@ -110,7 +113,7 @@
                     </tr>
                 </tbody>
             </table>
-            <input type="hidden" name="scenariste" ng-model="scenaristesString" value="{{scenaristesString}}"/>
+            <input type="text" name="scenariste" ng-model="scenaristesString" class="hide"/>
             <br />
         </div>
         <div ng-init="setDessinateurs('<c:out value="${requestScope.dessinateursString}');"/>">
@@ -140,7 +143,7 @@
                     </tr>
                 </tbody>
             </table>
-            <input type="hidden" name="dessinateur" ng-model="dessinateursString" value="{{dessinateursString}}"/>
+            <input type="text" name="dessinateur" ng-model="dessinateursString" class="hide"/>
             <br />
         </div>
         <div ng-init="setColoristes('<c:out value="${requestScope.coloristesString}');"/>">
@@ -170,7 +173,7 @@
                     </tr>
                 </tbody>
             </table>
-            <input type="hidden" name="coloriste" ng-model="coloristesString" value="{{coloristesString}}"/>
+            <input type="text" name="coloriste" ng-model="coloristesString" class="hide"/>
             <br />
         </div>
         <div ng-init="setLettreurs('<c:out value="${requestScope.lettreursString}');"/>">
@@ -200,7 +203,7 @@
                     </tr>
                 </tbody>
             </table>
-            <input type="hidden" name="lettrage" ng-model="lettreursString" value="{{lettreursString}}"/>
+            <input type="text" name="lettrage" ng-model="lettreursString" class="hide"/>
             <br />
         </div>
         <div ng-init="setEncreurs('<c:out value="${requestScope.encreursString}');"/>">
@@ -230,9 +233,9 @@
                     </tr>
                 </tbody>
             </table>
-            <input type="hidden" name="encrage" ng-model="encreursString" value="{{encreursString}}"/>
+            <input type="text" name="encrage" ng-model="encreursString" class="hide"/>
             <br />
         </div>
     </fieldset>
-    <input ng-disabled="addForm.$invalid" class="btn" type="submit" value="Ajouter la bd"/>
+    <input ng-disabled="updateForm.$invalid" class="btn" type="submit" value="Modifier la bd"/>
 </form>

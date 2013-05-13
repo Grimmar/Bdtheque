@@ -58,7 +58,6 @@ public class ShowServlet extends HttpServlet {
                     request.setAttribute(ATTR_BD, bd);
                 }
             } catch (DAOException e) {
-
                 request.setAttribute(ATTR_MESSAGE, "Une erreur a eu lieu lors de l'accès aux données.");
             }
 

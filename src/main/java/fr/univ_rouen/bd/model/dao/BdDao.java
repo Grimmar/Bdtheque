@@ -12,6 +12,8 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
@@ -285,11 +287,12 @@ public class BdDao implements Dao<Bd> {
     public boolean update(Bd bd) throws DAOException {
         try {
             Collection col = daoFactory.getCollection();
-
             XMLResource resource = (XMLResource) col.createResource(bd.getId() + XML_SUFFIX, XMLResource.RESOURCE_TYPE);
             if (resource != null) {
+                bd.setInsertedDate(DAOFactory.getXMLGregorianCalendar(new GregorianCalendar()));
                 Marshaller m = daoFactory.getJAXBContext().createMarshaller();
                 m.marshal(bd, resource.setContentAsSAX());
+                System.out.println(resource.getContent());
                 col.storeResource(resource);
                 col.close();
                 return true;
@@ -300,6 +303,8 @@ public class BdDao implements Dao<Bd> {
             throw new DAOException(e);
         } catch (JAXBException e) {
             throw new DAOException(e);
+        } catch (DatatypeConfigurationException ex) {
+            throw new DAOException(ex);
         }
 
     }

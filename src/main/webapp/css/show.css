@@ -1,5 +1,6 @@
 @import "main.css";
 @import "form.css";
+@import "table.css";
 
 .bd-main-content {
     margin: 0; 
@@ -20,6 +21,14 @@
 .bd-export-html, .bd-export-pdf {
     display: block;
     text-decoration: none;
+    width: 42%;
+    float: left;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.bd-export-html {
+    margin-left: 10px;
 }
 
 .bd-image-btn {
@@ -59,7 +68,7 @@
 }
 
 .bd-main-content > div {
-    min-width: 30%;
+    width: 30%;
 }
 
 h3.bd-normal-title {
@@ -71,27 +80,37 @@ h3.bd-normal-title {
     font-weight: normal;    
 }
 
+.bd-resume-content {
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: justify;
+}
+
 .bd-resume-content h3 {
     max-width: 30%;
 }
 
-@media screen and (max-width: 480px) {
-    .bd-main-content {
-        -moz-column-count: 1;
-        -webkit-column-count: 1;
-        column-count: 1;
-    }
+table.individus {
+    border-collapse: collapse;
+    border-top-width: 2px;
+    width: 100%;
+    margin-bottom: 20px;
+}
 
-    .bd-main-content > div {
-        min-width: 100%;
-        margin-bottom: 10px;
-    }
+table.individus th + th {
+    width: 40%;
+    text-align: center;
+}
 
-    h3.bd-normal-title {
-        max-width: 75%;
-        margin: auto;
-    }
-    .left {
-        margin-left: 0;
-    }
+table.individus td + td {
+    text-align: center;
+}
+
+div > p > span {
+    font-size: 13pt;
+    font-weight: bold;
+}
+
+p > span{
+    font-family: "Skolar Regular","Times New Roman",serif;
 }

@@ -84,7 +84,7 @@ public class UploadForm extends AbstractForm<Bd> {
             return bd;
         }
         if (bd != null) {
-            Validator<Bd> validator = new BdValidator("bd", bdDao);
+            Validator<Bd> validator = new BdValidator("bd", bdDao, true);
             if (!validator.isValid(bd)) {
                 Map<String, List<String>> map = validator.getValidationMessages();
                 for (String s : map.keySet()) {

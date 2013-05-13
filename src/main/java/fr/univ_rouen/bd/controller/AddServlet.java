@@ -27,7 +27,6 @@ public class AddServlet extends HttpServlet {
     private static final String ATTR_BD = "bd";
     private static final String ATTR_FORM_NAME = "formName";
     private static final String FORM_NAME = "add";
-    
     private BdDao bdDao;
 
     @Override
@@ -53,12 +52,7 @@ public class AddServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
-            this.getServletContext().getRequestDispatcher(ADD_VIEW).forward(request, response);
-        } else {
-            processRequest(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -78,7 +72,7 @@ public class AddServlet extends HttpServlet {
         Form<Bd> form = new AddForm(bdDao);
 
         Bd bd = form.validateForm(request);
-        
+
         request.setAttribute(ATTR_FORM, form);
         request.setAttribute(ATTR_BD, bd);
 

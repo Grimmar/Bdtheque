@@ -99,71 +99,116 @@
                             <c:if test="${!empty requestScope.bd.scenaristes}">
                                 <div class="bd-individus bd-scenaristes">
                                     <p><span class="bd-key-name">Scénaristes:&nbsp;</span></p>
-                                    <ul>
-                                        <c:forEach var="individu" items="${requestScope.bd.scenaristes.scenariste}">
-                                            <li>
-                                                <span><c:out value="${individu.prenom}" /></span>
-                                                &nbsp;
-                                                <span><c:out value="${individu.nom}"/></span>
-                                            </li>
-                                        </c:forEach>
-                                    </ul>
+                                    <table class="individus">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Nom</th>
+                                                <th>Prénom</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="individu" items="${requestScope.bd.scenaristes.scenariste}" varStatus="status">
+                                                <tr>
+                                                    <td><c:out value="${status.index + 1}" /></td>
+                                                    <td><c:out value="${individu.nom}" /></td>
+                                                    <td><c:out value="${individu.prenom}"/></td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
                                 </div>    
                             </c:if>
                             <c:if test="${!empty requestScope.bd.dessinateurs}">
                                 <div class="bd-individus bd-dessinateurs">
                                     <p><span class="bd-key-name">Dessinateurs&nbsp;</span></p>
-                                    <ul>
-                                        <c:forEach var="individu" items="${requestScope.bd.dessinateurs.dessinateur}">
-                                            <li>
-                                                <span><c:out value="${individu.prenom}" /></span>
-                                                &nbsp;
-                                                <span><c:out value="${individu.nom}"/></span>
-                                            </li>
-                                        </c:forEach>
-                                    </ul>
+                                    <table class="individus">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Nom</th>
+                                                <th>Prénom</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="individu" items="${requestScope.bd.dessinateurs.dessinateur}" varStatus="status">
+                                                <tr>
+                                                    <td><c:out value="${status.index + 1}" /></td>
+                                                    <td><c:out value="${individu.nom}" /></td>
+                                                    <td><c:out value="${individu.prenom}"/></td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
                                 </div>    
                             </c:if>
                             <c:if test="${!empty requestScope.bd.coloristes}">
                                 <div class="bd-individus bd-coloristes">
                                     <p><span class="bd-key-name">Coloristes:&nbsp;</span></p>
-                                    <ul>
-                                        <c:forEach var="individu" items="${requestScope.bd.coloristes.coloriste}">
-                                            <li>
-                                                <span><c:out value="${individu.prenom}" /></span>
-                                                &nbsp;
-                                                <span><c:out value="${individu.nom}"/></span>
-                                            </li>
-                                        </c:forEach>
-                                    </ul>
+                                    <table class="individus">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Nom</th>
+                                                <th>Prénom</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="individu" items="${requestScope.bd.coloristes.coloriste}" varStatus="status">
+                                                <tr>
+                                                    <td><c:out value="${status.index + 1}" /></td>
+                                                    <td><c:out value="${individu.nom}" /></td>
+                                                    <td><c:out value="${individu.prenom}"/></td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
                                 </div>    
                             </c:if>
                             <c:if test="${!empty requestScope.bd.lettrages}">
                                 <div class="bd-individus bd-lettrages">
                                     <p><span class="bd-key-name">Lettreurs&nbsp;</span></p>
-                                    <ul>
-                                        <c:forEach var="individu" items="${requestScope.bd.lettrages.lettrage}">
-                                            <li>
-                                                <span><c:out value="${individu.prenom}" /></span>
-                                                &nbsp;
-                                                <span><c:out value="${individu.nom}"/></span>
-                                            </li>
-                                        </c:forEach>
-                                    </ul>
+                                     <table class="individus">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Nom</th>
+                                                <th>Prénom</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="individu" items="${requestScope.bd.lettrages.lettrage}" varStatus="status">
+                                                <tr>
+                                                    <td><c:out value="${status.index + 1}" /></td>
+                                                    <td><c:out value="${individu.nom}" /></td>
+                                                    <td><c:out value="${individu.prenom}"/></td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
                                 </div>    
                             </c:if>
                             <c:if test="${!empty requestScope.bd.encrages}">
                                 <div class="bd-individus bd-encrages">
                                     <p><span class="bd-key-name">Encreurs:&nbsp;</span></p>
-                                    <ul>
-                                        <c:forEach var="individu" items="${requestScope.bd.encrages.encrage}">
-                                            <li>
-                                                <span><c:out value="${individu.prenom}" /></span>
-                                                &nbsp;
-                                                <span><c:out value="${individu.nom}"/></span>
-                                            </li>
-                                        </c:forEach>
-                                    </ul>
+                                    <table class="individus">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Nom</th>
+                                                <th>Prénom</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="individu" items="${requestScope.bd.encrages.encrage}" varStatus="status">
+                                                <tr>
+                                                    <td><c:out value="${status.index + 1}" /></td>
+                                                    <td><c:out value="${individu.nom}" /></td>
+                                                    <td><c:out value="${individu.prenom}"/></td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
                                 </div>    
                             </c:if>
                         </div>
@@ -176,9 +221,6 @@
                         </p>
                     </section>
                 </section>
-                <footer>
-                    <p class="right">Cette bd a été ajoutée le ${requestScope.bd.insertedDate}</p>
-                </footer>
             </c:if>
             <c:if test="${!empty requestScope.message}">
                 <p><c:out value="${requestScope.message}"/></p>

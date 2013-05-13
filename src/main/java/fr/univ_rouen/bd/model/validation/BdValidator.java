@@ -20,10 +20,12 @@ public class BdValidator extends AbstractValidator<Bd> {
     private static final String ONE_SHOT_VALUE = "One-Shot";
     private static final String PARTIAL_DATE_PATTERN = "((([1-9][0-9]{3}))-((0[1-9])|(1[0-2])))|(((([1-9][0-9]{3}))-((0[1-9])|(1[012])))-((0[1-9])|([12][0-9])|(3[0-1])))";
     private final BdDao bdDao;
+    private final boolean checkUniqueIsbn;
 
-    public BdValidator(String fieldName, BdDao bdDao) {
+    public BdValidator(String fieldName, BdDao bdDao, boolean checkUniqueIsbn) {
         super(fieldName);
         this.bdDao = bdDao;
+        this.checkUniqueIsbn = checkUniqueIsbn;
     }
 
     @Override
@@ -39,7 +41,7 @@ public class BdValidator extends AbstractValidator<Bd> {
         }
         bd.setIsbn(isbn);
 
-        if (bdDao.getByISBN(isbn) != null) {
+        if (checkUniqueIsbn && bdDao.getByISBN(isbn) != null) {
             addValidationMessage("isbn", "L'ISBN correspond à une bd déjà présente dans la base.");
         }
 
@@ -184,8 +186,6 @@ public class BdValidator extends AbstractValidator<Bd> {
                 addValidationMessage("tome", "Le numéro du tome doit être supérieur à 0");
             }
         }
-
-        System.out.println(getValidationMessages());
         
         return MapUtils.isEmpty(getValidationMessages());
     }
