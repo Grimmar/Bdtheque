@@ -296,7 +296,7 @@ function AddBdCtrl($scope, $http, $compile) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function(data, status, headers, config) {
             var elm = angular.element(document.getElementById('search-content'));
-            elm.append(data);
+            elm.html(data);
             $compile(elm.contents())($scope);
         }).error(function(data, status, headers, config) {
             $scope.searchContent = 'Veuillez nous excuser, une erreur à eu lieu';
