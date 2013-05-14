@@ -273,17 +273,25 @@ function AddBdCtrl($scope, $http, $compile) {
     $scope.submit = function() {
         if ($scope.scenaristesString !== null && $scope.scenaristesString !== "") {
             $scope.formData.scenariste = $scope.scenaristesString;
+        } else {
+            $scope.formData.scenariste = "";
         }
         if ($scope.dessinateursString !== null && $scope.dessinateursString !== "") {
             $scope.formData.dessinateur = $scope.dessinateursString;
+        } else {
+            $scope.formData.dessinateur = "";
         }
         if ($scope.coloristesString !== null && $scope.coloristesString !== "") {
             $scope.formData.coloriste = $scope.coloristesString;
+        } else {
+            $scope.formData.coloriste = "";
         }
         if ($scope.lettreursString !== null && $scope.lettreursString !== "") {
             $scope.formData.lettrage = $scope.lettreursString;
+        } else {
+            $scope.formData.lettrage = "";
         }
-
+        console.log($scope.formData);
         var url = document.getElementById("ajax-url").value + '/'
                 + document.getElementById("current-page").value + '/';
         var form = document.getElementById("serialized-form");
